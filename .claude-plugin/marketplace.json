@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "plugin": {
+    "id": "ushabti",
+    "name": "Ushabti",
+    "version": "1.0.0",
+    "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
+    "long_description": "Ushabti is a structured development methodology that uses five specialized agents (Lawgiver, Artisan, Scribe, Builder, Overseer) to guide projects through bounded Phases. All state is tracked in files inside your repo, not chat history. The core loop: Plan (Scribe) → Build (Builder) → Review (Overseer). No Phase is complete without Overseer approval.",
+    "author": {
+      "name": "Adam Drew",
+      "email": "adamrdrew@live.com",
+      "url": "https://github.com/adamrdrew"
+    },
+    "repository": "https://github.com/adamrdrew/ushabti",
+    "homepage": "https://github.com/adamrdrew/ushabti",
+    "license": "MIT",
+    "categories": ["development", "workflow", "agents", "project-management"],
+    "keywords": ["development", "agents", "phases", "planning", "review", "workflow", "methodology"],
+    "pricing": "free",
+    "min_claude_code_version": "1.0.0"
+  },
+  "assets": {
+    "icon": null,
+    "screenshots": [],
+    "documentation": "https://github.com/adamrdrew/ushabti#readme"
+  }
+}

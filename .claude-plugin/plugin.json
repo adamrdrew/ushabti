@@ -1,0 +1,24 @@
+{
+  "name": "ushabti",
+  "version": "1.0.0",
+  "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
+  "author": {
+    "name": "Adam Drew",
+    "email": "adamrdrew@live.com",
+    "url": "https://github.com/adamrdrew/ushabti"
+  },
+  "repository": "https://github.com/adamrdrew/ushabti",
+  "license": "MIT",
+  "keywords": ["development", "agents", "phases", "planning", "review"],
+  "agents": [
+    "./agents/ushabti-lawgiver.md",
+    "./agents/ushabti-artisan.md",
+    "./agents/ushabti-scribe.md",
+    "./agents/ushabti-builder.md",
+    "./agents/ushabti-overseer.md"
+  ],
+  "skills": [
+    "./skills/ushabti-core/",
+    "./skills/phase-files/"
+  ]
+}
