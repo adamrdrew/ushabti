@@ -170,6 +170,43 @@ You stay in control of what gets built. Ushabti handles how the work is executed
 
 Ushabti is not trying to replace engineering judgment. It exists to amplify it without losing control.
 
+## Installation
+
+Ushabti is distributed as a Claude Code plugin. To install it at the project level:
+
+```bash
+# From your project root
+claude plugins add adamrdrew/ushabti --scope project
+```
+
+This creates a `.claude/plugins.json` file in your project that references Ushabti. The plugin provides all five agents and their associated skills.
+
+### Alternative: Manual Installation
+
+You can also add the plugin manually by creating `.claude/plugins.json`:
+
+```json
+{
+  "plugins": [
+    {
+      "source": "github:adamrdrew/ushabti"
+    }
+  ]
+}
+```
+
+### After Installation
+
+Once installed, the Ushabti agents are available in Claude Code:
+
+1. Start with **Lawgiver** to define your project invariants
+2. Use **Artisan** to establish your style conventions
+3. Ask **Scribe** to plan your first Phase
+4. Hand off to **Builder** to implement
+5. Have **Overseer** review and approve
+
+All state is tracked in `.ushabti/` within your repository.
+
 ## Status
 
 Ushabti is under active design.
