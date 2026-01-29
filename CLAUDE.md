@@ -17,12 +17,13 @@ No Phase is complete without Overseer approval.
 
 ## Agent Roles
 
-Five specialized agents with strictly enforced boundaries:
+Six specialized agents with strictly enforced boundaries:
 
 | Agent | Purpose | Does NOT |
 |-------|---------|----------|
 | **Lawgiver** | Define project invariants in `laws.md` | Plan, code, or style |
 | **Artisan** | Define conventions in `style.md` | Define laws or write code |
+| **Surveyor** | Onboard existing projects by creating documentation | Plan, code, review, define laws, or style |
 | **Scribe** | Plan Phases with steps and acceptance criteria | Write production code |
 | **Builder** | Implement steps exactly as planned | Change scope or approve work |
 | **Overseer** | Verify completion and declare Phases green | Write code or plan |

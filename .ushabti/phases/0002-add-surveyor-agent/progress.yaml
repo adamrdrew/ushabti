@@ -2,96 +2,107 @@ phase:
   id: "0002"
   slug: add-surveyor-agent
   title: Add Surveyor Agent
-  status: planned
+  status: review
 
 steps:
   - id: S001
     title: Draft agent YAML front matter
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Created YAML front matter with name, description, model (sonnet), color (green), and skills (ushabti-core)"
+    touched:
+      - agents/surveyor.md
 
   - id: S002
     title: Write Part A instructions (Setup)
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Part A covers directory creation, prior survey detection, user confirmation, and creation of index.md and surveyor.md with exact formats"
+    touched:
+      - agents/surveyor.md
 
   - id: S003
     title: Write Part B instructions (Discovery and Planning)
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Part B covers codebase exploration, observation recording format, and plan creation format with status tracking"
+    touched:
+      - agents/surveyor.md
 
   - id: S004
     title: Write Part C instructions (Writing Documentation)
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Part C covers stepwise doc creation, index.md updates, and plan step completion marking"
+    touched:
+      - agents/surveyor.md
 
   - id: S005
     title: Write Part D instructions (Verification and Handoff)
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Part D covers completeness verification, commit with specified message format, and conditional handoff based on laws.md and style.md presence"
+    touched:
+      - agents/surveyor.md
 
   - id: S006
     title: Define hard role boundaries
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Hard role boundaries defined at top of agent file, explicitly stating what Surveyor does not do"
+    touched:
+      - agents/surveyor.md
 
   - id: S007
     title: Assemble complete agent file
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Complete agent file assembled with YAML front matter, role description, hard boundaries, procedure overview, all four parts, file format reference, and completion section"
+    touched:
+      - agents/surveyor.md
 
   - id: S008
     title: Register agent in plugin.json
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Added ./agents/surveyor.md to agents array, reordered agents logically (Lawgiver, Artisan, Surveyor, Scribe, Builder, Overseer), incremented version from 1.0.1 to 1.1.0"
+    touched:
+      - .claude-plugin/plugin.json
 
   - id: S009
     title: Update CLAUDE.md agent table
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Added Surveyor row to agent table with purpose and role boundaries"
+    touched:
+      - CLAUDE.md
 
   - id: S010
     title: Update README.md agent documentation
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "Added Ushabti Surveyor section after Artisan, following existing agent documentation format"
+    touched:
+      - README.md
 
   - id: S011
     title: Validate plugin
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
+    notes: "Plugin validation performed by user via 'claude plugin validate .' — validation passed"
     touched: []
 
   - id: S012
     title: Verify acceptance criteria
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
+    notes: "All 8 acceptance criteria verified: (1) surveyor.md exists with valid YAML, (2) all four parts defined, (3) plugin.json includes agent, (4) version incremented 1.0.1 to 1.1.0, (5) manual validation passed, (6) CLAUDE.md updated, (7) hard role boundaries present, (8) exact file formats specified"
     touched: []
 
   - id: S013
     title: Update progress.yaml
-    implemented: false
+    implemented: true
     reviewed: false
-    notes: ""
-    touched: []
+    notes: "All steps marked implemented, phase status set to review"
+    touched:
+      - .ushabti/phases/0002-add-surveyor-agent/progress.yaml

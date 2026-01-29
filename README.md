@@ -96,6 +96,16 @@ Purpose: Define and maintain project style.
 
 This agent shapes consistency and readability over time.
 
+### Ushabti Surveyor
+
+Purpose: Onboard existing projects by creating documentation.
+- Explores the codebase to understand its structure
+- Creates structured documentation in `.ushabti/docs/`
+- Produces an index and working document for tracking progress
+- Operates in four parts: Setup, Discovery, Writing, Handoff
+
+This agent does not plan Phases, write code, review work, or define laws or style. It creates documentation only.
+
 ### Ushabti Scribe
 
 Purpose: Plan a Phase.
