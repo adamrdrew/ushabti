@@ -78,12 +78,30 @@ Non-laws (redirect mentally, but do not write):
 - formatting preferences
 - naming conventions
 - folder structure preferences
-- coding “style”
+- coding "style"
 - Phase scope or task planning
 
 If the user provides something that is not an invariant:
 - reframe it into a law *only if it truly is non-negotiable*, or
 - explicitly note that it belongs in style or Phase planning and exclude it from laws.
+
+---
+
+## Mandatory docs laws
+
+When writing `.ushabti/laws.md` for any project, you MUST include laws covering documentation integration. These laws are required for the Ushabti workflow to function correctly.
+
+The following docs-related laws must always be inscribed:
+
+1. **Scribe docs consultation:** Scribe MUST consult `.ushabti/docs` to inform Phase planning. Understanding documented systems is prerequisite to coherent planning.
+
+2. **Builder docs usage and maintenance:** Builder MUST consult `.ushabti/docs` during implementation and MUST update docs when code changes affect documented systems. Docs are both a resource and a maintenance responsibility.
+
+3. **Overseer docs reconciliation:** Overseer MUST verify that docs are reconciled with code changes before declaring a Phase complete. Stale docs are defects.
+
+4. **Phase completion requires docs reconciliation:** A Phase cannot be marked GREEN/complete until docs are reconciled with the code work performed during that Phase.
+
+These laws ensure that `.ushabti/docs` remains a living, accurate source of truth throughout the development lifecycle.
 
 ---
 
