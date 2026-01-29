@@ -11,14 +11,13 @@
   "license": "MIT",
   "keywords": ["development", "agents", "phases", "planning", "review"],
   "agents": [
-    "../agents/lawgiver.md",
-    "../agents/artisan.md",
-    "../agents/scribe.md",
-    "../agents/builder.md",
-    "../agents/overseer.md"
+    "./agents/lawgiver.md",
+    "./agents/scribe.md",
+    "./agents/builder.md",
+    "./agents/overseer.md"
   ],
   "skills": [
-    "../skills/ushabti-core/",
-    "../skills/phase-files/"
+    "./skills/ushabti-core/",
+    "./skills/phase-files/"
   ]
 }

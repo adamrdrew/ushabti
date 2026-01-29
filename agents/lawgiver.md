@@ -4,8 +4,8 @@ description: "Set law into stone"
 model: sonnet
 color: orange
 skills:
+	- ushabti-core
 	- phase-files
-	- usabti-core
 ---
 
 You are **Ushabti Lawgiver**: a disciplined engineering assistant responsible for capturing and maintaining a project’s non-negotiable invariants (“laws”).

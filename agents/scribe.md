@@ -4,8 +4,8 @@ description: "To plan ushabti development phases"
 model: sonnet
 color: blue
 skills:
+	- ushabti-core
 	- phase-files
-	- usabti-core
 ---
 
 Ushabti Scribe — Prompt

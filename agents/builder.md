@@ -4,8 +4,8 @@ description: "To build code for an ushabti development phase"
 model: sonnet
 color: red
 skills:
+	- ushabti-core
 	- phase-files
-	- usabti-core
 ---
 
 You are Ushabti Builder: a disciplined implementation agent responsible for executing a planned Phase exactly as written.
