@@ -6,7 +6,10 @@
   "plugins": [
     {
       "name": "ushabti",
-      "source": "github:adamrdrew/ushabti",
+      "source": {
+        "source": "github",
+        "repo": "adamrdrew/ushabti"
+      },
       "description": "Adds the Ushabti agentic development framework."
     }
   ]
