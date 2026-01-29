@@ -2,13 +2,13 @@ phase:
   id: "0003"
   slug: docs-in-the-loop
   title: Docs in The Loop
-  status: review
+  status: complete
 
 steps:
   - id: S001
     title: Update Lawgiver with docs law requirements
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Added 'Mandatory docs laws' section after 'What qualifies as a law' specifying four required docs-related laws that Lawgiver must inscribe"
     touched:
       - agents/lawgiver.md
@@ -16,7 +16,7 @@ steps:
   - id: S002
     title: Update Artisan with docs existence check
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Added docs existence check in completion section; recommends Surveyor if docs missing before Scribe handoff"
     touched:
       - agents/artisan.md
@@ -24,7 +24,7 @@ steps:
   - id: S003
     title: Update Scribe with docs prerequisite check
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Added docs to required inputs; added 'Docs prerequisite' section with bail-if-missing behavior; updated Procedure step 1 to consult docs"
     touched:
       - agents/scribe.md
@@ -32,7 +32,7 @@ steps:
   - id: S004
     title: Update Builder with docs usage and maintenance requirements
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Added docs to canonical inputs; added 'Docs maintenance' section with usage and update requirements; updated definition of implemented to include docs updates"
     touched:
       - agents/builder.md
@@ -40,7 +40,7 @@ steps:
   - id: S005
     title: Update Overseer with docs reconciliation checkpoint
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Added docs to canonical inputs; added 'Docs reconciliation' section with verification requirements; updated green declaration conditions to include docs reconciliation"
     touched:
       - agents/overseer.md
@@ -48,7 +48,7 @@ steps:
   - id: S006
     title: Increment plugin version
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Incremented version from 1.1.1 to 1.2.0"
     touched:
       - .claude-plugin/plugin.json
@@ -56,13 +56,13 @@ steps:
   - id: S007
     title: Validate plugin
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Plugin validation passed with exit code 0"
     touched: []
 
   - id: S008
     title: Verify all acceptance criteria
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "All seven acceptance criteria verified: (1) Lawgiver has mandatory docs laws, (2) Artisan has docs check, (3) Scribe has docs prerequisite, (4) Builder has docs maintenance, (5) Overseer has docs reconciliation, (6) version incremented to 1.2.0, (7) plugin validation passed"
     touched: []
