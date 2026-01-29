@@ -1,0 +1,68 @@
+phase:
+  id: "0001"
+  slug: update-readme
+  title: Update the README
+  status: complete
+
+steps:
+  - id: S001
+    title: Audit current README structure
+    implemented: true
+    reviewed: true
+    notes: "Identified: duplicate installation sections (lines 7-12 and 180-215), incorrect second installation commands, stale structure diagram (missing .claude-plugin, agents, skills; shows non-existent root-level law/style files), false mirroring claim (line 76), no dogfooding statement"
+    touched: []
+
+  - id: S002
+    title: Consolidate installation instructions
+    implemented: true
+    reviewed: true
+    notes: "Removed duplicate installation section (lines 180-215). Single correct installation section remains at lines 7-12 with marketplace commands."
+    touched:
+      - README.md
+
+  - id: S003
+    title: Add dogfooding statement
+    implemented: true
+    reviewed: true
+    notes: "Added Development section after Status, stating Ushabti is developed using itself through the Phase loop."
+    touched:
+      - README.md
+
+  - id: S004
+    title: Correct repository structure diagram
+    implemented: true
+    reviewed: true
+    notes: "Replaced conceptual diagram with accurate structure. Removed non-existent root-level laws.md/style.md. Added .claude-plugin/, agents/, skills/, CLAUDE.md. Removed false mirror references."
+    touched:
+      - README.md
+
+  - id: S005
+    title: Remove stale content
+    implemented: true
+    reviewed: true
+    notes: "Removed false mirroring claim. Updated file references from (laws.md) to (.ushabti/laws.md) and (style.md) to (.ushabti/style.md) to reflect actual locations."
+    touched:
+      - README.md
+
+  - id: S006
+    title: Apply style guidelines
+    implemented: true
+    reviewed: true
+    notes: "Standardized all unordered lists to use - instead of * and bullet points. Fixed nested list indentation. Added blank lines before headers per style. Updated bold file references to backtick code format for consistency."
+    touched:
+      - README.md
+
+  - id: S007
+    title: Verify acceptance criteria
+    implemented: true
+    reviewed: true
+    notes: "All 5 criteria satisfied: (1) Single installation section with correct marketplace commands, (2) Dogfooding statement present in Development section, (3) Structure diagram matches actual layout, (4) No duplicates or contradictions, (5) Prose follows style guidelines."
+    touched: []
+
+  - id: S008
+    title: Update progress.yaml
+    implemented: true
+    reviewed: true
+    notes: "All steps marked implemented. Phase status set to review."
+    touched:
+      - .ushabti/phases/0001-update-readme/progress.yaml
