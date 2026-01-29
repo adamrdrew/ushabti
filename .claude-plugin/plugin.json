@@ -1,6 +1,6 @@
 {
   "name": "ushabti",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
   "author": {
     "name": "Adam Drew",
@@ -14,7 +14,8 @@
     "./agents/lawgiver.md",
     "./agents/scribe.md",
     "./agents/builder.md",
-    "./agents/overseer.md"
+    "./agents/overseer.md",
+    "./agents/artisan.md"
   ],
   "skills": [
     "./skills/ushabti-core/",
