@@ -1,8 +1,12 @@
 # Ushabti
 
-![logo](images/logo.png)
+<p align="center">
+   <img src="images/logo.png" alt="Ushabti logo" width="360" style="max-width: 100%; height: auto;" />
+</p>
 
-> #### *Your development practices have been weighed against Ma’at and found wanting. Come. Let us build.*
+<p align="center">
+   <em>Your development practices have been weighed against Ma’at and found wanting. Come. Let us build.</em>
+</p>
 
 Ushabti is a lightweight, file-backed, agent-driven development system for Claude Code. It is inspired by spec-kit, but deliberately not tied to spec-driven development. Ushabti is optimized for tight iteration loops, not one-shot bootstrapping.
 
