@@ -1,5 +1,9 @@
 # Ushabti
 
+![logo](images/logo.png)
+
+> #### *Your development practices have been weighed against Ma’at and found wanting. Come. Let us build.*
+
 Ushabti is a lightweight, file-backed, agent-driven development system for Claude Code. It is inspired by spec-kit, but deliberately not tied to spec-driven development. Ushabti is optimized for tight iteration loops, not one-shot bootstrapping.
 
 In ancient Egypt, ushabti were small figurines placed in tombs to do work for you in the afterlife. In this project, Ushabti are small agents that do focused work for you so you can stay at the decision layer.
