@@ -1,4 +1,4 @@
-# Ushabti
+# 𓀀 Ushabti
 
 <p align="center">
    <img src="images/logo.png" alt="Ushabti logo" width="360" style="max-width: 100%; height: auto;" />
@@ -12,14 +12,14 @@ Ushabti is a lightweight, file-backed, agent-driven development system for Claud
 
 In ancient Egypt, ushabti were small figurines placed in tombs to do work for you in the afterlife. In this project, Ushabti are small agents that do focused work for you so you can stay at the decision layer.
 
-## Installation
+## 🧱 Installation
 
 ```
 /plugin marketplace add adamrdrew/marketplace
 /plugin install ushabti@adamrdrew
 ```
 
-## Core Idea
+## 𓁗 Core Idea
 
 Development happens in Phases.
 
@@ -33,7 +33,7 @@ Once a Phase is green, you move on. No half-finished work. No drifting scope. No
 
 Everything is tracked in files inside the repo, not in chat history.
 
-## The Phase Loop
+## 𓁀 The Phase Loop
 
 ```
 Plan → Build → Review
@@ -49,11 +49,11 @@ Plan → Build → Review
 
 There is no implicit “done.” A Phase is done only when the Reviewer marks it green.
 
-## Project Invariants
+## 📜 Project Invariants
 
 Ushabti separates what must never change from what evolves.
 
-### Laws
+### ⚖️ Laws
 (`.ushabti/laws.md`)
 
 Project invariants that must always hold.
@@ -67,7 +67,7 @@ Examples:
 
 If a Phase violates a law, the Phase is invalid.
 
-### Style
+### 🖋️ Style
 (`.ushabti/style.md`)
 
 How the project is written and structured.
@@ -81,11 +81,11 @@ Examples:
 
 Style may evolve over time. Laws should not, except deliberately.
 
-## The Agents
+## 🏺 The Agents
 
 Ushabti uses six specialized agents, each with a narrow, enforced role.
 
-### Ushabti Lawgiver
+### 🦅 Ushabti Lawgiver
 
 Purpose: Define and maintain project laws.
 - Captures invariants into `.ushabti/laws.md`
@@ -95,7 +95,7 @@ Purpose: Define and maintain project laws.
 
 This agent establishes the immovable ground rules of the project.
 
-### Ushabti Artisan
+### 🧱 Ushabti Artisan
 
 Purpose: Define and maintain project style.
 - Creates and updates `.ushabti/style.md`
@@ -104,7 +104,7 @@ Purpose: Define and maintain project style.
 
 This agent shapes consistency and readability over time.
 
-### Ushabti Surveyor
+### 🐊 Ushabti Surveyor
 
 Purpose: Onboard existing projects by creating documentation.
 - Explores the codebase to understand its structure
@@ -116,7 +116,7 @@ This agent does not plan Phases, write code, review work, or define laws or styl
 
 The documentation Surveyor creates becomes a critical resource for other agents. Once created, these docs are consulted during planning and updated during development to stay current with the codebase.
 
-### Ushabti Scribe
+### 📜 Ushabti Scribe
 
 Purpose: Plan a Phase.
 - Creates a new Phase directory under `.ushabti/phases/`
@@ -128,7 +128,7 @@ Purpose: Plan a Phase.
 
 The Scribe never writes production code.
 
-### Ushabti Builder
+### 🧱 Ushabti Builder
 
 Purpose: Implement the Phase.
 - Reads laws, style, and the Phase plan
@@ -138,7 +138,7 @@ Purpose: Implement the Phase.
 
 The Builder does not decide scope and does not declare completion.
 
-### Ushabti Overseer
+### 👁️ Ushabti Overseer
 
 Purpose: Review and gate the Phase.
 - Verifies acceptance criteria
@@ -149,7 +149,7 @@ Purpose: Review and gate the Phase.
 
 No Phase is complete without Overseer approval.
 
-## Repository Structure
+## 🏛️ Repository Structure
 
 ```
 .
@@ -176,9 +176,9 @@ No Phase is complete without Overseer approval.
 
 Everything Ushabti needs to reason about the project lives inside the repo.
 
-## How You Use Ushabti (Typical Flow)
+## 🧭 How You Use Ushabti (Typical Flow)
 
-### New Projects
+### 🌅 New Projects
 
 1. Bootstrap
    - Tell Lawgiver the project invariants
@@ -195,7 +195,7 @@ Everything Ushabti needs to reason about the project lives inside the repo.
 5. Repeat
    - Once green, ask Scribe to plan the next Phase
 
-### Existing Projects (Onboarding)
+### 🏺 Existing Projects (Onboarding)
 
 1. Survey
    - Run Surveyor to explore and document the existing codebase
@@ -210,11 +210,11 @@ Everything Ushabti needs to reason about the project lives inside the repo.
 
 You stay in control of what gets built. Ushabti handles how the work is executed and tracked.
 
-## Documentation in the Loop
+## 📜 Documentation in the Loop
 
 The `.ushabti/docs/` directory is not just onboarding material—it's a living resource that stays current with the codebase.
 
-### How Docs Integrate with the Phase Loop
+### ♻️ How Docs Integrate with the Phase Loop
 
 ```
 Surveyor creates docs
@@ -233,7 +233,7 @@ Surveyor creates docs
 
 A Phase cannot be marked complete if documentation is out of sync with the code changes made during that Phase.
 
-### What Gets Documented
+### 📚 What Gets Documented
 
 Surveyor creates documentation covering:
 - Architecture and system overview
@@ -244,7 +244,7 @@ Surveyor creates documentation covering:
 
 These docs reduce discovery time for agents and provide a reliable source of truth about the repository.
 
-## Design Philosophy
+## ☀️ Design Philosophy
 
 - Iteration over ceremony
 - Files over prompts
@@ -254,7 +254,7 @@ These docs reduce discovery time for agents and provide a reliable source of tru
 
 Ushabti is not trying to replace engineering judgment. It exists to amplify it without losing control.
 
-## Onboarding an Existing Project
+## 🏺 Onboarding an Existing Project
 
 Ushabti works with existing codebases, not just greenfield projects. To onboard:
 
@@ -275,12 +275,12 @@ Ushabti works with existing codebases, not just greenfield projects. To onboard:
 
 The Surveyor step is critical. Without docs, Scribe will ask you to run Surveyor before planning. The docs become the shared knowledge base that accelerates all subsequent work.
 
-## Status
+## 🏜️ Status
 
 Ushabti is under active design.
 
 Agent prompts, schemas, and conventions will evolve—but the core loop and roles are intentional and stable.
 
-## Development
+## 🧱 Development
 
 Ushabti is developed using itself. All changes go through the Phase loop: planned by Scribe, implemented by Builder, reviewed by Overseer.
