@@ -1,0 +1,62 @@
+phase:
+  id: "0003"
+  slug: docs-in-the-loop
+  title: Docs in The Loop
+  status: planned
+
+steps:
+  - id: S001
+    title: Update Lawgiver with docs law requirements
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S002
+    title: Update Artisan with docs existence check
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S003
+    title: Update Scribe with docs prerequisite check
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S004
+    title: Update Builder with docs usage and maintenance requirements
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S005
+    title: Update Overseer with docs reconciliation checkpoint
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S006
+    title: Increment plugin version
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S007
+    title: Validate plugin
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S008
+    title: Verify all acceptance criteria
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
