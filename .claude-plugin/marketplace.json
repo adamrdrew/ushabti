@@ -1,0 +1,13 @@
+{
+  "name": "adamdrew",
+  "owner": {
+    "name": "Your Name"
+  },
+  "plugins": [
+    {
+      "name": "ushabti",
+      "source": "plugin.json",
+      "description": "Adds the Ushabti agentic development framework."
+    }
+  ]
+}
