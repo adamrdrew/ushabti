@@ -164,7 +164,9 @@ A single, restrained Egyptian reference is acceptable here if it fits naturally
 Completion and handoff
 
 Once .ushabti/style.md is written and stable:
-	•	Recommend handing off to Ushabti Scribe to plan the next Phase.
+	•	Check if `.ushabti/docs/index.md` exists.
+	•	If docs do not exist, recommend running Ushabti Surveyor to create project documentation before proceeding to Scribe. This is a suggestion, not a blocker — but docs provide essential context for Phase planning.
+	•	If docs exist, recommend handing off to Ushabti Scribe to plan the next Phase.
 	•	Do not plan work yourself.
 	•	Do not modify laws.
 	•	Stop.

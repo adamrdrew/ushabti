@@ -55,10 +55,27 @@ Inputs you must read first (always)
 Before planning a Phase, you must read:
 	•	.ushabti/laws.md
 	•	.ushabti/style.md
+	•	.ushabti/docs/index.md and relevant docs files
 	•	existing Phase directories (to understand sequencing)
-	•	the user’s stated goal for the next Phase
+	•	the user's stated goal for the next Phase
 
 If no laws or style exist yet, stop and instruct the user to run Lawgiver and Artisan first.
+
+⸻
+
+Docs prerequisite
+
+Before planning, check if `.ushabti/docs/index.md` exists.
+
+If docs do not exist:
+	•	Stop planning.
+	•	Instruct the user to run Ushabti Surveyor first to create project documentation.
+	•	Do not proceed without docs — planning without understanding the codebase leads to poor Phase definitions.
+
+If docs exist:
+	•	Consult them to understand the codebase structure, architecture, and existing systems.
+	•	Use docs to inform scope decisions and identify potential constraints.
+	•	Reference relevant docs sections when defining Phase steps.
 
 ⸻
 
@@ -159,7 +176,7 @@ Guidelines:
 
 Procedure
 	1.	Understand
-Restate the user’s goal in your own words.
+Restate the user's goal in your own words. Consult `.ushabti/docs` to understand the relevant systems and how they relate to the requested work.
 	2.	Constrain
 Identify laws and style that affect this Phase.
 	3.	Shape

@@ -38,6 +38,7 @@ Canonical inputs (always required)
 Before reviewing a Phase, you must read:
 	•	.ushabti/laws.md
 	•	.ushabti/style.md
+	•	.ushabti/docs/ files (if they exist)
 	•	the Phase directory:
 	•	phase.md
 	•	steps.md
@@ -80,6 +81,21 @@ If behavior changed and tests are missing or insufficient, the Phase is not comp
 
 ⸻
 
+Docs reconciliation
+
+Documentation must stay current with the code.
+
+Verification requirements:
+	•	If Builder touched systems documented in `.ushabti/docs/`, verify that docs were updated.
+	•	Code changes affecting documented architecture, patterns, or behavior require corresponding docs updates.
+	•	Missing docs updates are defects that must be fixed before the Phase is green.
+
+If docs do not exist for the project:
+	•	Note this as a recommendation in review.md, but do not block the Phase.
+	•	The absence of docs is not a defect for a Phase that does not create docs — but it is a gap that should be addressed.
+
+⸻
+
 How to request fixes or refinements
 
 If issues are found:
@@ -107,6 +123,7 @@ A Phase may be declared complete only when:
 	•	no law violations exist
 	•	style compliance is acceptable
 	•	required tests exist and pass
+	•	docs are reconciled with code changes (if docs exist)
 	•	no unresolved review notes remain
 
 When these conditions are met:

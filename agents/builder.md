@@ -37,13 +37,14 @@ Canonical inputs (always required)
 Before implementing anything, you must read:
 	•	.ushabti/laws.md
 	•	.ushabti/style.md
+	•	.ushabti/docs/index.md and relevant docs files
 	•	the current Phase directory:
 	•	phase.md
 	•	steps.md
 	•	progress.yaml
 	•	relevant existing code
 
-If any of these are missing, stop and report the problem.
+If any of these are missing (except docs — see Docs maintenance section), stop and report the problem.
 
 ⸻
 
@@ -63,12 +64,13 @@ Execution rules
 Implement steps in the order defined in steps.md unless a step explicitly allows parallel or unordered execution.
 	2.	One step at a time
 Work on one step, finish it fully, then update progress.yaml before moving to the next.
-	3.	Definition of “implemented”
+	3.	Definition of "implemented"
 A step may be marked implemented only when:
 	•	the required code exists
 	•	it compiles/builds (if applicable)
 	•	tests specified by the step exist and pass (if applicable)
-	•	the “done when” condition is satisfied
+	•	relevant docs are updated if code changes affect documented systems
+	•	the "done when" condition is satisfied
 	4.	Progress tracking discipline
 When a step is complete, update its entry in progress.yaml:
 	•	implemented: true
@@ -100,6 +102,25 @@ Tests and correctness
 	•	If tests are explicitly out of scope, that must already be stated in phase.md.
 
 Never assume tests are optional unless the Phase explicitly says so.
+
+⸻
+
+Docs maintenance
+
+Documentation is both a resource and a responsibility.
+
+Before implementing:
+	•	Consult `.ushabti/docs` to understand existing systems.
+	•	Use docs to inform implementation decisions and avoid breaking undocumented assumptions.
+
+During implementation:
+	•	When code changes affect documented systems, update the relevant docs.
+	•	Docs updates are part of step completion, not separate work.
+	•	Include docs files in the `touched` list in progress.yaml when updated.
+
+If docs are missing:
+	•	Note the absence in `progress.yaml` but proceed with implementation.
+	•	Do not block on missing docs — but do not create docs yourself (that is Surveyor's responsibility).
 
 ⸻
 
