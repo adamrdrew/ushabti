@@ -75,7 +75,7 @@ Style may evolve over time. Laws should not, except deliberately.
 
 ## The Agents
 
-Ushabti uses five specialized agents, each with a narrow, enforced role.
+Ushabti uses six specialized agents, each with a narrow, enforced role.
 
 ### Ushabti Lawgiver
 
@@ -105,6 +105,8 @@ Purpose: Onboard existing projects by creating documentation.
 - Operates in four parts: Setup, Discovery, Writing, Handoff
 
 This agent does not plan Phases, write code, review work, or define laws or style. It creates documentation only.
+
+The documentation Surveyor creates becomes a critical resource for other agents. Once created, these docs are consulted during planning and updated during development to stay current with the codebase.
 
 ### Ushabti Scribe
 
@@ -148,6 +150,10 @@ No Phase is complete without Overseer approval.
 ├── .ushabti/
 │   ├── laws.md           # Project invariants
 │   ├── style.md          # Project conventions
+│   ├── docs/             # Project documentation (created by Surveyor)
+│   │   ├── index.md          # Documentation index and table of contents
+│   │   ├── surveyor.md       # Surveyor working document (observations/plan)
+│   │   └── *.md              # System and component documentation
 │   └── phases/
 │       └── NNNN-slug/
 │           ├── phase.md
@@ -164,21 +170,71 @@ Everything Ushabti needs to reason about the project lives inside the repo.
 
 ## How You Use Ushabti (Typical Flow)
 
+### New Projects
+
 1. Bootstrap
    - Tell Lawgiver the project invariants
    - Tell Artisan the project style preferences
+   - Run Surveyor to create initial documentation
 2. Start a Phase
    - Ask Scribe to plan the next Phase
 3. Build
    - Hand the Phase to Builder
-   - Let it implement and update progress
+   - Let it implement, update progress, and update docs
 4. Review
    - Hand the Phase to Overseer
-   - Address follow-ups if required
+   - Address follow-ups if required (including docs reconciliation)
 5. Repeat
    - Once green, ask Scribe to plan the next Phase
 
+### Existing Projects (Onboarding)
+
+1. Survey
+   - Run Surveyor to explore and document the existing codebase
+   - Surveyor creates `.ushabti/docs/` with structured documentation
+2. Establish Rules
+   - Run Lawgiver to capture project invariants
+   - Run Artisan to define project style
+3. Begin Phase Loop
+   - Scribe consults the docs when planning Phases
+   - Builder uses docs for context and updates them during implementation
+   - Overseer verifies docs are current before marking Phases green
+
 You stay in control of what gets built. Ushabti handles how the work is executed and tracked.
+
+## Documentation in the Loop
+
+The `.ushabti/docs/` directory is not just onboarding material—it's a living resource that stays current with the codebase.
+
+### How Docs Integrate with the Phase Loop
+
+```
+Surveyor creates docs
+        ↓
+┌─────────────────────────────────────────┐
+│  Plan → Build → Review                  │
+│    ↑       ↑       ↓                    │
+│ consult  update  verify                 │
+│  docs    docs    docs                   │
+└─────────────────────────────────────────┘
+```
+
+- **Scribe** consults docs when planning to understand existing systems
+- **Builder** uses docs for context and updates them when code changes
+- **Overseer** verifies docs are reconciled before marking a Phase green
+
+A Phase cannot be marked complete if documentation is out of sync with the code changes made during that Phase.
+
+### What Gets Documented
+
+Surveyor creates documentation covering:
+- Architecture and system overview
+- Agent purposes and boundaries
+- Component and subsystem reference
+- Configuration and settings
+- File formats and schemas
+
+These docs reduce discovery time for agents and provide a reliable source of truth about the repository.
 
 ## Design Philosophy
 
@@ -189,6 +245,27 @@ You stay in control of what gets built. Ushabti handles how the work is executed
 - Review is mandatory, not optional
 
 Ushabti is not trying to replace engineering judgment. It exists to amplify it without losing control.
+
+## Onboarding an Existing Project
+
+Ushabti works with existing codebases, not just greenfield projects. To onboard:
+
+1. **Install Ushabti** (see Installation above)
+
+2. **Run Surveyor first**
+   - Surveyor explores your codebase and creates structured documentation
+   - This produces `.ushabti/docs/` with an index and system docs
+   - Documentation is tailored to what agents need to know
+
+3. **Establish project rules**
+   - Run Lawgiver to capture invariants (what must never change)
+   - Run Artisan to define style (how you build things)
+
+4. **Start the Phase loop**
+   - With docs, laws, and style in place, Scribe can plan Phases effectively
+   - Agents use the docs to understand your codebase without extensive exploration
+
+The Surveyor step is critical. Without docs, Scribe will ask you to run Surveyor before planning. The docs become the shared knowledge base that accelerates all subsequent work.
 
 ## Status
 
