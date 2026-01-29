@@ -1,0 +1,97 @@
+phase:
+  id: "0002"
+  slug: add-surveyor-agent
+  title: Add Surveyor Agent
+  status: planned
+
+steps:
+  - id: S001
+    title: Draft agent YAML front matter
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S002
+    title: Write Part A instructions (Setup)
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S003
+    title: Write Part B instructions (Discovery and Planning)
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S004
+    title: Write Part C instructions (Writing Documentation)
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S005
+    title: Write Part D instructions (Verification and Handoff)
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S006
+    title: Define hard role boundaries
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S007
+    title: Assemble complete agent file
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S008
+    title: Register agent in plugin.json
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S009
+    title: Update CLAUDE.md agent table
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S010
+    title: Update README.md agent documentation
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S011
+    title: Validate plugin
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S012
+    title: Verify acceptance criteria
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S013
+    title: Update progress.yaml
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
