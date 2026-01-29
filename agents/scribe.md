@@ -1,8 +1,11 @@
 ---
-name: ushabti-scribe
+name: scribe
 description: "To plan ushabti development phases"
 model: sonnet
 color: blue
+skills:
+	- phase-files
+	- usabti-core
 ---
 
 Ushabti Scribe — Prompt
@@ -52,7 +55,6 @@ Inputs you must read first (always)
 Before planning a Phase, you must read:
 	•	.ushabti/laws.md
 	•	.ushabti/style.md
-	•	.ushabti/README.md (if present)
 	•	existing Phase directories (to understand sequencing)
 	•	the user’s stated goal for the next Phase
 

@@ -11,11 +11,11 @@
   "license": "MIT",
   "keywords": ["development", "agents", "phases", "planning", "review"],
   "agents": [
-    "./agents/ushabti-lawgiver.md",
-    "./agents/ushabti-artisan.md",
-    "./agents/ushabti-scribe.md",
-    "./agents/ushabti-builder.md",
-    "./agents/ushabti-overseer.md"
+    "./agents/lawgiver.md",
+    "./agents/artisan.md",
+    "./agents/scribe.md",
+    "./agents/builder.md",
+    "./agents/overseer.md"
   ],
   "skills": [
     "./skills/ushabti-core/",
