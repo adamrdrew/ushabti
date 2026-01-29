@@ -4,6 +4,13 @@ Ushabti is a lightweight, file-backed, agent-driven development system for VS Co
 
 In ancient Egypt, ushabti were small figurines placed in tombs to do work for you in the afterlife. In this project, Ushabti are small agents that do focused work for you so you can stay at the decision layer.
 
+## Installation
+
+```
+/plugin marketplace add adamrdrew/marketplace
+/plugin install ushabti@adamrdrew
+```
+
 ## Core Idea
 
 Development happens in Phases.
