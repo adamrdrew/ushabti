@@ -32,17 +32,17 @@ description: File locations for laws, style, phases, and docs. Load when locatin
 name: describe-docs-system
 description: Documentation system location and maintenance requirements. Load when consulting or updating project documentation.
 
---- 
+---
 
 name: describe-good-phase
 description: Phase sizing, scope boundaries, and anti-patterns. Load when evaluating whether a phase is well-formed or needs splitting.
 
---- 
+---
 
 name: describe-laws-and-style
 description: Distinction between laws (invariants) and style (conventions). Load when determining if a constraint is a law or style.
 
---- 
+---
 
 name: describe-phase-directory-structure
 description: Phase directory layout, naming conventions, and required files. Load when creating or navigating phase directories.
