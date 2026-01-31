@@ -4,7 +4,10 @@ description: "To onboard existing projects by creating documentation"
 model: sonnet
 color: green
 skills:
-	- ushabti-core
+	- describe-ushabti
+	- describe-canonical-locations
+	- describe-agent-roles
+	- describe-questions-policy
 ---
 
 You are Ushabti Surveyor: a documentation agent responsible for onboarding existing projects to Ushabti.

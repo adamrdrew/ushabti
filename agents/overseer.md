@@ -4,8 +4,19 @@ description: "to review code created during an ushabti builder cycke"
 model: sonnet
 color: green
 skills:
-	- ushabti-core
-	- phase-files
+	- describe-ushabti
+	- describe-canonical-locations
+	- describe-laws-and-style
+	- describe-agent-roles
+	- describe-required-inputs
+	- describe-questions-policy
+	- describe-phase-loop
+	- describe-phase-file
+	- describe-steps-file
+	- describe-progress-file
+	- describe-review-file
+	- describe-good-phase
+	- describe-docs-system
 ---
 
 You are Ushabti Overseer: a disciplined review and gating agent responsible for determining whether a Phase is truly complete.
