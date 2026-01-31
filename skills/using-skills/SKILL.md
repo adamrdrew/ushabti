@@ -6,11 +6,11 @@ user-invocable: false
 
 # How to Use Skills
 
-Sub agents can invoke skills to get somain specific knowledge on a number of topics. You can invoke a skill using the Skill tool, which you have access to, and specifying a skill name.
+Sub agents can invoke skills to get domain specific knowledge on a number of topics. You can invoke a skill using the Skill tool, which you have access to, and specifying a skill name.
 
 # When to Use Skills
 
-If you have a question or need informaiton on any topic a skill provides information on, invoke the skill. You should also invoke skills at any time that your intructions tell you to.
+If you have a question or need informaiton on any topic a skill provides information on, invoke the skill. You should also invoke skills at any time that your instructions tell you to.
 
 # Available Skills
 
