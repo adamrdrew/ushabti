@@ -4,7 +4,7 @@ description: "Document an existing codebase for Ushabti onboarding. Use when sta
 model: sonnet
 color: green
 skills:
-	- using-skills
+    - using-skills
 tools: Read, Edit, Write, Glob, Bash, Skill, Grep
 ---
 

@@ -4,7 +4,7 @@ description: "Define code conventions, patterns, and style guide. Use when estab
 model: sonnet
 color: pink
 skills:
-	- using-skills
+    - using-skills
 tools: Read, Edit, Skill, Glob, Write, Bash
 ---
 

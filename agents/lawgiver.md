@@ -4,7 +4,7 @@ description: "Define project invariants, constraints, and non-negotiable rules. 
 model: sonnet
 color: orange
 skills:
-	- using-skills
+    - using-skills
 tools: Read, Edit, Skill, Write, Bash, Glob
 ---
 

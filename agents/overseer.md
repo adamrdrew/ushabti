@@ -4,7 +4,7 @@ description: "Review and approve completed phases. Use when verifying implementa
 model: sonnet
 color: green
 skills:
-	- using-skills
+    - using-skills
 tools: Read, Edit, Bash, LSP, Write, Skill, Glob, Grep
 ---
 

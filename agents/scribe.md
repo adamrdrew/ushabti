@@ -4,7 +4,7 @@ description: "Plan development phases with steps and acceptance criteria. Use wh
 model: sonnet
 color: blue
 skills:
-	- using-skills
+    - using-skills
 tools: Read, Edit, Write, Glob, Bash, Skill
 ---
 

@@ -4,7 +4,7 @@ description: "Implement planned phases step by step. Use when writing code, exec
 model: sonnet
 color: red
 skills:
-	- using-skills
+    - using-skills
 tools: Read, Edit, Write, Bash, Skill, Glob, LSP, Grep
 ---
 
