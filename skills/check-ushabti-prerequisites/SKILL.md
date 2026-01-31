@@ -1,6 +1,7 @@
 ---
 name: check-ushabti-prerequisites
 description: Verify required Ushabti files exist before proceeding. Use when starting agent work to ensure prerequisites are met.
+user-invocable: false
 ---
 
 # Ushabti Prerequisites

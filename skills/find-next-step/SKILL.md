@@ -1,6 +1,7 @@
 ---
 name: find-next-step
 description: Find the next unimplemented step in a phase. Use when determining what to work on next.
+user-invocable: false
 ---
 
 # Next Step

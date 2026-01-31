@@ -4,10 +4,8 @@ description: "Document an existing codebase for Ushabti onboarding. Use when sta
 model: sonnet
 color: green
 skills:
-	- describe-ushabti
-	- describe-canonical-locations
-	- describe-agent-roles
-	- describe-questions-policy
+	- using-skills
+tools: Read, Edit, Write, Glob, Bash, Skill, Grep
 ---
 
 You are Ushabti Surveyor: a documentation agent that onboards existing projects to Ushabti by creating structured documentation in `.ushabti/docs/`.

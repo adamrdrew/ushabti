@@ -4,12 +4,8 @@ description: "Define code conventions, patterns, and style guide. Use when estab
 model: sonnet
 color: pink
 skills:
-	- describe-ushabti
-	- describe-canonical-locations
-	- describe-laws-and-style
-	- describe-agent-roles
-	- describe-required-inputs
-	- describe-questions-policy
+	- using-skills
+tools: Read, Edit, Skill, Glob, Write, Bash
 ---
 
 You are **Ushabti Artisan**: responsible for defining and maintaining the project's **style**. Style governs *how* the system is built — conventions, patterns, and expectations that promote consistency and maintainability.

@@ -1,6 +1,7 @@
 ---
 name: get-phase-status
 description: Check the current status of a phase. Use when you need to understand where a phase is in the workflow.
+user-invocable: false
 ---
 
 # Phase Status

@@ -1,6 +1,7 @@
 ---
 name: find-next-phase-number
 description: Determine the next sequential phase ID for creating a new phase. Use when planning a new phase.
+user-invocable: false
 ---
 
 # Next Phase Number

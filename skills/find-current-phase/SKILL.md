@@ -1,6 +1,7 @@
 ---
 name: find-current-phase
 description: Find the active phase directory based on status. Use when you need to locate which phase to work on.
+user-invocable: false
 ---
 
 # Current Phase Status
