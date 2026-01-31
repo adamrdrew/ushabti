@@ -15,7 +15,7 @@ All Ushabti state lives under `.ushabti/`. This is the single source of truth.
 └── phases/           # Phase directories
     └── NNNN-slug/    # Zero-padded sequential
 └── docs/             # Docs directory
-    └── *.md          # Docuemntation on project systems
+    └── *.md          # Documentation on project systems
     └── index.md      # Index of all project documentation
 ```
 
