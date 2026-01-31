@@ -3,13 +3,13 @@ name: find-current-phase
 description: Find the active phase directory based on status. Use when you need to locate which phase to work on.
 ---
 
-# Find Current Phase
+# Current Phase Status
 
-Locate the active phase directory in `.ushabti/phases/`.
+## All Phases
 
-## By Status
+!`if [ -d .ushabti/phases ] && [ "$(ls -A .ushabti/phases 2>/dev/null)" ]; then for dir in .ushabti/phases/*/; do name=$(basename "$dir"); status=$(grep "^  status:" "$dir/progress.yaml" 2>/dev/null | awk '{print $2}'); echo "$name: $status"; done; else echo "No phases exist yet"; fi`
 
-Different agents work on phases in different statuses:
+## Status Reference
 
 | Status | Agent | Meaning |
 |--------|-------|---------|
@@ -18,39 +18,8 @@ Different agents work on phases in different statuses:
 | `review` | Overseer | Ready for review |
 | `complete` | — | Phase is green, no work needed |
 
-## Commands
+## Agent Guidance
 
-**List all phases:**
-```bash
-ls -1 .ushabti/phases/
-```
+**Builder**: Work on phases with `status: building` or `status: planned`. If multiple exist, work on the lowest-numbered one first.
 
-**Find phase by status:**
-```bash
-for dir in .ushabti/phases/*/; do
-  status=$(grep "^  status:" "$dir/progress.yaml" | awk '{print $2}')
-  echo "$dir -> $status"
-done
-```
-
-**Find phase with specific status (e.g., "building"):**
-```bash
-for dir in .ushabti/phases/*/; do
-  if grep -q "status: building" "$dir/progress.yaml" 2>/dev/null; then
-    echo "$dir"
-  fi
-done
-```
-
-**Get highest-numbered phase (most recent):**
-```bash
-ls -1 .ushabti/phases/ | sort -V | tail -1
-```
-
-## For Builder
-
-Look for `status: building` or `status: planned`. If multiple exist, work on the lowest-numbered one first.
-
-## For Overseer
-
-Look for `status: review`. If none exist, no phase is ready for review.
+**Overseer**: Review phases with `status: review`. If none exist, no phase is ready for review.

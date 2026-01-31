@@ -1,6 +1,6 @@
 ---
 name: surveyor
-description: "To onboard existing projects by creating documentation"
+description: "Document an existing codebase for Ushabti onboarding. Use when starting with an existing project, creating system documentation, or mapping code architecture."
 model: sonnet
 color: green
 skills:

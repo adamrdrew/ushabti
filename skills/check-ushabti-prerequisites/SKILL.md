@@ -3,9 +3,14 @@ name: check-ushabti-prerequisites
 description: Verify required Ushabti files exist before proceeding. Use when starting agent work to ensure prerequisites are met.
 ---
 
-# Check Ushabti Prerequisites
+# Ushabti Prerequisites
 
-Verify that required files exist before agents can proceed.
+## Current Status
+
+!`[ -f .ushabti/laws.md ] && echo "✓ laws.md exists" || echo "✗ laws.md MISSING (run Lawgiver)"`
+!`[ -f .ushabti/style.md ] && echo "✓ style.md exists" || echo "✗ style.md MISSING (run Artisan)"`
+!`[ -f .ushabti/docs/index.md ] && echo "✓ docs/ exists" || echo "✗ docs/ MISSING (run Surveyor)"`
+!`[ -d .ushabti/phases ] && echo "✓ phases/ exists" || echo "✗ phases/ MISSING (run Scribe)"`
 
 ## Required Files by Agent
 
@@ -18,34 +23,6 @@ Verify that required files exist before agents can proceed.
 | Builder | Required | Required | Recommended | Required |
 | Overseer | Required | Required | Recommended | Required |
 
-## Commands
-
-**Check if file exists:**
-```bash
-test -f .ushabti/laws.md && echo "laws.md exists" || echo "laws.md MISSING"
-test -f .ushabti/style.md && echo "style.md exists" || echo "style.md MISSING"
-test -f .ushabti/docs/index.md && echo "docs exist" || echo "docs MISSING"
-test -d .ushabti/phases && echo "phases/ exists" || echo "phases/ MISSING"
-```
-
-**Full prerequisite check:**
-```bash
-echo "=== Ushabti Prerequisites ==="
-[ -f .ushabti/laws.md ] && echo "✓ laws.md" || echo "✗ laws.md (run Lawgiver)"
-[ -f .ushabti/style.md ] && echo "✓ style.md" || echo "✗ style.md (run Artisan)"
-[ -f .ushabti/docs/index.md ] && echo "✓ docs/" || echo "✗ docs/ (run Surveyor)"
-[ -d .ushabti/phases ] && echo "✓ phases/" || echo "✗ phases/ (run Scribe)"
-```
-
-## What to Do If Missing
-
-| Missing | Run |
-|---------|-----|
-| laws.md | Ushabti Lawgiver |
-| style.md | Ushabti Artisan |
-| docs/ | Ushabti Surveyor |
-| phases/ | Ushabti Scribe (to create first phase) |
-
-## Recommended Order
+## Recommended Bootstrap Order
 
 For a new project: Surveyor → Lawgiver → Artisan → Scribe → Builder → Overseer

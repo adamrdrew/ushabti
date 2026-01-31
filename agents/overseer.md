@@ -1,6 +1,6 @@
 ---
 name: overseer
-description: "to review code created during an ushabti builder cycke"
+description: "Review and approve completed phases. Use when verifying implementation, checking acceptance criteria, or declaring phases complete."
 model: sonnet
 color: green
 skills:

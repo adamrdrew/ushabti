@@ -1,6 +1,6 @@
 ---
 name: builder
-description: "To build code for an ushabti development phase"
+description: "Implement planned phases step by step. Use when writing code, executing implementation plans, or building features defined by Scribe."
 model: sonnet
 color: red
 skills:

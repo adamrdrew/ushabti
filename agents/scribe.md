@@ -1,6 +1,6 @@
 ---
 name: scribe
-description: "To plan ushabti development phases"
+description: "Plan development phases with steps and acceptance criteria. Use when starting new work, breaking down features, or creating implementation plans."
 model: sonnet
 color: blue
 skills:

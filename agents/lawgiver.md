@@ -1,6 +1,6 @@
 ---
 name: lawgiver
-description: "Set law into stone"
+description: "Define project invariants, constraints, and non-negotiable rules. Use when establishing laws, setting boundaries, or capturing what must never change."
 model: sonnet
 color: orange
 skills:

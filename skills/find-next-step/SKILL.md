@@ -3,9 +3,11 @@ name: find-next-step
 description: Find the next unimplemented step in a phase. Use when determining what to work on next.
 ---
 
-# Find Next Step
+# Next Step
 
-Identify the next step to implement in the current phase.
+## Active Phases - Step Progress
+
+!`if [ -d .ushabti/phases ] && [ "$(ls -A .ushabti/phases 2>/dev/null)" ]; then for dir in .ushabti/phases/*/; do status=$(grep "^  status:" "$dir/progress.yaml" 2>/dev/null | awk '{print $2}'); if [ "$status" = "building" ] || [ "$status" = "planned" ]; then name=$(basename "$dir"); next=$(awk '/- id:/{id=$3} /implemented: false/{print id; exit}' "$dir/progress.yaml" 2>/dev/null); impl=$(grep -c "implemented: true" "$dir/progress.yaml" 2>/dev/null || echo 0); total=$(grep -c "implemented:" "$dir/progress.yaml" 2>/dev/null || echo 0); if [ -n "$next" ]; then echo "$name: next step is $next ($impl/$total done)"; else echo "$name: all steps implemented - ready for review"; fi; fi; done; else echo "No active phases"; fi`
 
 ## How Steps Are Tracked
 
@@ -13,26 +15,6 @@ In `progress.yaml`, each step has:
 - `id`: Step identifier (S001, S002, ...)
 - `implemented`: false until Builder completes it
 - `reviewed`: false until Overseer verifies it
-
-## Commands
-
-**Show all steps with status:**
-```bash
-grep -E "(id:|implemented:|reviewed:)" .ushabti/phases/PHASE_DIR/progress.yaml
-```
-
-**Find first unimplemented step:**
-```bash
-# Replace PHASE_DIR with actual phase directory
-awk '/- id:/{id=$3} /implemented: false/{print id; exit}' .ushabti/phases/PHASE_DIR/progress.yaml
-```
-
-**Count implemented vs total:**
-```bash
-total=$(grep -c "implemented:" .ushabti/phases/PHASE_DIR/progress.yaml)
-done=$(grep -c "implemented: true" .ushabti/phases/PHASE_DIR/progress.yaml)
-echo "$done / $total steps implemented"
-```
 
 ## Workflow
 

@@ -1,6 +1,6 @@
 ---
 name: artisan
-description: "Record the style guidelines for the project"
+description: "Define code conventions, patterns, and style guide. Use when establishing how things should be built, naming conventions, or architectural preferences."
 model: sonnet
 color: pink
 skills:
