@@ -19,6 +19,7 @@
     "./agents/overseer.md"
   ],
   "skills": [
+    "./skills/using-skills/",
     "./skills/describe-ushabti/",
     "./skills/describe-canonical-locations/",
     "./skills/describe-laws-and-style/",
@@ -37,6 +38,7 @@
     "./skills/find-current-phase/",
     "./skills/find-next-phase-number/",
     "./skills/find-next-step/",
-    "./skills/get-phase-status/"
+    "./skills/get-phase-status/",
+    "./skills/using-skills/"
   ]
 }
