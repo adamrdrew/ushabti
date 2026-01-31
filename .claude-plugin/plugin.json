@@ -38,7 +38,6 @@
     "./skills/find-current-phase/",
     "./skills/find-next-phase-number/",
     "./skills/find-next-step/",
-    "./skills/get-phase-status/",
-    "./skills/using-skills/"
+    "./skills/get-phase-status/"
   ]
 }
