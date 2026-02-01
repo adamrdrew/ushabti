@@ -1,0 +1,63 @@
+phase:
+  id: "0005"
+  slug: docs-loop-fix
+  title: Docs Loop Fix
+  status: complete
+
+steps:
+  - id: S001
+    title: Define minimal docs scaffold format
+    implemented: true
+    reviewed: true
+    notes: "Scaffold format defined in 'Bootstrap infrastructure' section with marker text"
+    touched:
+      - agents/lawgiver.md
+
+  - id: S002
+    title: Update Lawgiver to create docs scaffold
+    implemented: true
+    reviewed: true
+    notes: "Bootstrap step added to Procedure; infrastructure section added"
+    touched:
+      - agents/lawgiver.md
+
+  - id: S003
+    title: Update Artisan handoff logic
+    implemented: true
+    reviewed: true
+    notes: "3-tier handoff: no docs / scaffold / comprehensive"
+    touched:
+      - agents/artisan.md
+
+  - id: S004
+    title: Update check-ushabti-prerequisites skill
+    implemented: true
+    reviewed: true
+    notes: "Table updated; Bootstrap Flow and Docs Scaffold sections added"
+    touched:
+      - skills/check-ushabti-prerequisites/SKILL.md
+
+  - id: S005
+    title: Update project documentation
+    implemented: true
+    reviewed: true
+    notes: "agents.md and architecture.md updated with new bootstrap flow"
+    touched:
+      - .ushabti/docs/agents.md
+      - .ushabti/docs/architecture.md
+
+  - id: S006
+    title: Validate plugin and increment version
+    implemented: true
+    reviewed: true
+    notes: "Plugin validates. Version 1.3.1 → 1.4.0"
+    touched:
+      - .claude-plugin/plugin.json
+
+  - id: S007
+    title: Manual verification test
+    implemented: true
+    reviewed: true
+    notes: "Test procedure documented in review.md"
+    touched:
+      - .ushabti/phases/0005-docs-loop-fix/review.md

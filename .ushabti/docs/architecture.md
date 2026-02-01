@@ -100,14 +100,30 @@ The plugin manifest registers all agents and skills with Claude Code.
 
 ## Workflow Summary
 
-1. **Bootstrap** (one-time):
-   - Run Surveyor to document existing code (optional)
-   - Run Lawgiver to define invariants
-   - Run Artisan to define style
+### Bootstrap (one-time)
 
-2. **Development cycle** (repeating):
-   - Scribe plans a Phase
-   - Builder implements the Phase
-   - Overseer reviews the Phase
-   - If approved, return to step 1
-   - If not approved, Builder addresses follow-ups
+**New project (empty directory):**
+1. Run Lawgiver to define invariants (also creates minimal docs scaffold)
+2. Run Artisan to define style
+3. Optionally run Surveyor for comprehensive documentation
+4. Proceed to development cycle
+
+**Existing project:**
+1. Run Surveyor to document existing code
+2. Run Lawgiver to define invariants
+3. Run Artisan to define style
+4. Proceed to development cycle
+
+### Docs Scaffold vs Comprehensive Docs
+
+Lawgiver creates a minimal docs scaffold (`.ushabti/docs/index.md`) during bootstrap. This enables the docs loop to function immediately. The scaffold contains placeholder content and a marker indicating comprehensive documentation is needed.
+
+Surveyor creates comprehensive documentation by exploring the codebase and generating detailed system docs. For existing projects, run Surveyor first. For new projects, the scaffold is sufficient to start — run Surveyor when there's code worth documenting.
+
+### Development Cycle (repeating)
+
+1. Scribe plans a Phase
+2. Builder implements the Phase
+3. Overseer reviews the Phase
+4. If approved, return to step 1
+5. If not approved, Builder addresses follow-ups

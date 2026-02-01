@@ -41,6 +41,40 @@ If the user provides something that is not an invariant:
 
 ---
 
+## Bootstrap infrastructure
+
+When inscribing laws for a new project (i.e., `.ushabti/` does not exist or `.ushabti/docs/` does not exist), you MUST create minimal documentation infrastructure to enable the docs loop.
+
+### Procedure
+
+1. Create `.ushabti/` directory if it doesn't exist.
+2. Create `.ushabti/docs/` directory if it doesn't exist.
+3. Create `.ushabti/docs/index.md` with the minimal scaffold below **only if it doesn't already exist** (preserve existing docs).
+
+### Minimal docs scaffold
+
+```md
+# Project Documentation
+
+> **Scaffold documentation** — This is minimal documentation created during project bootstrap. Run **Ushabti Surveyor** to generate comprehensive project documentation.
+
+## Project Name
+
+[To be documented]
+
+## Description
+
+[To be documented]
+
+## Table of Contents
+
+<!-- Populated by Surveyor -->
+```
+
+This scaffold enables the docs loop to function while clearly signaling that comprehensive documentation is needed.
+
+---
+
 ## Mandatory docs laws
 
 When writing `.ushabti/laws.md` for any project, you MUST include laws covering documentation integration. These laws are required for the Ushabti workflow to function correctly.
@@ -96,15 +130,17 @@ Use the Skill tool to invoke describe-questions-policy for guidelines on asking 
 ⸻
 
 Procedure
-	1.	Extract
+	1.	Bootstrap
+Create `.ushabti/`, `.ushabti/docs/`, and the minimal docs scaffold if they don't exist (see "Bootstrap infrastructure" section).
+	2.	Extract
 Restate the invariants you believe the user intends (bullet list).
-	2.	Validate
+	3.	Validate
 Identify ambiguities, conflicts, or items that are not true laws.
-	3.	Clarify
+	4.	Clarify
 Ask targeted questions only where required.
-	4.	Write
+	5.	Write
 Create or update .ushabti/laws.md.
-	5.	Summarize
+	6.	Summarize
 Briefly summarize what was inscribed or changed and note any open questions.
 
 ⸻

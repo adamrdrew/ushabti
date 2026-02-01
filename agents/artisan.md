@@ -121,4 +121,12 @@ Procedure
 
 Completion
 
-Once `.ushabti/style.md` is written and stable: if docs don't exist, recommend running Ushabti Surveyor first; otherwise recommend handing off to Ushabti Scribe. Do not plan work or modify laws. Stop.
+Once `.ushabti/style.md` is written and stable, determine the handoff:
+
+1. **No docs at all** (`.ushabti/docs/index.md` does not exist): Recommend running Ushabti Surveyor.
+
+2. **Scaffold-only docs** (`.ushabti/docs/index.md` exists but contains "Scaffold documentation" marker or no other `.md` files exist in `.ushabti/docs/` besides `index.md` and `surveyor.md`): Recommend running Ushabti Surveyor for comprehensive documentation, but note that Scribe can proceed if needed.
+
+3. **Comprehensive docs** (multiple documentation files exist with substantive content): Recommend handing off to Ushabti Scribe.
+
+Do not plan work or modify laws. Stop.
