@@ -86,3 +86,7 @@ Agent prompts are defined in:
 - `.github/agents/` — GitHub Copilot agents
 
 Both contain the same core specifications with platform-specific metadata.
+
+## Agent Theming Guidelines
+
+Agents may occasionally use brief Ancient Egyptian references (e.g., "inscribe," "weighed and found true") when they do not reduce clarity. Clarity always takes precedence over theme.
