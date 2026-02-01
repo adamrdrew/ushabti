@@ -11,7 +11,7 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 - **Core technologies**: Markdown, YAML, JSON (no traditional code)
 - **Agent architecture**: Seven specialized agents with enforced boundaries
 - **Phase-driven workflow**: Plan (Scribe) → Build (Builder) → Review (Overseer)
-- **Most recent phase**: [0007-vizier-library](/Users/adam/Development/ushabti/.ushabti/phases/0007-vizier-library) - added Reference Library capability to Vizier (complete)
+- **Most recent phase**: [0008-minimal-bash-permissions](/Users/adam/Development/ushabti/.ushabti/phases/0008-minimal-bash-permissions) - replaced Bash(*) with explicit minimal permissions (complete)
 
 ### Technology Stack
 - **Markup languages**: Markdown (agent definitions, documentation, phase tracking), YAML (progress tracking, front matter), JSON (plugin manifest)
@@ -23,119 +23,145 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 - **Created by**: Surveyor agent during onboarding
 - **Maintained by**: Builder updates during implementation, Overseer verifies during review
 - **Coverage**: Agents, architecture, phase files, plugin structure, skills, configuration
+- **Completeness**: 1185 total lines across 8 docs files - comprehensive coverage
 
-### Permissions Architecture (2026-02-01 Deep Investigation)
+### Codebase Health (2026-02-01 Assessment)
 
-**Permission system overview:**
+**What's working well:**
+- **Clean separation of concerns**: Seven agents with hard boundaries, no overlapping responsibilities
+- **Comprehensive documentation**: 1185 lines covering all major systems
+- **Security hardened**: Phase 0008 replaced Bash(*) with 11 explicit read-only permissions
+- **Automation**: Pre-commit hook automatically updates skill catalog
+- **Phase discipline**: All 8 phases have complete review.md files, all marked complete
+- **Version management**: Plugin version properly incremented per L08
+- **Agent isolation**: Vizier memory properly separated from other agents
 
-Claude Code permissions flow through three layers:
-1. **Project-level** (`.claude/settings.json`) - committed, shared across team
-2. **User-level** (`.claude/settings.local.json`) - local only, not committed
-3. **Agent/Skill-level** (YAML frontmatter) - embedded in agent/skill definitions
-
-**Current permission state:**
-- `.claude/settings.json`: Contains `Bash(*)` wildcard (committed to repo)
-- `.claude/settings.local.json`: Contains many specific bash permissions (not committed)
-- Agent definitions: All use `permissionMode: default` with no specific permissions
-- Skills: No permission configuration in frontmatter (skills don't support permissions)
-
-**Agent permission modes available:**
-- `default` - standard permission checking with prompts
-- `acceptEdits` - auto-accept file edits
-- `dontAsk` - auto-deny permission prompts (explicitly allowed tools still work)
-- `bypassPermissions` - skip all permission checks (dangerous)
-- `plan` - plan mode (read-only exploration)
-
-**Skills requiring bash permissions (5 of 20):**
-- `check-ushabti-prerequisites`: `[ -f path ]`, `[ -d path ]`, `echo`
-- `find-current-phase`: `ls`, `grep`, `awk`, `basename`, `echo`, shell loops
-- `find-next-phase-number`: `ls`, `sed`, `sort`, `tail`, `printf`
-- `find-next-step`: `ls`, `grep`, `awk`, `basename`, `echo`, shell loops
-- `get-phase-status`: `ls`, `grep`, `awk`, `basename`, `echo`, shell loops
-
-All skill bash commands are read-only operations against the `.ushabti/` directory structure. No writes, no network access, no destructive operations.
-
-**Permission inheritance model:**
-- Agents inherit project-level permissions from settings.json
-- Skills inherit permissions from the invoking context (user or agent)
-- Skills themselves cannot declare permissions - this is a Claude Code platform limitation
-- When an agent invokes a skill, the skill runs with the agent's permission set
-
-**The problem:**
-- User invocation: If permissions missing → user gets prompted → can approve
-- Agent invocation: If permissions missing → operation fails silently → agent doesn't know why
-- Current workaround: `Bash(*)` in project settings.json gives blanket approval
+**Current state:**
+- **Laws**: 8 laws defined, all enforced (plugin compliance, file locations, manifest completeness, versioning)
+- **Style**: Comprehensive style guide covering prose, markup, docs accuracy, theme usage
+- **Agents**: All 7 agents operational with proper frontmatter and tools
+- **Skills**: 20 skills total, 5 use bash (all read-only), catalog auto-maintained
+- **Tests**: No automated test suite present (Ushabti is markup only, no traditional code to test)
+- **Git hooks**: Pre-commit hook for skill catalog reconciliation (working)
 
 ---
 
 ## Risks
 
-### R001 — Overly Permissive Bash Wildcard
+### R001 — Overly Permissive Bash Wildcard (RESOLVED)
 
-**Risk**: The `Bash(*)` permission in `.claude/settings.json` allows any bash command without restriction. While convenient for skills, this creates a broad security surface.
+**Status**: RESOLVED in Phase 0008
 
-**Impact**: An agent or skill could theoretically execute destructive operations (rm, curl to external sites, etc.) without user approval.
+**Resolution**: Replaced `Bash(*)` with 11 explicit read-only command permissions. Security posture significantly improved while maintaining full functionality.
 
-**Root cause**: Skills cannot declare their own permissions in frontmatter. The only way to ensure skills work when invoked by agents is to grant permissions at the project level.
+### R002 — No Automated Validation
 
-**Current status**: Active in `.claude/settings.json` (committed)
+**Risk**: Plugin manifest, agent frontmatter, and skill frontmatter are not automatically validated before commits.
+
+**Impact**: Invalid JSON or YAML could be committed, breaking plugin loading for users. Law L01 requires `claude plugin validate .` to pass, but this is not enforced pre-commit.
+
+**Likelihood**: Medium - humans can miss validation steps
+
+**Current state**: Manual validation expected during Overseer review
+
+### R003 — Missing User Onboarding Examples
+
+**Risk**: New users may struggle to understand the complete workflow without concrete examples.
+
+**Impact**: Reduced adoption, increased support burden, potential misuse of agents
+
+**Current state**: README is comprehensive but abstract. No step-by-step examples of a complete Phase cycle from planning through review.
 
 ---
 
 ## High-Impact Work
 
-### HI001 — Secure Permissions Configuration
+### HI001 — Secure Permissions Configuration (COMPLETED)
 
-**Opportunity**: Replace the `Bash(*)` wildcard with minimal, specific permissions that precisely match what skills actually need.
+**Status**: COMPLETED in Phase 0008
 
-**Value**: Improved security posture while maintaining seamless skill execution for both user and agent contexts.
+### HI002 — Pre-Commit Validation Hook
 
-**Recommended approach**:
+**Opportunity**: Add `claude plugin validate .` to the pre-commit hook to catch manifest errors before they're committed.
 
-Since skills cannot declare permissions and agents inherit from project settings, the solution is to configure precise permissions in `.claude/settings.json` that cover all skill requirements.
+**Value**:
+- Enforces Law L01 automatically
+- Catches JSON syntax errors, missing files, schema violations
+- Zero ongoing maintenance cost once implemented
+- Prevents broken states from reaching users
 
-**Specific bash commands needed:**
-```json
-{
-  "permissions": {
-    "allow": [
-      "Bash([ -f *)",
-      "Bash([ -d *)",
-      "Bash(ls *)",
-      "Bash(grep *)",
-      "Bash(awk *)",
-      "Bash(basename *)",
-      "Bash(echo *)",
-      "Bash(sed *)",
-      "Bash(sort *)",
-      "Bash(tail *)",
-      "Bash(printf *)"
-    ]
-  }
-}
-```
+**Implementation approach**:
+1. Update `.githooks/pre-commit` to run `claude plugin validate .`
+2. Exit with failure if validation fails
+3. Document in README under Development section
+4. Test with intentionally broken manifest
 
-**Alternative approaches considered:**
+**Risk**: Low - validation is read-only and fast
+**Effort**: Low - 10-15 lines in existing hook
+**Impact**: High - prevents entire class of defects
 
-1. **Agent-level permissions**: Configure `permissionMode: bypassPermissions` in agent frontmatter
-   - **Pros**: Removes friction for agent skill invocation
-   - **Cons**: Too broad - agents could bypass permissions for non-skill operations
-   - **Verdict**: Not recommended - violates principle of least privilege
+### HI003 — Example-Driven Documentation
 
-2. **Skill-level allowed-tools**: Use `allowed-tools` field in skill frontmatter
-   - **Pros**: Granular control per skill
-   - **Cons**: `allowed-tools` restricts which tools are available, but doesn't grant permissions for specific commands
-   - **Verdict**: Not applicable - doesn't solve the permission grant problem
+**Opportunity**: Add concrete, end-to-end examples showing the full workflow for a small feature.
 
-3. **Hybrid approach**: Project-level specific permissions + agent documentation
-   - **Pros**: Precise permissions, clear audit trail, works for all agents
-   - **Cons**: Requires maintenance when adding new skills
-   - **Verdict**: Recommended - balances security and functionality
+**Value**:
+- Dramatically lowers onboarding friction
+- Demonstrates agent boundaries in practice
+- Shows what good Phase planning looks like
+- Provides template for users to follow
 
-**Implementation notes:**
-- All bash commands used by skills are read-only
-- Permissions can be scoped to specific command patterns (e.g., `Bash(ls .ushabti/*)` if further restriction needed)
-- Document this pattern in `.ushabti/docs/` for future skill authors
+**Implementation approach**:
+1. Create `.ushabti/docs/examples.md`
+2. Walk through a complete example: "Add a new skill"
+   - Scribe planning session (what phase.md and steps.md look like)
+   - Builder implementation (how progress.yaml updates)
+   - Overseer review (what review.md contains)
+3. Show agent prompts user would actually type
+4. Link from README "Getting Started" section
+
+**Risk**: Low - documentation only, no code changes
+**Effort**: Medium - requires thoughtful example selection and clear writing
+**Impact**: High - addresses primary adoption barrier
+
+### HI004 — Agent Startup Latency Reduction
+
+**Opportunity**: Skills are loaded on-demand, but `using-skills` catalog is large (20 skills). Consider splitting catalog into categories or lazy-loading.
+
+**Value**:
+- Faster agent startup
+- Reduced token usage per agent invocation
+- Better scalability as skill count grows
+
+**Implementation approach**:
+1. Analyze token cost of current `using-skills/SKILL.md`
+2. Consider categorizing skills (phase-management, docs, validation, etc.)
+3. Agent loads category catalog, invokes category skill, then specific skill
+4. Measure improvement
+
+**Risk**: Medium - changes skill invocation pattern, affects all agents
+**Effort**: Medium - requires skill reorganization and catalog split
+**Impact**: Medium - optimization, not critical path issue
+
+**Current assessment**: Not urgent. 20 skills is manageable. Revisit when skill count exceeds 30.
+
+### HI005 — Progress.yaml Schema Validation
+
+**Opportunity**: Add a skill or law that validates progress.yaml structure against a defined schema.
+
+**Value**:
+- Catches malformed progress files before review
+- Ensures Builder updates are machine-parseable
+- Prevents drift in progress.yaml format across phases
+
+**Implementation approach**:
+1. Define JSON Schema for progress.yaml structure
+2. Add `validate-progress` skill that checks schema compliance
+3. Builder invokes skill before marking phase status as "review"
+4. Overseer invokes skill during review
+
+**Risk**: Low - validation only, doesn't modify files
+**Effort**: Medium - requires schema definition and validation logic
+**Impact**: Medium - catches errors earlier, reduces review friction
 
 ---
 
@@ -143,9 +169,9 @@ Since skills cannot declare permissions and agents inherit from project settings
 
 ### Initial Startup
 - Vizier.md created on 2026-02-01
-- Project has 7 completed phases (0001-0007)
+- Project has 8 completed phases (0001-0008)
 - All core agents operational: Lawgiver, Artisan, Surveyor, Scribe, Builder, Overseer, Vizier
-- Phase 0007 just completed, adding Reference Library feature to Vizier
+- Phase 0008 completed security hardening of bash permissions
 
 ### Permissions Investigation (2026-02-01)
 - Examined all 20 skills for bash command usage
@@ -157,6 +183,15 @@ Since skills cannot declare permissions and agents inherit from project settings
 - Skills cannot declare permissions - this is a platform constraint
 - Agent `permissionMode` and `allowed-tools` fields exist but don't solve the permission grant problem
 - Only project-level or user-level permissions can grant bash command access
+
+### Codebase Assessment (2026-02-01)
+- Reviewed all 8 completed phases - all have proper review.md and complete status
+- Examined agent definitions - all 7 agents have proper frontmatter and tools
+- Reviewed documentation - comprehensive coverage across 8 files (1185 lines)
+- Checked git hooks - pre-commit hook working, updates skill catalog automatically
+- Assessed permissions - Phase 0008 completed security hardening
+- No automated test suite (not applicable - Ushabti is markup-based, no traditional code)
+- No automated validation in CI/CD (opportunity for improvement)
 
 ---
 
