@@ -34,13 +34,17 @@ This keeps agent startup lightweight while providing access to the full skill li
 
 **File**: `agents/lawgiver.md`
 
-**Purpose**: Capture and maintain project invariants (laws).
+**Purpose**: Capture and maintain project invariants (laws). Also creates minimal docs scaffold during bootstrap.
 
 **Tools**: Read, Edit, Write, Bash, Glob, Skill
 
 **Inputs**: `.ushabti/laws.md` (if exists), user-provided constraints
 
-**Outputs**: `.ushabti/laws.md`
+**Outputs**:
+- `.ushabti/laws.md`
+- `.ushabti/docs/index.md` (scaffold, if docs don't exist)
+
+**Bootstrap responsibility**: When creating laws for a new project, Lawgiver also creates `.ushabti/` and `.ushabti/docs/` directories with a minimal docs scaffold. This enables the docs loop to function from project inception.
 
 **Handoff**: Recommends Artisan for style definition.
 
@@ -56,7 +60,10 @@ This keeps agent startup lightweight while providing access to the full skill li
 
 **Outputs**: `.ushabti/style.md`
 
-**Handoff**: Recommends Surveyor (if no docs) or Scribe.
+**Handoff**: Recommends next agent based on docs state:
+- No docs → Surveyor
+- Scaffold-only docs → Surveyor recommended, but Scribe can proceed
+- Comprehensive docs → Scribe
 
 ## Surveyor
 

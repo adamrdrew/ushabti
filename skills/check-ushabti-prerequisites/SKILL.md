@@ -17,13 +17,33 @@ user-invocable: false
 
 | Agent | laws.md | style.md | docs/ | phases/ |
 |-------|---------|----------|-------|---------|
-| Lawgiver | Creates | — | — | — |
+| Lawgiver | Creates | — | Creates scaffold | — |
 | Artisan | Required | Creates | — | — |
-| Surveyor | — | — | Creates | — |
-| Scribe | Required | Required | Required | Creates |
+| Surveyor | — | — | Creates comprehensive | — |
+| Scribe | Required | Required | Required (scaffold OK) | Creates |
 | Builder | Required | Required | Recommended | Required |
 | Overseer | Required | Required | Recommended | Required |
 
-## Recommended Bootstrap Order
+## Bootstrap Flow
 
-For a new project: Surveyor → Lawgiver → Artisan → Scribe → Builder → Overseer
+**For a new project (empty directory):**
+
+1. **Lawgiver** — Creates `.ushabti/laws.md` and a minimal docs scaffold (`.ushabti/docs/index.md`)
+2. **Artisan** — Creates `.ushabti/style.md`, recommends Surveyor for comprehensive docs
+3. **Surveyor** (optional) — Creates comprehensive documentation in `.ushabti/docs/`
+4. **Scribe** — Plans the first Phase (scaffold docs are sufficient to proceed)
+5. **Builder** — Implements the Phase
+6. **Overseer** — Reviews and approves the Phase
+
+**For an existing project:**
+
+1. **Surveyor** — Documents the existing codebase
+2. **Lawgiver** — Defines project invariants (docs already exist)
+3. **Artisan** — Defines project style
+4. **Scribe → Builder → Overseer** — Normal Phase cycle
+
+## Docs Scaffold vs Comprehensive Docs
+
+**Scaffold** (created by Lawgiver): Minimal `index.md` with placeholder content. Marked with "Scaffold documentation" text. Sufficient for Scribe to plan, but Surveyor should run for full documentation.
+
+**Comprehensive** (created by Surveyor): Full project documentation with multiple files covering architecture, systems, and APIs.
