@@ -1,5 +1,10 @@
 {
   "enabledPlugins": {
     "ushabti@adamdrew": true
+  },
+    "permissions": {
+    "allow": [
+      "Bash(*)"
+    ]
   }
 }
