@@ -155,21 +155,22 @@ No Phase is complete without Overseer approval.
 .
 ├── .claude-plugin/
 │   └── plugin.json       # Claude Code plugin manifest
+├── .githooks/
+│   └── pre-commit        # Auto-updates skill catalog
 ├── .ushabti/
 │   ├── laws.md           # Project invariants
 │   ├── style.md          # Project conventions
 │   ├── docs/             # Project documentation (created by Surveyor)
-│   │   ├── index.md          # Documentation index and table of contents
-│   │   ├── surveyor.md       # Surveyor working document (observations/plan)
-│   │   └── *.md              # System and component documentation
 │   └── phases/
 │       └── NNNN-slug/
 │           ├── phase.md
 │           ├── steps.md
 │           ├── progress.yaml
 │           └── review.md
-├── agents/               # Agent definitions (markdown with YAML front matter)
-├── skills/               # Skill definitions (directories with SKILL.md)
+├── agents/               # Agent definitions
+├── skills/               # Skill definitions (20 skills)
+├── scripts/
+│   └── reconcile-skills.sh
 ├── CLAUDE.md
 └── README.md
 ```
@@ -284,3 +285,21 @@ Agent prompts, schemas, and conventions will evolve—but the core loop and role
 ## 🧱 Development
 
 Ushabti is developed using itself. All changes go through the Phase loop: planned by Scribe, implemented by Builder, reviewed by Overseer.
+
+### Setup
+
+After cloning, enable the git hooks:
+```bash
+git config core.hooksPath .githooks
+```
+
+This enables the pre-commit hook that maintains the skill catalog.
+
+### Skills
+
+Skills provide domain knowledge that agents invoke on-demand. Agents preload a single `using-skills` skill containing the skill catalog, then invoke specific skills via the Skill tool as needed.
+
+To add a skill:
+1. Create `skills/skill-name/SKILL.md`
+2. Add to `plugin.json`
+3. Commit — the hook auto-updates the catalog

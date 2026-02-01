@@ -2,7 +2,7 @@
 
 ## Overview
 
-Ushabti uses six specialized agents, each with a narrow, enforced role. Agents have hard boundaries: they cannot perform functions assigned to other agents. This separation ensures clarity and prevents scope drift.
+Ushabti uses six specialized agents, each with a narrow, enforced role. Agents have hard boundaries: they cannot perform functions assigned to other agents.
 
 All agent definitions live in `agents/` as markdown files with YAML front matter.
 
@@ -17,23 +17,30 @@ All agent definitions live in `agents/` as markdown files with YAML front matter
 | Builder | Implement Phases | Change scope or approve work |
 | Overseer | Review and approve Phases | Write code or plan |
 
+## Skill Access
+
+All agents preload the `using-skills` skill at startup, which provides:
+- Instructions on using the Skill tool
+- A catalog of all available skills
+
+Agents invoke skills on-demand during execution:
+```
+Skill(describe-progress-file)
+```
+
+This keeps agent startup lightweight while providing access to the full skill library.
+
 ## Lawgiver
 
 **File**: `agents/lawgiver.md`
 
 **Purpose**: Capture and maintain project invariants (laws).
 
-**Responsibilities**:
-- Extract invariant constraints from the user
-- Resolve ambiguity with minimal clarifying questions
-- Write or update `.ushabti/laws.md`
+**Tools**: Read, Edit, Write, Bash, Glob, Skill
 
-**Inputs**:
-- `.ushabti/laws.md` (if it exists)
-- User-provided constraints
+**Inputs**: `.ushabti/laws.md` (if exists), user-provided constraints
 
-**Outputs**:
-- `.ushabti/laws.md`
+**Outputs**: `.ushabti/laws.md`
 
 **Handoff**: Recommends Artisan for style definition.
 
@@ -43,20 +50,13 @@ All agent definitions live in `agents/` as markdown files with YAML front matter
 
 **Purpose**: Define and maintain project style conventions.
 
-**Responsibilities**:
-- Create and update `.ushabti/style.md`
-- Ensure style does not contradict laws
-- Encode "how we build things here"
+**Tools**: Read, Edit, Write, Bash, Glob, Skill
 
-**Inputs**:
-- `.ushabti/laws.md` (mandatory)
-- `.ushabti/style.md` (if it exists)
-- Repository structure and existing code
+**Inputs**: `.ushabti/laws.md` (mandatory), `.ushabti/style.md` (if exists), repository structure
 
-**Outputs**:
-- `.ushabti/style.md`
+**Outputs**: `.ushabti/style.md`
 
-**Handoff**: Recommends Scribe to plan next Phase.
+**Handoff**: Recommends Surveyor (if no docs) or Scribe.
 
 ## Surveyor
 
@@ -64,25 +64,15 @@ All agent definitions live in `agents/` as markdown files with YAML front matter
 
 **Purpose**: Onboard existing projects by creating structured documentation.
 
-**Responsibilities**:
-- Explore the codebase to understand its structure
-- Create documentation in `.ushabti/docs/`
-- Produce an index and working document for tracking progress
+**Tools**: Read, Edit, Write, Bash, Glob, Grep, Skill
 
 **Procedure**:
-1. **Setup**: Create `.ushabti/docs/`, `index.md`, `surveyor.md`
-2. **Discovery**: Explore codebase, record observations, create documentation plan
-3. **Writing**: Create documentation files per plan
-4. **Handoff**: Verify completeness, commit, recommend next agent
+1. Setup: Create `.ushabti/docs/`, `index.md`, `surveyor.md`
+2. Discovery: Explore codebase, record observations, create plan
+3. Writing: Create documentation files per plan
+4. Handoff: Verify completeness, commit, recommend next agent
 
-**Inputs**:
-- Repository files and structure
-- Existing `.ushabti/docs/` content (if resuming)
-
-**Outputs**:
-- `.ushabti/docs/index.md`
-- `.ushabti/docs/surveyor.md`
-- Documentation files per plan
+**Outputs**: `.ushabti/docs/` with index and system documentation
 
 **Handoff**: Recommends Lawgiver, Artisan, or Scribe depending on what exists.
 
@@ -92,16 +82,9 @@ All agent definitions live in `agents/` as markdown files with YAML front matter
 
 **Purpose**: Plan Phases with steps and acceptance criteria.
 
-**Responsibilities**:
-- Create Phase directories under `.ushabti/phases/`
-- Write `phase.md`, `steps.md`, `progress.yaml`, `review.md` (scaffold)
-- Keep Phases intentionally small and reviewable
+**Tools**: Read, Edit, Write, Bash, Glob, Skill
 
-**Inputs**:
-- `.ushabti/laws.md`
-- `.ushabti/style.md`
-- Existing Phase directories
-- User's stated goal
+**Inputs**: `.ushabti/laws.md`, `.ushabti/style.md`, existing phases, user's goal
 
 **Outputs**:
 - `.ushabti/phases/NNNN-slug/phase.md`
@@ -109,7 +92,7 @@ All agent definitions live in `agents/` as markdown files with YAML front matter
 - `.ushabti/phases/NNNN-slug/progress.yaml`
 - `.ushabti/phases/NNNN-slug/review.md`
 
-**Handoff**: Hands off to Builder for implementation.
+**Handoff**: Hands off to Builder.
 
 ## Builder
 
@@ -117,23 +100,13 @@ All agent definitions live in `agents/` as markdown files with YAML front matter
 
 **Purpose**: Implement Phase steps exactly as planned.
 
-**Responsibilities**:
-- Implement each step in order
-- Follow laws and style without exception
-- Update `progress.yaml` truthfully
-- Add new steps if missing work is discovered (never silently)
+**Tools**: Read, Edit, Write, Bash, Glob, Grep, LSP, Skill
 
-**Inputs**:
-- `.ushabti/laws.md`
-- `.ushabti/style.md`
-- Phase directory (`phase.md`, `steps.md`, `progress.yaml`)
-- Relevant existing code
+**Inputs**: `.ushabti/laws.md`, `.ushabti/style.md`, Phase directory, relevant code
 
-**Outputs**:
-- Implemented code/files per steps
-- Updated `progress.yaml`
+**Outputs**: Implemented code, updated `progress.yaml`
 
-**Handoff**: Hands off to Overseer for review when all steps complete.
+**Handoff**: Hands off to Overseer when all steps complete.
 
 ## Overseer
 
@@ -141,57 +114,36 @@ All agent definitions live in `agents/` as markdown files with YAML front matter
 
 **Purpose**: Review and gate Phases. Final authority on Phase correctness.
 
-**Responsibilities**:
-- Verify acceptance criteria are satisfied
-- Verify laws and style compliance
-- Review code and tests
-- Add follow-up steps if issues found
-- Declare Phase green when complete
+**Tools**: Read, Edit, Write, Bash, Glob, Grep, LSP, Skill
 
-**Inputs**:
-- `.ushabti/laws.md`
-- `.ushabti/style.md`
-- Phase directory (all files)
-- Code and tests changed during Phase
+**Inputs**: `.ushabti/laws.md`, `.ushabti/style.md`, Phase directory, changed code/tests
 
-**Outputs**:
-- Updated `progress.yaml` (reviewed flags, status)
-- Updated `review.md` (findings and decision)
-- Follow-up steps in `steps.md` (if needed)
+**Outputs**: Updated `progress.yaml`, `review.md`, follow-up steps if needed
 
 **Decision outcomes**:
-- **Green**: Phase complete, status set to `complete`, all steps marked reviewed
+- **Green**: Phase complete, status set to `complete`
 - **Needs work**: Follow-up steps added, status set to `building`, hands back to Builder
 
 ## Agent File Format
 
-All agents use markdown with YAML front matter:
-
-```markdown
+```yaml
 ---
 name: agent-name
-description: "Brief description"
+description: "Brief description for auto-delegation"
 model: sonnet
 color: blue
 skills:
-  - ushabti-core
-  - phase-files
+  - using-skills
+tools: Read, Edit, Write, Bash, Glob, Skill
 ---
 
-[Agent prompt content in markdown]
+[Agent prompt content]
 ```
 
 **Front matter fields**:
 - `name`: Agent identifier
-- `description`: Brief purpose statement
+- `description`: Purpose statement (used for auto-delegation)
 - `model`: LLM model to use
 - `color`: Display color in Claude Code
-- `skills`: List of skills the agent can access
-
-## Skills Dependency
-
-Most agents depend on two skills:
-- `ushabti-core`: Core concepts (laws vs style, Phase loop, agent boundaries)
-- `phase-files`: Phase file formats and conventions
-
-These skills provide shared context that agents reference during operation.
+- `skills`: Skills to preload (typically just `using-skills`)
+- `tools`: Tools the agent can use

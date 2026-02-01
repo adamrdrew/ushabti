@@ -1,6 +1,6 @@
 {
   "name": "ushabti",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
   "author": {
     "name": "Adam Drew",
@@ -19,7 +19,25 @@
     "./agents/overseer.md"
   ],
   "skills": [
-    "./skills/ushabti-core/",
-    "./skills/phase-files/"
+    "./skills/using-skills/",
+    "./skills/describe-ushabti/",
+    "./skills/describe-canonical-locations/",
+    "./skills/describe-laws-and-style/",
+    "./skills/describe-agent-roles/",
+    "./skills/describe-required-inputs/",
+    "./skills/describe-questions-policy/",
+    "./skills/describe-phase-loop/",
+    "./skills/describe-phase-directory-structure/",
+    "./skills/describe-phase-file/",
+    "./skills/describe-steps-file/",
+    "./skills/describe-progress-file/",
+    "./skills/describe-review-file/",
+    "./skills/describe-good-phase/",
+    "./skills/describe-docs-system/",
+    "./skills/check-ushabti-prerequisites/",
+    "./skills/find-current-phase/",
+    "./skills/find-next-phase-number/",
+    "./skills/find-next-step/",
+    "./skills/get-phase-status/"
   ]
 }

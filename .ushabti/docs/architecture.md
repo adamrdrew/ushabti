@@ -2,7 +2,7 @@
 
 ## Overview
 
-Ushabti is a file-backed, agent-driven development system implemented as a Claude Code plugin. All state lives in files within the repository, not in chat history. Development happens in bounded Phases that flow through a Plan-Build-Review loop until approved.
+Ushabti is a file-backed, agent-driven development system implemented as a Claude Code plugin. All state lives in files within the repository. Development happens in bounded Phases that flow through a Plan-Build-Review loop until approved.
 
 ## Core Principles
 
@@ -12,7 +12,7 @@ Ushabti is a file-backed, agent-driven development system implemented as a Claud
 
 3. **Agent specialization**: Six agents with strictly enforced role boundaries. No agent can perform another's function.
 
-4. **Mandatory review**: No Phase is complete without Overseer approval. Review is a gate, not a formality.
+4. **Mandatory review**: No Phase is complete without Overseer approval.
 
 ## The Phase Loop
 
@@ -22,8 +22,6 @@ Plan (Scribe) --> Build (Builder) --> Review (Overseer)
                         |                    v
                         +------ refine ------+
 ```
-
-### Flow
 
 1. **Plan**: Scribe creates a Phase directory with intent, scope, acceptance criteria, and ordered steps.
 
@@ -41,11 +39,11 @@ All Ushabti state lives under `.ushabti/`:
 
 ```
 .ushabti/
-├── laws.md           # Project invariants (absolute constraints)
-├── style.md          # Conventions (how we build)
-├── docs/             # Project documentation (created by Surveyor)
+├── laws.md           # Project invariants
+├── style.md          # Project conventions
+├── docs/             # Project documentation
 └── phases/
-    └── NNNN-slug/    # Zero-padded sequential Phase directories
+    └── NNNN-slug/
         ├── phase.md
         ├── steps.md
         ├── progress.yaml
@@ -54,16 +52,9 @@ All Ushabti state lives under `.ushabti/`:
 
 ### Laws vs Style
 
-**Laws** (`.ushabti/laws.md`):
-- Non-negotiable invariants
-- Any violation fails a Phase
-- Only Lawgiver can modify
+**Laws** (`.ushabti/laws.md`): Non-negotiable invariants. Any violation fails a Phase.
 
-**Style** (`.ushabti/style.md`):
-- Conventions for consistency
-- May evolve over time
-- Only Artisan can modify
-- Must not contradict laws
+**Style** (`.ushabti/style.md`): Conventions for consistency. May evolve over time. Must not contradict laws.
 
 ## Agent Architecture
 
@@ -80,33 +71,39 @@ Six agents, each with a single responsibility:
 
 ### Role Boundaries
 
-Agents have hard boundaries. For example:
+Agents have hard boundaries:
 - Scribe plans but does not code
 - Builder codes but does not plan or approve
 - Overseer approves but does not code or plan
 
 Cross-role violations are fundamental errors.
 
-## Plugin Architecture
+## Skill Architecture
 
-Ushabti is packaged as a Claude Code plugin:
+Agents access domain knowledge through skills. Rather than preloading all content, agents:
+1. Receive a skill catalog at startup (`using-skills`)
+2. Invoke specific skills on-demand via the Skill tool
+
+This keeps agent context lightweight while providing access to the full knowledge library.
+
+## Plugin Architecture
 
 ```
 .
-├── .claude-plugin/
-│   └── plugin.json       # Plugin manifest
-├── agents/               # Agent definitions (markdown with YAML front matter)
-└── skills/               # Skill definitions (directories with SKILL.md)
+├── .claude-plugin/plugin.json   # Plugin manifest
+├── agents/                      # Agent definitions
+├── skills/                      # Skill definitions
+└── scripts/                     # Maintenance scripts
 ```
 
-The plugin manifest (`plugin.json`) registers all agents and skills, making them available to Claude Code clients.
+The plugin manifest registers all agents and skills with Claude Code.
 
 ## Workflow Summary
 
 1. **Bootstrap** (one-time):
+   - Run Surveyor to document existing code (optional)
    - Run Lawgiver to define invariants
    - Run Artisan to define style
-   - Optionally run Surveyor to document existing code
 
 2. **Development cycle** (repeating):
    - Scribe plans a Phase
@@ -114,5 +111,3 @@ The plugin manifest (`plugin.json`) registers all agents and skills, making them
    - Overseer reviews the Phase
    - If approved, return to step 1
    - If not approved, Builder addresses follow-ups
-
-This cycle continues until all planned work is complete.

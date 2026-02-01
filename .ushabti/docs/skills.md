@@ -2,93 +2,99 @@
 
 ## Overview
 
-Skills are shared knowledge modules that agents reference. They provide context about Ushabti concepts without defining agent behavior. Skills live in `skills/` as directories, each containing a `SKILL.md` file.
+Skills provide domain knowledge that agents can access on-demand. Rather than preloading all knowledge into each agent, Ushabti uses a catalog-based approach: agents receive a skill manifest at startup and invoke individual skills as needed via the Skill tool.
 
-## Skill Structure
+## Skill Architecture
 
-Each skill is a directory under `skills/`:
+```
+┌──────────────────────────────────────────────┐
+│  using-skills (preloaded at agent startup)   │
+│  ├── How to invoke skills via Skill tool     │
+│  └── Catalog of all available skills         │
+└──────────────────────────────────────────────┘
+                     │
+                     ▼
+         Agent calls Skill(skill-name)
+                     │
+                     ▼
+         Skill content loaded on-demand
+```
+
+This approach minimizes startup context while giving agents access to the full skill library.
+
+## Skill Categories
+
+### Meta Skill
+
+**using-skills** — Teaches agents how to invoke skills and lists all available skills with descriptions. Preloaded into all agents at startup.
+
+### Domain Knowledge Skills
+
+These skills provide reference information about Ushabti concepts:
+
+| Skill | Purpose |
+|-------|---------|
+| describe-ushabti | Core concepts and development lifecycle |
+| describe-canonical-locations | File locations for laws, style, phases, docs |
+| describe-laws-and-style | Distinction between invariants and conventions |
+| describe-agent-roles | Agent responsibilities and boundaries |
+| describe-required-inputs | Mandatory files agents must read |
+| describe-questions-policy | Guidelines for asking clarifying questions |
+| describe-phase-loop | Plan-Build-Review cycle and handoffs |
+| describe-phase-directory-structure | Phase directory layout and naming |
+| describe-phase-file | phase.md format and sections |
+| describe-steps-file | steps.md format and ordering |
+| describe-progress-file | progress.yaml structure and field ownership |
+| describe-review-file | review.md format and sections |
+| describe-good-phase | Phase sizing and anti-patterns |
+| describe-docs-system | Documentation maintenance requirements |
+
+### Utility Skills
+
+These skills provide dynamic information about project state:
+
+| Skill | Purpose |
+|-------|---------|
+| check-ushabti-prerequisites | Verify required files exist |
+| find-current-phase | Locate active phase by status |
+| find-next-phase-number | Calculate next sequential phase ID |
+| find-next-step | Find next unimplemented step |
+| get-phase-status | Check phase workflow position |
+
+Utility skills use dynamic context injection to provide live project state when invoked.
+
+## Skill Invocation
+
+Agents invoke skills using the Skill tool:
+
+```
+Skill(describe-progress-file)
+```
+
+The skill content is loaded into the agent's context at that moment, keeping it fresh and avoiding lost-in-middle effects during long-running sessions.
+
+## Skill Directory Structure
+
+Each skill is a directory containing a SKILL.md file:
 
 ```
 skills/
-├── ushabti-core/
+├── using-skills/
 │   └── SKILL.md
-└── phase-files/
-    └── SKILL.md
+├── describe-ushabti/
+│   └── SKILL.md
+├── find-current-phase/
+│   └── SKILL.md
+└── ...
 ```
 
-The `SKILL.md` file contains markdown documentation that agents can read for context.
+## Skill Maintenance
 
-## Available Skills
-
-### ushabti-core
-
-**Location**: `skills/ushabti-core/SKILL.md`
-
-**Purpose**: Provides core Ushabti concepts that all agents need to understand.
-
-**Contents**:
-- Canonical location of Ushabti state (`.ushabti/`)
-- Laws vs Style distinction
-- The Phase loop (Plan, Build, Review)
-- Agent role boundaries table
-- Required inputs for agents
-- Clarifying question policy
-
-**Used by**: All agents
-
-### phase-files
-
-**Location**: `skills/phase-files/SKILL.md`
-
-**Purpose**: Provides detailed reference for Phase file formats and conventions.
-
-**Contents**:
-- Phase directory structure
-- `phase.md` format (intent, scope, constraints, acceptance criteria, risks)
-- `steps.md` format (title, intent, work, done-when)
-- `progress.yaml` schema (phase metadata, step tracking)
-- `review.md` format (summary, verified, issues, follow-ups, decision)
-- What makes a good Phase
-- Status transitions
-
-**Used by**: Scribe (planning), Builder (implementing), Overseer (reviewing)
-
-## How Skills Are Used
-
-Agents declare skill dependencies in their YAML front matter:
-
-```yaml
----
-name: scribe
-skills:
-  - ushabti-core
-  - phase-files
----
-```
-
-When an agent runs, it has access to the content of its declared skills. This provides shared context without duplicating information across agent definitions.
-
-## Skill Registration
-
-Skills must be registered in `.claude-plugin/plugin.json`:
-
-```json
-{
-  "skills": [
-    "./skills/ushabti-core/",
-    "./skills/phase-files/"
-  ]
-}
-```
-
-Per Law L04, all skill definitions must reside in `skills/`. Per Law L05, each skill must be a directory containing a `SKILL.md` file. Per Law L06, every skill must be registered in the plugin manifest.
+The `using-skills` catalog is automatically maintained by a pre-commit hook. When skill files change, `scripts/reconcile-skills.sh` updates the catalog to reflect current skill names and descriptions.
 
 ## Adding New Skills
 
-To add a new skill:
-
 1. Create a directory under `skills/` (e.g., `skills/new-skill/`)
-2. Create `SKILL.md` inside the directory
-3. Add the skill to the `skills` array in `.claude-plugin/plugin.json`
-4. Run `claude plugin validate .` to verify
-5. Update agent front matter to include the new skill where needed
+2. Create `SKILL.md` with YAML frontmatter (name, description) and content
+3. Add the skill to `plugin.json`
+4. Commit — the pre-commit hook updates the `using-skills` catalog automatically

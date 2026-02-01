@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Pre-commit hook: Reconcile skills catalog
+# Ensures using-skills/SKILL.md is up-to-date with all skill descriptions
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+RECONCILE_SCRIPT="$REPO_ROOT/scripts/reconcile-skills.sh"
+USING_SKILLS_FILE="$REPO_ROOT/skills/using-skills/SKILL.md"
+
+# Only run if the reconcile script exists
+if [ ! -x "$RECONCILE_SCRIPT" ]; then
+    echo "Warning: reconcile-skills.sh not found or not executable, skipping skill reconciliation"
+    exit 0
+fi
+
+# Check if any skill files are being committed (added, modified, or deleted)
+SKILL_CHANGES=$(git diff --cached --name-only -- 'skills/*/SKILL.md' | grep -v 'using-skills/SKILL.md' || true)
+
+if [ -n "$SKILL_CHANGES" ]; then
+    echo "Skill changes detected, reconciling skill catalog..."
+
+    # Run the reconcile script
+    "$RECONCILE_SCRIPT"
+
+    # Stage the updated using-skills file if it changed
+    if ! git diff --quiet "$USING_SKILLS_FILE"; then
+        git add "$USING_SKILLS_FILE"
+        echo "Updated and staged skills/using-skills/SKILL.md"
+    fi
+fi
+
+exit 0

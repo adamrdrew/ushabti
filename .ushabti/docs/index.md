@@ -12,7 +12,7 @@ A file-backed, agent-driven development system for Claude Code. Development happ
 
 - [Architecture Overview](architecture.md) — System architecture, Phase loop, state model, agent boundaries
 - [Agent Reference](agents.md) — All six agents: purposes, boundaries, inputs, outputs, handoffs
-- [Skills Reference](skills.md) — Shared knowledge modules (ushabti-core, phase-files)
+- [Skills Reference](skills.md) — Domain knowledge and utility skills (20 total)
 - [Phase Files Reference](phase-files.md) — Phase directory structure and file formats
 - [Configuration Reference](configuration.md) — Laws, style, plugin manifest, Claude settings
 - [Plugin Structure](plugin-structure.md) — Claude Code plugin packaging and validation
