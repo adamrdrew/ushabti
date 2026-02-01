@@ -2,9 +2,19 @@
   "enabledPlugins": {
     "ushabti@adamdrew": true
   },
-    "permissions": {
+  "permissions": {
     "allow": [
-      "Bash(*)"
+      "Bash([ -f *)",
+      "Bash([ -d *)",
+      "Bash(ls *)",
+      "Bash(grep *)",
+      "Bash(awk *)",
+      "Bash(basename *)",
+      "Bash(echo *)",
+      "Bash(sed *)",
+      "Bash(sort *)",
+      "Bash(tail *)",
+      "Bash(printf *)"
     ]
   }
 }

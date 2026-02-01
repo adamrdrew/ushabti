@@ -21,19 +21,31 @@ In ancient Egypt, ushabti were small figurines placed in tombs to do work for yo
 
 ### Permissions Configuration
 
-Ushabti skills require permission to execute bash commands. Add the following to your project's `.claude/settings.json` or `.claude/settings.local.json`:
+Ushabti skills use read-only bash commands to inspect repository state (e.g., finding the current phase, checking for required files). Following the principle of least privilege, Ushabti grants only the specific commands needed.
+
+Add the following to your project's `.claude/settings.json` or `.claude/settings.local.json`:
 
 ```json
 {
   "permissions": {
     "allow": [
-      "Bash(*)"
+      "Bash([ -f *)",
+      "Bash([ -d *)",
+      "Bash(ls *)",
+      "Bash(grep *)",
+      "Bash(awk *)",
+      "Bash(basename *)",
+      "Bash(echo *)",
+      "Bash(sed *)",
+      "Bash(sort *)",
+      "Bash(tail *)",
+      "Bash(printf *)"
     ]
   }
 }
 ```
 
-This allows skills to execute bash commands for tasks like finding the current phase and checking prerequisites.
+These permissions grant access to common read-only commands that skills use for file inspection and text processing. If you add new skills that require additional commands, update this list accordingly.
 
 ## 𓁗 Core Idea
 

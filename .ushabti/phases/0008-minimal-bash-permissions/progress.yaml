@@ -1,0 +1,45 @@
+phase:
+  id: "0008"
+  slug: minimal-bash-permissions
+  title: Minimal Bash Permissions
+  status: complete
+
+steps:
+  - id: S001
+    title: Update .claude/settings.json with explicit permissions
+    implemented: true
+    reviewed: true
+    notes: "Replaced Bash(*) with 11 explicit read-only bash command permissions"
+    touched:
+      - ".claude/settings.json"
+
+  - id: S002
+    title: Update README permissions section
+    implemented: true
+    reviewed: true
+    notes: "Replaced generic Bash(*) guidance with explicit permissions list and security rationale"
+    touched:
+      - "README.md"
+
+  - id: S003
+    title: Update configuration documentation
+    implemented: true
+    reviewed: true
+    notes: "Updated settings.local.json section with explicit permissions and security rationale"
+    touched:
+      - ".ushabti/docs/configuration.md"
+
+  - id: S004
+    title: Increment plugin version
+    implemented: true
+    reviewed: true
+    notes: "Bumped version from 1.6.2 to 1.6.3 (patch bump for security hardening)"
+    touched:
+      - ".claude-plugin/plugin.json"
+
+  - id: S005
+    title: Validate JSON syntax
+    implemented: true
+    reviewed: true
+    notes: "Verified settings.json and plugin.json are syntactically valid"
+    touched: []

@@ -198,11 +198,24 @@ Run `claude plugin validate .` from repository root to verify:
 {
   "permissions": {
     "allow": [
-      "Bash(command:*)",
-      "Bash(another-command:*)"
+      "Bash([ -f *)",
+      "Bash([ -d *)",
+      "Bash(ls *)",
+      "Bash(grep *)",
+      "Bash(awk *)",
+      "Bash(basename *)",
+      "Bash(echo *)",
+      "Bash(sed *)",
+      "Bash(sort *)",
+      "Bash(tail *)",
+      "Bash(printf *)"
     ]
   }
 }
 ```
 
 Permissions control what Bash commands Claude Code can execute without user confirmation.
+
+**Ushabti Permissions**: The commands listed above are the minimal set required for current Ushabti skills. These commands are read-only and used for inspecting repository state (finding phases, checking file existence, parsing YAML). This follows the principle of least privilege—granting only what is needed for skills to function.
+
+If you create new skills that require additional bash commands, add those specific commands to the permissions list.
