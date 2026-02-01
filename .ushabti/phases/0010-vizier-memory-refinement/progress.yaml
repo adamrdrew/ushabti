@@ -1,0 +1,76 @@
+phase:
+  id: 0010
+  slug: vizier-memory-refinement
+  title: Vizier Memory Refinement
+  status: complete
+
+steps:
+  - id: S001
+    title: Read current Vizier agent definition
+    implemented: true
+    reviewed: true
+    notes: "Read agents/vizier.md. Current memory system allows storage of observations, risks, notes, context, and Reference Library. No explicit boundaries against state or conversation logs."
+    touched:
+      - agents/vizier.md
+
+  - id: S002
+    title: Define evergreen vs. ephemeral distinction
+    implemented: true
+    reviewed: true
+    notes: "Added 'Memory boundaries' section clearly distinguishing evergreen (store) from ephemeral (do not store) information."
+    touched:
+      - agents/vizier.md
+
+  - id: S003
+    title: Add prohibitions against storing state and logs
+    implemented: true
+    reviewed: true
+    notes: "Prohibitions added in S002's 'Do not store ephemeral information' section: conversation logs, state tracking, work results, ongoing discussions."
+    touched:
+      - agents/vizier.md
+
+  - id: S004
+    title: Clarify user preference storage
+    implemented: true
+    reviewed: true
+    notes: "Added 'User preference storage' section with guidance on storing preferences as factual statements, not narratives. Included good/bad examples."
+    touched:
+      - agents/vizier.md
+
+  - id: S005
+    title: Add minimal memory guidance
+    implemented: true
+    reviewed: true
+    notes: "Added 'Keep memory minimal and focused' section with directives on avoiding duplication, preferring references, and keeping memory lean."
+    touched:
+      - agents/vizier.md
+
+  - id: S006
+    title: Review updated agent definition for contradictions
+    implemented: true
+    reviewed: true
+    notes: "Identified contradiction in startup behavior (line 91) which suggested seeding with multiple sections contrary to minimal memory guidance. Updated to seed with Reference Library only. Removed redundant line 83."
+    touched:
+      - agents/vizier.md
+
+  - id: S007
+    title: Validate plugin
+    implemented: true
+    reviewed: true
+    notes: "Ran 'claude plugin validate .' - validation passed successfully."
+    touched: []
+
+  - id: S008
+    title: Increment version
+    implemented: true
+    reviewed: true
+    notes: "Incremented version from 1.6.4 to 1.6.5 (patch version for agent behavior refinement)."
+    touched:
+      - .claude-plugin/plugin.json
+
+  - id: S009
+    title: Final validation
+    implemented: true
+    reviewed: true
+    notes: "Plugin validation passed. JSON syntax valid in plugin.json. YAML front matter well-formed in agents/vizier.md."
+    touched: []
