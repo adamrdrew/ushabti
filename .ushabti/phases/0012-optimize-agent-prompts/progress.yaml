@@ -2,13 +2,13 @@ phase:
   id: 0012
   slug: optimize-agent-prompts
   title: Optimize Agent Prompts for Token Efficiency
-  status: review
+  status: complete
 
 steps:
   - id: S001
     title: Remove Agent Isolation Warnings
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Removed agent isolation paragraph from builder.md, scribe.md, overseer.md, lawgiver.md, artisan.md, and surveyor.md. Vizier.md unchanged as required."
     touched:
       - agents/builder.md
@@ -21,7 +21,7 @@ steps:
   - id: S002
     title: Remove Theming Guidance from All Agents
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Removed theming guidance sentence from all 7 agent files."
     touched:
       - agents/builder.md
@@ -35,7 +35,7 @@ steps:
   - id: S003
     title: Add Theming Section to CLAUDE.md
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Added Agent Theming Guidelines section to CLAUDE.md under Agent Configuration."
     touched:
       - CLAUDE.md
@@ -43,7 +43,7 @@ steps:
   - id: S004
     title: Simplify Skill Invocations in builder.md
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Replaced all instances of 'Use the Skill tool to invoke' with 'Invoke' in builder.md."
     touched:
       - agents/builder.md
@@ -51,7 +51,7 @@ steps:
   - id: S005
     title: Simplify Skill Invocations in scribe.md
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Replaced all instances of 'Use the Skill tool to invoke' with 'Invoke' in scribe.md."
     touched:
       - agents/scribe.md
@@ -59,7 +59,7 @@ steps:
   - id: S006
     title: Simplify Skill Invocations in overseer.md
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Replaced all instances of 'Use the Skill tool to invoke' with 'Invoke' in overseer.md."
     touched:
       - agents/overseer.md
@@ -67,7 +67,7 @@ steps:
   - id: S007
     title: Simplify Skill Invocations in lawgiver.md, artisan.md, surveyor.md, vizier.md
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Replaced all instances of 'Use the Skill tool to invoke' with 'Invoke' in lawgiver.md, artisan.md, and surveyor.md. Vizier.md had no skill invocation patterns to update."
     touched:
       - agents/lawgiver.md
@@ -77,7 +77,7 @@ steps:
   - id: S008
     title: Shorten Frontmatter Descriptions
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Removed 'Use when...' clauses from all 7 agent frontmatter descriptions. YAML remains valid."
     touched:
       - agents/builder.md
@@ -91,7 +91,7 @@ steps:
   - id: S009
     title: Consolidate Grouped Skill References in scribe.md
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Converted bulleted skill list to single-line comma-separated format in scribe.md."
     touched:
       - agents/scribe.md
@@ -99,7 +99,7 @@ steps:
   - id: S010
     title: Consolidate Grouped Skill References in Other Agents
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "No multi-line skill lists found in other agents. Fixed remaining lowercase 'use the Skill tool to invoke' instances in builder.md and overseer.md."
     touched:
       - agents/builder.md
@@ -108,7 +108,7 @@ steps:
   - id: S011
     title: Increment Version in plugin.json
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Updated version from 1.6.6 to 1.6.7. JSON remains valid."
     touched:
       - .claude-plugin/plugin.json
@@ -116,6 +116,6 @@ steps:
   - id: S012
     title: Validate Plugin
     implemented: true
-    reviewed: false
+    reviewed: true
     notes: "Ran 'claude plugin validate .' - validation passed with exit code 0."
     touched: []
