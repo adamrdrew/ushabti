@@ -25,6 +25,33 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 - **Coverage**: Agents, architecture, phase files, plugin structure, skills, configuration
 - **Completeness**: 1185 total lines across 8 docs files - comprehensive coverage
 
+### Target Audience & Core Value Proposition
+
+**CRITICAL ARCHITECTURAL PRINCIPLE** (recorded 2026-02-01):
+
+Ushabti is designed for **experienced developers who know what they want to build and how they want to build it**.
+
+**What Ushabti is:**
+- A framework for disciplined, bounded development
+- A tool for developers with clear intent and direction
+- A system for maintaining rigor and documentation across phases
+
+**What Ushabti is NOT:**
+- A "getting started with development" tool
+- A helping hand for uncertain developers
+- A system to guide users through figuring out what to build
+
+**Design implications:**
+- Do not add features that guide developers toward decisions
+- Do not add discovery or exploration features
+- Do not add suggestion engines or recommendation systems
+- Focus on workflow discipline, not direction-setting
+- Assume developer clarity, enforce developer intent
+
+**Reason:** User feedback confirmed that adding "helpful" features that guide developers would harm the core pattern. The value is in enforcing what experienced developers already know they want to do, not in helping them figure out what to do.
+
+**Related:** This principle validates the recommendation against traditional plugin systems (R004) and supports skill-based preferences (HI006) because skills extend capability without eroding clarity of intent.
+
 ### Codebase Health (2026-02-01 Assessment)
 
 **What's working well:**
@@ -43,6 +70,59 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 - **Skills**: 20 skills total, 5 use bash (all read-only), catalog auto-maintained
 - **Tests**: No automated test suite present (Ushabti is markup only, no traditional code to test)
 - **Git hooks**: Pre-commit hook for skill catalog reconciliation (working)
+
+### Token Consumption Analysis (2026-02-01)
+
+**Token consumption in Claude Code:**
+- System prompts (agent definitions, CLAUDE.md) consume tokens on every message
+- MCP tool definitions consume tokens even when idle
+- Conversation history accumulates tokens
+- File reads consume tokens
+- Skills consume ~100 tokens for metadata scanning, <5k when invoked
+- Prompt caching reduces costs for repeated content
+- Auto-compaction summarizes history when approaching limits
+
+**Ushabti's current token footprint:**
+
+**Base context (loaded on every agent invocation):**
+- CLAUDE.md: 88 lines (~1,300 tokens)
+- Agent definition: 60-247 lines (~900-3,700 tokens depending on agent)
+- using-skills catalog: 109 lines (~1,600 tokens)
+- **Total base**: ~3,800-6,600 tokens per agent startup
+
+**Skills (on-demand, metadata only until invoked):**
+- 20 skills total
+- Average skill size: ~25 lines (~375 tokens when loaded)
+- Smallest: 8 lines (describe-ushabti)
+- Largest: 109 lines (using-skills)
+- Skills use ~100 tokens for metadata, full content only when invoked
+
+**Documentation (read by agents during work):**
+- .ushabti/docs/: 1185 lines total (~17,800 tokens if all loaded)
+- Agents read selectively, not all at once
+- Most common reads: agents.md (191 lines), phase-files.md (307 lines)
+
+**Agent prompts:**
+- Lawgiver: 152 lines (~2,300 tokens)
+- Surveyor: 247 lines (~3,700 tokens) - largest agent
+- Builder: 88 lines (~1,300 tokens)
+- Overseer: 85 lines (~1,300 tokens)
+- Scribe: 60 lines (~900 tokens) - smallest agent
+- Artisan: 134 lines (~2,000 tokens)
+- Vizier: 184 lines (~2,800 tokens)
+
+**Repetitive patterns identified:**
+- "Use the Skill tool to invoke" appears 18 times across agents (verbosity)
+- "Agent isolation" vizier.md warning appears in all 6 non-Vizier agents (96 words × 6 = 576 words)
+- CLAUDE.md duplicates content from architecture.md (agent table, phase loop, file structure)
+- Ancient Egyptian flavor text adds minimal value but consumes tokens
+
+**Key optimization opportunities:**
+1. CLAUDE.md contains significant duplication with .ushabti/docs/architecture.md
+2. Agent isolation warning repeated 6 times verbatim could be compressed
+3. Verbose skill invocation instructions could be terser
+4. using-skills catalog lists all 20 skills even when most are irrelevant
+5. Agent prompts contain redundant procedural instructions
 
 ---
 
@@ -71,6 +151,38 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 **Impact**: Reduced adoption, increased support burden, potential misuse of agents
 
 **Current state**: README is comprehensive but abstract. No step-by-step examples of a complete Phase cycle from planning through review.
+
+**Note**: Given Ushabti's target audience (experienced developers), examples should demonstrate workflow mechanics, not teach development concepts.
+
+### R004 — Plugin System Architecture Risk (RESOLVED)
+
+**Status**: RESOLVED via architectural clarity (2026-02-01)
+
+**Original risk**: User considering adding "personality plugin" system that could violate core architectural principles.
+
+**Resolution**: User confirmed that guidance-oriented features would harm core pattern. Ushabti is for experienced developers who know their intent. Plugin systems that suggest or guide would erode this clarity.
+
+**Outcome**: Traditional plugin system rejected as architecturally inappropriate. Skill-based preferences (HI006) remain viable as they extend capability without eroding clarity.
+
+### R005 — Token Inefficiency May Impact Cost at Scale
+
+**Risk**: Ushabti's current token consumption patterns include duplication and verbosity that increase costs per agent invocation.
+
+**Impact**:
+- Higher costs for users running many phases
+- Slower agent startup due to larger context
+- Reduced context window available for actual work
+- May limit Ushabti adoption in cost-sensitive environments
+
+**Current state**:
+- Base context per agent: 3,800-6,600 tokens
+- CLAUDE.md + docs duplication: ~1,500 tokens wasted
+- Repetitive agent isolation warnings: ~800 tokens across 6 agents
+- Verbose skill catalog: ~1,600 tokens (only ~400 needed for most tasks)
+
+**Likelihood**: High - every agent invocation pays this cost
+
+**Severity**: Medium - functional but inefficient; compounds over time
 
 ---
 
@@ -119,6 +231,8 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 3. Show agent prompts user would actually type
 4. Link from README "Getting Started" section
 
+**Note**: Examples should demonstrate workflow mechanics for experienced developers, not teach basic development concepts. Focus on showing how Ushabti enforces discipline, not how to think about software design.
+
 **Risk**: Low - documentation only, no code changes
 **Effort**: Medium - requires thoughtful example selection and clear writing
 **Impact**: High - addresses primary adoption barrier
@@ -163,6 +277,93 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 **Effort**: Medium - requires schema definition and validation logic
 **Impact**: Medium - catches errors earlier, reduces review friction
 
+### HI006 — Skill-Based Preference System
+
+**Opportunity**: Implement agent customization through skill-based preferences rather than traditional plugins.
+
+**Value**:
+- Allows preference enforcement (OOP, functional, TDD) without architectural changes
+- Enables capability extension (diagram generation) through composable skills
+- Preserves file-backed state principle
+- Maintains agent clarity and transparency
+- Shareable skills can be distributed like current Ushabti skills
+- Aligns with Ushabti's target audience: experienced developers who know what they want
+
+**Implementation approach**:
+1. Create `.ushabti/config.yaml` schema for declaring preferences
+2. Add `read-config` skill for agents to access configuration
+3. Create preference skills:
+   - `prefer-functional/` - functional programming guidance
+   - `enforce-tdd/` - TDD workflow enforcement
+   - `generate-block-diagram/` - diagram generation for Overseer
+4. Update Builder and Overseer to read config and invoke configured skills
+5. Test on a real phase
+
+**Design constraint**: Preference skills should enforce developer intent, not suggest or guide. They validate and verify, they do not recommend or discover.
+
+**Risk**: Low - extends existing skill architecture, no agent boundary changes
+**Effort**: Medium - requires config schema, multiple new skills, agent updates
+**Impact**: High - provides customization without plugin complexity
+
+**Priority**: Evaluate after HI002 and HI003 are complete
+
+### HI007 — Token Efficiency Optimization
+
+**Opportunity**: Reduce token consumption through strategic refactoring while preserving functionality and clarity.
+
+**Value**:
+- Lower cost per agent invocation (estimated 20-35% reduction)
+- Faster agent startup
+- More context window available for actual work
+- Better scaling as codebase and skill library grow
+- More competitive on cost vs. alternatives
+
+**Target reductions:**
+1. **CLAUDE.md compression**: 88 lines → ~50 lines (save ~600 tokens)
+   - Remove content duplicated in architecture.md
+   - Link to docs instead of repeating
+   - Keep only what's needed for non-agent Claude Code usage
+
+2. **Agent isolation compression**: 6 instances × 16 words → 1 shared reference (~400 token savings)
+   - Move to skill: `describe-agent-isolation`
+   - Agents reference: "Load describe-agent-isolation for constraints"
+   - Single source of truth, 95% token reduction
+
+3. **Skill invocation terseness**: 18 verbose instances → terse pattern (~300 token savings)
+   - From: "Use the Skill tool to invoke describe-X for Y"
+   - To: "See describe-X for Y"
+   - Agent frontmatter already specifies Skill tool access
+
+4. **using-skills optimization**: Smart catalog or lazy loading (~800 token savings)
+   - Option A: Categorize skills (phase, docs, validation)
+   - Option B: Two-tier catalog (common vs. specialized)
+   - Most agent invocations only need 5-8 skills
+
+5. **Remove flavor text**: Ancient Egyptian references (~100 token savings)
+   - "Occasionally (rarely) you may use..." appears in 7 agents
+   - Minimal value, consistent token cost
+   - Can remove entirely or move to style.md
+
+**Total estimated savings**: 2,200-2,500 tokens per agent invocation (35-40% reduction in base context)
+
+**Implementation approach**:
+1. Measure current token consumption (baseline)
+2. Implement changes in priority order
+3. Validate functionality with test phases
+4. Measure token reduction
+5. Document optimization patterns in style.md
+
+**Tradeoffs:**
+- **Clarity vs. efficiency**: Some compression may reduce immediate readability
+- **Self-contained vs. referenced**: Moving content to skills adds indirection
+- **Stability**: Changes affect all agents, requires careful testing
+
+**Risk**: Medium - changes touch all agents, must preserve functionality
+**Effort**: Medium - systematic refactoring with validation
+**Impact**: High - meaningful cost reduction for all users
+
+**Priority**: HIGH - cost efficiency benefits all Ushabti users
+
 ---
 
 ## Notes
@@ -193,6 +394,91 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 - No automated test suite (not applicable - Ushabti is markup-based, no traditional code)
 - No automated validation in CI/CD (opportunity for improvement)
 
+### Plugin System Analysis (2026-02-01)
+
+**User proposal**: Add plugin system for agent "personalities" that could:
+- Enforce paradigm preferences (OOP vs functional)
+- Enforce methodology preferences (TDD)
+- Extend capabilities (generate diagrams)
+
+**Core finding**: Proposal conflates two distinct needs:
+1. **Preference enforcement** - already solvable with laws/style or enhanced skill system
+2. **Capability extension** - already solvable with skills
+
+**Architectural concerns identified**:
+- Traditional plugins would violate agent immutability principle
+- Runtime behavior modification creates non-determinism
+- Bypasses file-backed state model
+- Could erode agent clarity and boundary enforcement
+- Risks users bypassing proper laws/style definition
+
+**Implementation options evaluated**:
+
+**Option A: Skill-based preference system (RECOMMENDED)**
+- Create `.ushabti/config.yaml` for preference declarations
+- Implement preferences as skills agents invoke based on config
+- Preserves all architectural principles
+- File-backed, transparent, composable
+- Skills can be shared/installed independently
+- **Filed as HI006**
+
+**Option B: Agent template system**
+- Core agent logic in templates
+- Personality overlays as YAML files
+- Generate final agents by merging
+- **Rejected**: Violates immutability, requires build step
+
+**Option C: External plugin hooks**
+- True plugin API with runtime hooks
+- Maximum extensibility
+- **Rejected**: Massive complexity, violates file-backed state, non-deterministic
+
+**Option D: Enhanced style system**
+- Extend `.ushabti/style.md` with structured preference declarations
+- Skills verify compliance
+- **Viable alternative**: Simpler than config.yaml, but less structured
+
+**Option E: Phase-level directives**
+- Individual phases declare specific constraints
+- Builder reads and applies per-phase
+- **Viable alternative**: Good for one-off preferences, not global configuration
+
+**Option F: Agent variant system**
+- Maintain official agent variants (builder-functional.md, overseer-visual.md)
+- Users select which to use
+- **Viable long-term**: Maximum transparency, high maintenance burden
+
+**Recommendation delivered**: Do not implement traditional plugin system. Prototype skill-based preferences (Option A) if customization need is validated. Observe usage before committing to full implementation.
+
+**Key insight**: Ushabti's strength is explicitness and clarity. Any extension mechanism must preserve these properties. Skills provide this. Plugins likely do not.
+
+**Follow-up (2026-02-01)**: User confirmed architectural principle. Ushabti is for experienced developers who know what they want to build. Features that guide or suggest would harm the core pattern. Plugin system rejected as inappropriate for this audience. Skill-based preferences remain viable because they enforce intent without suggesting direction.
+
+### Token Efficiency Research (2026-02-01)
+
+Researched Claude Code token management best practices and analyzed Ushabti's consumption patterns.
+
+**Key learnings from Anthropic documentation:**
+- Skills use ~100 tokens for metadata scanning, <5k when invoked (progressive disclosure)
+- CLAUDE.md loads into context at session start - should be <500 lines
+- Moving instructions from CLAUDE.md to skills reduces base context
+- Code intelligence plugins reduce token usage vs. text search
+- Specific prompts reduce token waste vs. vague requests
+- MCP tools consume tokens even when idle (threshold: 10% of context window)
+- Tool search reduces tool token usage by 85%
+
+**Ushabti-specific findings:**
+- Base context: 3,800-6,600 tokens per agent (CLAUDE.md + agent + using-skills)
+- CLAUDE.md is 88 lines (~1,300 tokens) with significant duplication
+- Agent isolation warning appears verbatim in 6 agents (~800 tokens total)
+- using-skills catalog lists all 20 skills even when irrelevant (~1,600 tokens)
+- Verbose skill invocation pattern repeated 18 times (~300 tokens)
+- Ancient Egyptian flavor text adds ~100 tokens across agents
+
+**Optimization potential**: 2,200-2,500 token reduction (35-40%) without functionality loss
+
+**Action**: Created HI007 for systematic token optimization
+
 ---
 
 ## Reference Library
@@ -210,7 +496,7 @@ Curated links to official documentation for technologies used in this project.
 
 **JSON**
 - [JSON Specification](https://www.json.org/)
-- [ECMA-404 Standard](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/)
+- [ECMA-404 Standard](https://www.ecma-international.org/publications-and-standards/ecma-404/)
 
 ### Tools
 
@@ -226,6 +512,8 @@ Curated links to official documentation for technologies used in this project.
 - [Claude Plugin Documentation](https://docs.anthropic.com/en/docs/claude-code/plugins)
 - [Claude Code Sub-Agents](https://code.claude.com/docs/en/sub-agents)
 - [Claude Code Skills](https://code.claude.com/docs/en/skills)
+- [Token-Efficient Tool Use](https://docs.claude.com/en/docs/agents-and-tools/tool-use/token-efficient-tool-use)
+- [Manage Costs Effectively](https://code.claude.com/docs/en/costs)
 
 ---
 
