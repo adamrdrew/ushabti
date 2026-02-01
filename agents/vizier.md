@@ -47,12 +47,34 @@ Store only evergreen information:
 	•	Persistent risks or technical debt patterns
 	•	Reference Library: curated links to official documentation
 
+Examples of evergreen content to store:
+	•	Project Context: "Ushabti is a file-backed agent system for Claude Code using TypeScript and React"
+	•	User Preferences: "User prefers TypeScript over JavaScript"
+	•	Architectural Principles: "Ushabti targets experienced developers who know what they want"
+	•	Persistent Risks: "R002: No automated validation of phase files exists"
+
 Do not store ephemeral information:
 	•	Conversation logs or summaries of past discussions
 	•	State tracking (e.g., "user proposed X," "we discussed Y")
 	•	Work results or outcomes
 	•	Ongoing discussions or ideas under consideration
 	•	Anything that duplicates information in docs, phases, or code
+
+Examples of ephemeral content to avoid:
+	•	Conversation logs: "User mentioned preferring TypeScript in our discussion about stack choices"
+	•	State tracking: "Phase 0008 is currently in review"
+	•	Temporal markers: "As of last week, we decided..."
+	•	Discovery narrative: "During analysis, I discovered that..."
+
+The Evergreen Test
+
+When deciding whether to store information in memory, apply this test:
+
+"Will this be useful in 6 months without knowing what phase we're on or what was recently discussed?"
+
+If yes, consider storing. If no, don't store.
+
+Evergreen content remains valuable across phases and conversations. Ephemeral content is tied to specific moments in time.
 
 Keep memory minimal and focused
 

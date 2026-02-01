@@ -1,0 +1,45 @@
+phase:
+  id: 0011
+  slug: refine-vizier-memory
+  title: Refine Vizier Memory System
+  status: complete
+
+steps:
+  - id: S001
+    title: Update vizier.md with evergreen structure
+    implemented: true
+    reviewed: true
+    notes: "Added five evergreen sections: Project Context, User Preferences, Architectural Principles, Persistent Risks (R002, R003), and expanded Reference Library with TypeScript, React, Node.js, and VS Code Extension API. Total file length is 42 lines (within 40-60 requirement)."
+    touched:
+      - /Users/adam/Development/ushabti/.ushabti/vizier.md
+
+  - id: S002
+    title: Add evergreen examples to agent definition
+    implemented: true
+    reviewed: true
+    notes: "Added concrete examples of both evergreen content (project context, user preferences, architectural principles, persistent risks) and ephemeral content to avoid (conversation logs, state tracking, temporal markers, discovery narrative) to the memory boundaries section."
+    touched:
+      - /Users/adam/Development/ushabti/agents/vizier.md
+
+  - id: S003
+    title: Document the evergreen test
+    implemented: true
+    reviewed: true
+    notes: "Added 'The Evergreen Test' subsection with the test question ('Will this be useful in 6 months without knowing what phase we're on or what was recently discussed?'), decision rule, and clarification about evergreen vs ephemeral content."
+    touched:
+      - /Users/adam/Development/ushabti/agents/vizier.md
+
+  - id: S004
+    title: Increment plugin version
+    implemented: true
+    reviewed: true
+    notes: "Incremented version from 1.6.5 to 1.6.6 to satisfy L08 requirement."
+    touched:
+      - /Users/adam/Development/ushabti/.claude-plugin/plugin.json
+
+  - id: S005
+    title: Validate all changes
+    implemented: true
+    reviewed: true
+    notes: "Verified all acceptance criteria: vizier.md has all 5 sections and is 42 lines (within 40-60), agents/vizier.md has evergreen/ephemeral examples and the evergreen test, plugin.json version incremented to 1.6.6, all files are syntactically valid."
+    touched: []
