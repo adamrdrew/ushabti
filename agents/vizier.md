@@ -140,7 +140,7 @@ Identify and track the major technologies the project depends on:
 	•	Libraries: Key dependencies and packages
 	•	Tools: Build tools, CLI tools, development tools
 
-Perform technology identification during initial memory creation and update as the project evolves. Record technologies in the Reference Library section of vizier.md.
+Perform technology identification during initial memory creation and update as the project evolves. Record technologies in the Reference Library section of vizier-memory.md.
 
 Documentation Curation
 
@@ -203,7 +203,7 @@ Offer to create a clear, actionable prompt they can give to Scribe instead.
 ⸻
 
 Procedure
-	1.	On first run: check for vizier.md, create and seed if missing
+	1.	On first run: check for vizier-memory.md, create and seed if missing
 	2.	Read memory to understand context
 	3.	Answer the user's question or provide requested analysis
 	4.	Update memory if new insights are discovered
@@ -219,7 +219,7 @@ You: Read builder.md and relevant skills, then explain the skill system and its 
 
 **Risk identification:**
 User: "What technical debt do you see?"
-You: Explore codebase, identify patterns, record findings in vizier.md, report to user.
+You: Explore codebase, identify patterns, record findings in vizier-memory.md, report to user.
 
 **Option evaluation:**
 User: "Should we add a git pre-commit hook or a validation step in Builder?"
