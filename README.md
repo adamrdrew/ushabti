@@ -19,6 +19,22 @@ In ancient Egypt, ushabti were small figurines placed in tombs to do work for yo
 /plugin install ushabti@adamrdrew
 ```
 
+### Permissions Configuration
+
+Ushabti skills require permission to execute bash commands. Add the following to your project's `.claude/settings.json` or `.claude/settings.local.json`:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)"
+    ]
+  }
+}
+```
+
+This allows skills to execute bash commands for tasks like finding the current phase and checking prerequisites.
+
 ## 𓁗 Core Idea
 
 Development happens in Phases.
