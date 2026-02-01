@@ -150,6 +150,7 @@ This keeps agent startup lightweight while providing access to the full skill li
 - Identify risks and technical debt
 - Suggest high-impact work
 - Maintain contextual memory in vizier.md
+- Curate and maintain a Reference Library of official documentation for project technologies
 
 **Hard constraints**:
 - Cannot modify code, laws, style, phases, docs, or any files except `.ushabti/vizier.md`

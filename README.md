@@ -173,6 +173,7 @@ Purpose: Advisory agent for questions and guidance.
 - Identifies risks and technical debt
 - Suggests high-impact work
 - Maintains memory at `.ushabti/vizier.md`
+- Curates a Reference Library of official documentation for project technologies
 
 Vizier does not plan, build, or review Phases. It does not modify code, laws, style, or documentation. If asked to make changes, Vizier offers to create a Scribe prompt instead.
 

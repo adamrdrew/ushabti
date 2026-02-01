@@ -1,0 +1,93 @@
+phase:
+  id: 0007
+  slug: vizier-library
+  title: Vizier Documentation Library
+  status: complete
+
+steps:
+  - id: S001
+    title: Update Vizier memory structure specification
+    implemented: true
+    reviewed: true
+    notes: "Added Reference Library section to memory structure with categories (Languages, Frameworks, Libraries, Tools) and explicit source restrictions"
+    touched:
+      - agents/vizier.md
+
+  - id: S002
+    title: Add technology identification instructions
+    implemented: true
+    reviewed: true
+    notes: "Added Technology Identification subsection to Capabilities with scope covering languages, frameworks, libraries, and tools. Specified timing for initial creation and ongoing updates."
+    touched:
+      - agents/vizier.md
+
+  - id: S003
+    title: Add documentation curation instructions
+    implemented: true
+    reviewed: true
+    notes: "Added Documentation Curation subsection with explicit allowed sources (official/first-party) and forbidden sources (blogs, Medium, Stack Overflow, Substack, Reddit, third-party content)"
+    touched:
+      - agents/vizier.md
+
+  - id: S004
+    title: Add library consultation instructions
+    implemented: true
+    reviewed: true
+    notes: "Added Library Consultation subsection with judicious consultation guidance, priority ordering (project/product/built-in knowledge first, library when needed), and example use case for security analysis"
+    touched:
+      - agents/vizier.md
+
+  - id: S005
+    title: Add library pre-population instructions
+    implemented: true
+    reviewed: true
+    notes: "Updated Startup behavior step 2 to include pre-populating Reference Library section with core technology documentation alongside existing sections"
+    touched:
+      - agents/vizier.md
+
+  - id: S006
+    title: Add library maintenance instructions
+    implemented: true
+    reviewed: true
+    notes: "Added Library Maintenance subsection covering adding new technologies, updating links, and removing obsolete entries. Framed as ongoing responsibility."
+    touched:
+      - agents/vizier.md
+
+  - id: S007
+    title: Add developer reference instructions
+    implemented: true
+    reviewed: true
+    notes: "Added instructions to include relevant documentation links when answering questions, with guidance on helpful, conversational tone"
+    touched:
+      - agents/vizier.md
+
+  - id: S008
+    title: Update agents.md documentation
+    implemented: true
+    reviewed: true
+    notes: "Added Reference Library capability to Vizier section in agents.md Capabilities list"
+    touched:
+      - .ushabti/docs/agents.md
+
+  - id: S009
+    title: Update README.md
+    implemented: true
+    reviewed: true
+    notes: "Added Reference Library capability to Vizier section bullet list in README.md"
+    touched:
+      - README.md
+
+  - id: S010
+    title: Validate plugin
+    implemented: true
+    reviewed: true
+    notes: "Ran claude plugin validate . - validation passed with exit code 0"
+    touched: []
+
+  - id: S011
+    title: Increment plugin version
+    implemented: true
+    reviewed: true
+    notes: "Updated version from 1.5.0 to 1.6.0 in .claude-plugin/plugin.json"
+    touched:
+      - .claude-plugin/plugin.json
