@@ -12,11 +12,12 @@ All Ushabti state lives under `.ushabti/`. This is the single source of truth.
 .ushabti/
 ├── laws.md           # Project invariants (absolute constraints)
 ├── style.md          # Conventions (how we build)
-└── phases/           # Phase directories
-    └── NNNN-slug/    # Zero-padded sequential
 └── docs/             # Docs directory
-    └── *.md          # Documentation on project systems
-    └── index.md      # Index of all project documentation
+│   └── *.md          # Documentation on project systems
+│   └── index.md      # Index of all project documentation
+└── phases/           # Phase directories
+   └── NNNN-slug/    # Zero-padded sequential
+
 ```
 
 No mirrors. No duplicates. No top-level copies.
