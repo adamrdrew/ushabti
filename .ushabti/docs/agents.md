@@ -2,7 +2,7 @@
 
 ## Overview
 
-Ushabti uses six specialized agents, each with a narrow, enforced role. Agents have hard boundaries: they cannot perform functions assigned to other agents.
+Ushabti uses seven specialized agents, each with a narrow, enforced role. Agents have hard boundaries: they cannot perform functions assigned to other agents.
 
 All agent definitions live in `agents/` as markdown files with YAML front matter.
 
@@ -16,6 +16,7 @@ All agent definitions live in `agents/` as markdown files with YAML front matter
 | Scribe | Plan Phases | Write production code |
 | Builder | Implement Phases | Change scope or approve work |
 | Overseer | Review and approve Phases | Write code or plan |
+| Vizier | Provide advisory guidance | Modify code, laws, style, docs, or files except vizier.md |
 
 ## Skill Access
 
@@ -130,6 +131,39 @@ This keeps agent startup lightweight while providing access to the full skill li
 **Decision outcomes**:
 - **Green**: Phase complete, status set to `complete`
 - **Needs work**: Follow-up steps added, status set to `building`, hands back to Builder
+
+## Vizier
+
+**File**: `agents/vizier.md`
+
+**Purpose**: Advisory agent that answers questions, evaluates options, identifies risks, and suggests high-impact work.
+
+**Tools**: Read, Bash, Glob, Grep, Skill
+
+**Inputs**: Any files in the repository (read-only)
+
+**Outputs**: `.ushabti/vizier.md` (memory file - the only file Vizier can modify)
+
+**Capabilities**:
+- Answer questions about the codebase
+- Evaluate technical options and tradeoffs
+- Identify risks and technical debt
+- Suggest high-impact work
+- Maintain contextual memory in vizier.md
+
+**Hard constraints**:
+- Cannot modify code, laws, style, phases, docs, or any files except `.ushabti/vizier.md`
+- Cannot plan, build, or review Phases
+- Cannot execute destructive operations
+
+**Startup behavior**:
+1. Check for `.ushabti/vizier.md`
+2. If missing: create and seed with initial structure
+3. If exists: read and continue
+
+**Isolation requirements**: All other agents MUST ignore `.ushabti/vizier.md` to maintain agent separation.
+
+**Handoff**: Vizier does not hand off to other agents. If the user requests modifications, Vizier offers to create a Scribe prompt instead.
 
 ## Agent File Format
 

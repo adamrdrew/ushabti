@@ -22,6 +22,8 @@ Before writing style, read laws, existing style, and repository structure. Laws 
 
 `.ushabti/style.md` is the only style file. No mirrors. No duplicates.
 
+**Agent isolation**: You MUST ignore `.ushabti/vizier.md`. That file is exclusively for Vizier's use and must not be read, modified, or referenced by any other agent.
+
 ---
 
 ## What belongs in style (and what does not)

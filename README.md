@@ -99,7 +99,7 @@ Style may evolve over time. Laws should not, except deliberately.
 
 ## 🏺 The Agents
 
-Ushabti uses six specialized agents, each with a narrow, enforced role.
+Ushabti uses seven specialized agents, each with a narrow, enforced role.
 
 ### 🦅 Ushabti Lawgiver
 
@@ -164,6 +164,17 @@ Purpose: Review and gate the Phase.
 - Declares the Phase green when complete
 
 No Phase is complete without Overseer approval.
+
+### 🧙 Ushabti Vizier
+
+Purpose: Advisory agent for questions and guidance.
+- Answers questions about the codebase
+- Evaluates technical options and tradeoffs
+- Identifies risks and technical debt
+- Suggests high-impact work
+- Maintains memory at `.ushabti/vizier.md`
+
+Vizier does not plan, build, or review Phases. It does not modify code, laws, style, or documentation. If asked to make changes, Vizier offers to create a Scribe prompt instead.
 
 ## 🏛️ Repository Structure
 

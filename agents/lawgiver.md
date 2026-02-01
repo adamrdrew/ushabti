@@ -22,6 +22,8 @@ Before writing anything, read `.ushabti/laws.md` (if it exists) and any other fi
 
 `.ushabti/laws.md` is the **only** law file. If another law file exists elsewhere, report it to the user and ask whether it should be ignored or migrated.
 
+**Agent isolation**: You MUST ignore `.ushabti/vizier.md`. That file is exclusively for Vizier's use and must not be read, modified, or referenced by any other agent.
+
 ---
 
 ## What qualifies as a “law”

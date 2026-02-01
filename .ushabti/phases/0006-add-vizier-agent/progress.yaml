@@ -1,0 +1,74 @@
+phase:
+  id: 0006
+  slug: add-vizier-agent
+  title: Add Vizier Agent
+  status: complete
+
+steps:
+  - id: S001
+    title: Create Vizier agent definition
+    implemented: true
+    reviewed: true
+    notes: "Created agents/vizier.md with complete YAML front matter and agent specification"
+    touched:
+      - agents/vizier.md
+
+  - id: S002
+    title: Register Vizier in plugin manifest
+    implemented: true
+    reviewed: true
+    notes: "Added ./agents/vizier.md to agents array in plugin.json"
+    touched:
+      - .claude-plugin/plugin.json
+
+  - id: S003
+    title: Update existing agents to ignore vizier.md
+    implemented: true
+    reviewed: true
+    notes: "Added agent isolation instruction to all six existing agent files"
+    touched:
+      - agents/lawgiver.md
+      - agents/artisan.md
+      - agents/surveyor.md
+      - agents/scribe.md
+      - agents/builder.md
+      - agents/overseer.md
+
+  - id: S004
+    title: Update CLAUDE.md agent table
+    implemented: true
+    reviewed: true
+    notes: "Added Vizier row to agent table and updated count from six to seven"
+    touched:
+      - CLAUDE.md
+
+  - id: S005
+    title: Document Vizier in agents.md
+    implemented: true
+    reviewed: true
+    notes: "Added Vizier to summary table and created full Vizier section in agents.md"
+    touched:
+      - .ushabti/docs/agents.md
+
+  - id: S006
+    title: Update README.md with Vizier documentation
+    implemented: true
+    reviewed: true
+    notes: "Added Vizier section to Agents and updated agent count from six to seven"
+    touched:
+      - README.md
+
+  - id: S007
+    title: Validate plugin
+    implemented: true
+    reviewed: true
+    notes: "Plugin validation passed with exit code 0"
+    touched: []
+
+  - id: S008
+    title: Increment plugin version
+    implemented: true
+    reviewed: true
+    notes: "Version incremented from 1.4.0 to 1.5.0"
+    touched:
+      - .claude-plugin/plugin.json

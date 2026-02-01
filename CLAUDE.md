@@ -17,7 +17,7 @@ No Phase is complete without Overseer approval.
 
 ## Agent Roles
 
-Six specialized agents with strictly enforced boundaries:
+Seven specialized agents with strictly enforced boundaries:
 
 | Agent | Purpose | Does NOT |
 |-------|---------|----------|
@@ -27,6 +27,7 @@ Six specialized agents with strictly enforced boundaries:
 | **Scribe** | Plan Phases with steps and acceptance criteria | Write production code |
 | **Builder** | Implement steps exactly as planned | Change scope or approve work |
 | **Overseer** | Verify completion and declare Phases green | Write code or plan |
+| **Vizier** | Advisory agent: answer questions, evaluate options, identify risks | Modify code, laws, style, docs, or any files except `vizier.md` |
 
 ## Canonical State Location
 
