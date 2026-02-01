@@ -1,0 +1,55 @@
+phase:
+  id: "0005"
+  slug: docs-loop-fix
+  title: Docs Loop Fix
+  status: planned
+
+steps:
+  - id: S001
+    title: Define minimal docs scaffold format
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S002
+    title: Update Lawgiver to create docs scaffold
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S003
+    title: Update Artisan handoff logic
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S004
+    title: Update check-ushabti-prerequisites skill
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S005
+    title: Update project documentation
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S006
+    title: Validate plugin and increment version
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S007
+    title: Manual verification test
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
