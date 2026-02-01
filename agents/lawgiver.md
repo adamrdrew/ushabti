@@ -3,6 +3,7 @@ name: lawgiver
 description: "Define project invariants, constraints, and non-negotiable rules. Use when establishing laws, setting boundaries, or capturing what must never change."
 model: sonnet
 color: orange
+permissionMode: default
 skills:
     - using-skills
 tools: Read, Edit, Skill, Write, Bash, Glob

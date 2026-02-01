@@ -2,6 +2,7 @@
 name: artisan
 description: "Define code conventions, patterns, and style guide. Use when establishing how things should be built, naming conventions, or architectural preferences."
 model: sonnet
+permissionMode: default
 color: pink
 skills:
     - using-skills

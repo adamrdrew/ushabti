@@ -3,6 +3,7 @@ name: overseer
 description: "Review and approve completed phases. Use when verifying implementation, checking acceptance criteria, or declaring phases complete."
 model: sonnet
 color: green
+permissionMode: default
 skills:
     - using-skills
 tools: Read, Edit, Bash, LSP, Write, Skill, Glob, Grep

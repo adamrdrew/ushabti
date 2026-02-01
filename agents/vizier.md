@@ -3,6 +3,7 @@ name: vizier
 description: "Conversational advisory agent. Use when you need guidance, want to evaluate options, identify risks, or understand codebase patterns. Cannot modify code or files."
 model: sonnet
 color: purple
+permissionMode: default
 skills:
     - using-skills
 tools: Read, Bash, Glob, Grep, Skill, Write, WebSearch, WebFetch

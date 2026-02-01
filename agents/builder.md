@@ -3,6 +3,7 @@ name: builder
 description: "Implement planned phases step by step. Use when writing code, executing implementation plans, or building features defined by Scribe."
 model: sonnet
 color: red
+permissionMode: default
 skills:
     - using-skills
 tools: Read, Edit, Write, Bash, Skill, Glob, LSP, Grep

@@ -3,6 +3,7 @@ name: surveyor
 description: "Document an existing codebase for Ushabti onboarding. Use when starting with an existing project, creating system documentation, or mapping code architecture."
 model: sonnet
 color: green
+permissionMode: default
 skills:
     - using-skills
 tools: Read, Edit, Write, Glob, Bash, Skill, Grep
