@@ -47,6 +47,17 @@ Add the following to your project's `.claude/settings.json` or `.claude/settings
 
 These permissions grant access to common read-only commands that skills use for file inspection and text processing. If you add new skills that require additional commands, update this list accordingly.
 
+## 📚 Documentation
+
+**New to Ushabti?** Start here:
+
+- **[Getting Started](docs/getting-started.md)** — Prerequisites, installation, agent overview, and the development loop
+- **[Greenfield Projects](docs/greenfield.md)** — Starting a new project from scratch with Ushabti
+- **[Brownfield Projects](docs/brownfield.md)** — Onboarding Ushabti onto an existing codebase
+- **[Tips and Tricks](docs/tips-and-tricks.md)** — Advanced patterns and non-obvious techniques
+
+These guides provide detailed walkthroughs and practical examples. The sections below offer a quick overview.
+
 ## 𓁗 Core Idea
 
 Development happens in Phases.
@@ -217,73 +228,19 @@ Vizier does not plan, build, or review Phases. It does not modify code, laws, st
 
 Everything Ushabti needs to reason about the project lives inside the repo.
 
-## 🧭 How You Use Ushabti (Typical Flow)
+## 🧭 How You Use Ushabti
 
-### 🌅 New Projects
+**New projects**: Bootstrap with Lawgiver (laws) → Artisan (style) → Surveyor (docs), then enter the Phase loop.
 
-1. Bootstrap
-   - Tell Lawgiver the project invariants
-   - Tell Artisan the project style preferences
-   - Run Surveyor to create initial documentation
-2. Start a Phase
-   - Ask Scribe to plan the next Phase
-3. Build
-   - Hand the Phase to Builder
-   - Let it implement, update progress, and update docs
-4. Review
-   - Hand the Phase to Overseer
-   - Address follow-ups if required (including docs reconciliation)
-5. Repeat
-   - Once green, ask Scribe to plan the next Phase
+**Existing projects**: Survey first with Surveyor, then establish laws and style, then begin the Phase loop.
 
-### 🏺 Existing Projects (Onboarding)
+**Phase loop**: Scribe plans → Builder implements → Overseer reviews → repeat.
 
-1. Survey
-   - Run Surveyor to explore and document the existing codebase
-   - Surveyor creates `.ushabti/docs/` with structured documentation
-2. Establish Rules
-   - Run Lawgiver to capture project invariants
-   - Run Artisan to define project style
-3. Begin Phase Loop
-   - Scribe consults the docs when planning Phases
-   - Builder uses docs for context and updates them during implementation
-   - Overseer verifies docs are current before marking Phases green
-
-You stay in control of what gets built. Ushabti handles how the work is executed and tracked.
+See [Greenfield Projects](docs/greenfield.md) and [Brownfield Projects](docs/brownfield.md) for detailed workflows.
 
 ## 📜 Documentation in the Loop
 
-The `.ushabti/docs/` directory is not just onboarding material—it's a living resource that stays current with the codebase.
-
-### ♻️ How Docs Integrate with the Phase Loop
-
-```
-Surveyor creates docs
-        ↓
-┌─────────────────────────────────────────┐
-│  Plan → Build → Review                  │
-│    ↑       ↑       ↓                    │
-│ consult  update  verify                 │
-│  docs    docs    docs                   │
-└─────────────────────────────────────────┘
-```
-
-- **Scribe** consults docs when planning to understand existing systems
-- **Builder** uses docs for context and updates them when code changes
-- **Overseer** verifies docs are reconciled before marking a Phase green
-
-A Phase cannot be marked complete if documentation is out of sync with the code changes made during that Phase.
-
-### 📚 What Gets Documented
-
-Surveyor creates documentation covering:
-- Architecture and system overview
-- Agent purposes and boundaries
-- Component and subsystem reference
-- Configuration and settings
-- File formats and schemas
-
-These docs reduce discovery time for agents and provide a reliable source of truth about the repository.
+The `.ushabti/docs/` directory is a living resource that stays current with the codebase. Scribe consults docs when planning, Builder updates them when code changes, and Overseer verifies they're reconciled before approving a Phase. A Phase cannot be marked complete if docs are out of sync with code.
 
 ## ☀️ Design Philosophy
 
@@ -297,24 +254,9 @@ Ushabti is not trying to replace engineering judgment. It exists to amplify it w
 
 ## 🏺 Onboarding an Existing Project
 
-Ushabti works with existing codebases, not just greenfield projects. To onboard:
+Ushabti works with existing codebases. Start with Surveyor to document what exists, then establish laws and style, then begin the Phase loop. The documentation Surveyor creates becomes the foundation for all subsequent planning and development.
 
-1. **Install Ushabti** (see Installation above)
-
-2. **Run Surveyor first**
-   - Surveyor explores your codebase and creates structured documentation
-   - This produces `.ushabti/docs/` with an index and system docs
-   - Documentation is tailored to what agents need to know
-
-3. **Establish project rules**
-   - Run Lawgiver to capture invariants (what must never change)
-   - Run Artisan to define style (how you build things)
-
-4. **Start the Phase loop**
-   - With docs, laws, and style in place, Scribe can plan Phases effectively
-   - Agents use the docs to understand your codebase without extensive exploration
-
-The Surveyor step is critical. Without docs, Scribe will ask you to run Surveyor before planning. The docs become the shared knowledge base that accelerates all subsequent work.
+See [Brownfield Projects](docs/brownfield.md) for the complete onboarding workflow.
 
 ## 🏜️ Status
 

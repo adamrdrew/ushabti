@@ -1,0 +1,237 @@
+# Getting Started with Ushabti
+
+Welcome to Ushabti — a file-backed, agent-driven development system for Claude Code.
+
+## What is Ushabti?
+
+Ushabti transforms how you develop software with Claude Code by introducing structure, accountability, and explicit state. Instead of drifting through chat history, development happens in bounded **Phases** that are planned, built, reviewed, and completed. Everything lives in files inside your repository, not in ephemeral conversation context.
+
+In ancient Egypt, ushabti were small figurines placed in tombs to perform work in the afterlife. In this system, Ushabti are specialized agents that handle focused work, letting you stay at the decision layer.
+
+## Prerequisites
+
+Before installing Ushabti, you need:
+
+- **Claude Code**: Ushabti is a Claude Code plugin. Install Claude Code from [claude.ai/code](https://claude.ai/code)
+- **A project**: Either a new repository or an existing codebase you want to develop with structured Phases
+
+## Installation
+
+Install Ushabti from the Claude Code plugin marketplace:
+
+```
+/plugin marketplace add adamrdrew/marketplace
+/plugin install ushabti@adamrdrew
+```
+
+### Permissions Configuration
+
+Ushabti skills use read-only bash commands to inspect repository state. Following the principle of least privilege, you need to grant specific command permissions.
+
+Add the following to your project's `.claude/settings.json` or `.claude/settings.local.json`:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash([ -f *)",
+      "Bash([ -d *)",
+      "Bash(ls *)",
+      "Bash(grep *)",
+      "Bash(awk *)",
+      "Bash(basename *)",
+      "Bash(echo *)",
+      "Bash(sed *)",
+      "Bash(sort *)",
+      "Bash(tail *)",
+      "Bash(printf *)"
+    ]
+  }
+}
+```
+
+These permissions allow Ushabti to find phases, check for required files, and inspect repository state without write access.
+
+## The Seven Agents
+
+Ushabti uses seven specialized agents, each with a narrow, enforced role. No agent can perform functions assigned to another.
+
+### Ushabti Lawgiver
+
+**Purpose**: Define and maintain project laws — the absolute invariants that must always hold.
+
+**Use when**: You need to capture architectural constraints, security rules, performance guarantees, or forbidden patterns. Run this at project bootstrap or when core invariants change.
+
+**Cannot**: Plan Phases, write code, or define style.
+
+**Invocation**: `/agent lawgiver`
+
+### Ushabti Artisan
+
+**Purpose**: Define and maintain project style — how you build things.
+
+**Use when**: You need to establish conventions for directory layout, naming, testing strategy, error handling, or observability. Run this during bootstrap or when conventions evolve.
+
+**Cannot**: Define laws or write production code.
+
+**Invocation**: `/agent artisan`
+
+### Ushabti Surveyor
+
+**Purpose**: Onboard existing projects by creating structured documentation.
+
+**Use when**: You're introducing Ushabti to an existing codebase. Surveyor explores the repository and creates documentation that other agents consult during planning and development.
+
+**Cannot**: Plan Phases, write code, review work, or define laws/style.
+
+**Invocation**: `/agent surveyor`
+
+### Ushabti Scribe
+
+**Purpose**: Plan Phases with explicit steps and acceptance criteria.
+
+**Use when**: You're ready to start a new unit of work. Scribe creates the Phase directory, writes the intent and scope, defines ordered steps, and prepares the progress tracker.
+
+**Cannot**: Write production code or declare work complete.
+
+**Invocation**: `/agent scribe`
+
+### Ushabti Builder
+
+**Purpose**: Implement Phase steps exactly as planned.
+
+**Use when**: You have a planned Phase ready to build. Builder reads laws, style, and the plan, then implements steps in order, updating progress truthfully.
+
+**Cannot**: Change scope, improvise beyond the plan, or approve its own work.
+
+**Invocation**: `/agent builder`
+
+### Ushabti Overseer
+
+**Purpose**: Review and gate Phases. Final authority on correctness.
+
+**Use when**: Builder has finished all steps and the Phase is ready for review. Overseer verifies acceptance criteria, checks law and style compliance, and either declares the Phase complete or adds follow-up steps.
+
+**Cannot**: Write production code or plan new Phases.
+
+**Invocation**: `/agent overseer`
+
+### Ushabti Vizier
+
+**Purpose**: Provide advisory guidance without modifying the codebase.
+
+**Use when**: You have questions about your code, need to evaluate technical options, want to identify risks, or need suggestions for high-impact work. Vizier maintains memory but never changes code, laws, style, or docs.
+
+**Cannot**: Modify any files except `.ushabti/vizier.md` (its memory). Cannot plan, build, or review Phases.
+
+**Invocation**: `/agent vizier`
+
+## The Development Loop
+
+All development in Ushabti follows a three-step cycle:
+
+```
+Plan → Build → Review
+        ↑       ↓
+        └── refine ──┘
+```
+
+### Plan (Scribe)
+
+Scribe creates a Phase directory with:
+- `phase.md`: Intent, scope, and acceptance criteria
+- `steps.md`: Ordered implementation steps with done-when conditions
+- `progress.yaml`: Machine-tracked state
+- `review.md`: Review scaffold
+
+Phases are intentionally small — 5 to 15 steps, completable in one focused session.
+
+### Build (Builder)
+
+Builder implements steps in the order defined by Scribe. After completing each step, Builder updates `progress.yaml` to mark it implemented and record which files were touched.
+
+If Builder discovers missing work, it does not improvise silently — it adds new steps to the plan and proceeds.
+
+### Review (Overseer)
+
+Overseer verifies the Phase against acceptance criteria and checks compliance with laws and style. Overseer either:
+- **Declares the Phase complete** (status: `complete`)
+- **Adds follow-up steps** and sends the Phase back to Builder (status: `building`)
+
+**No Phase is complete without Overseer approval.** This is non-negotiable.
+
+## When to Use Each Agent
+
+| Situation | Agent | Why |
+|-----------|-------|-----|
+| Starting a new project | Lawgiver → Artisan → Surveyor | Establish invariants, conventions, and baseline docs |
+| Onboarding an existing project | Surveyor → Lawgiver → Artisan | Document first, then establish rules |
+| Planning the next feature | Scribe | Define the Phase with steps and acceptance criteria |
+| Implementing a planned Phase | Builder | Execute steps as written |
+| Checking if Phase is done | Overseer | Verify acceptance and gate completion |
+| Asking questions | Vizier | Get guidance without modifying anything |
+| Evaluating technical options | Vizier | Compare tradeoffs before planning |
+| Remembering project context | Vizier | Ask Vizier to store decisions or patterns in memory |
+
+## What Happens When
+
+### First Time Setup (New Project)
+
+1. **Lawgiver**: Capture project laws
+2. **Artisan**: Define project style
+3. **Surveyor** (optional but recommended): Create initial docs scaffold
+4. **Scribe**: Plan your first Phase
+5. **Builder**: Implement it
+6. **Overseer**: Review and approve
+7. Repeat from step 4
+
+### First Time Setup (Existing Project)
+
+1. **Surveyor**: Explore and document the codebase
+2. **Lawgiver**: Capture project invariants
+3. **Artisan**: Define project style
+4. **Scribe**: Plan your first Phase (Scribe consults the docs Surveyor created)
+5. **Builder**: Implement it (Builder uses docs for context)
+6. **Overseer**: Review and approve (Overseer verifies docs are current)
+7. Repeat from step 4
+
+### Ongoing Development
+
+Once bootstrap is complete, you cycle through the Plan → Build → Review loop:
+
+1. **Plan**: Ask Scribe to plan the next Phase
+2. **Build**: Hand the Phase to Builder
+3. **Review**: Hand the Phase to Overseer
+4. If Overseer adds follow-ups, Builder implements them and Overseer reviews again
+5. Once Overseer marks the Phase complete, return to step 1
+
+## File Structure
+
+Ushabti creates this structure in your repository:
+
+```
+.ushabti/
+├── laws.md           # Project invariants (absolute constraints)
+├── style.md          # Conventions (how you build)
+├── docs/             # Project documentation (created by Surveyor)
+│   ├── index.md
+│   └── *.md
+└── phases/
+    └── NNNN-slug/    # Zero-padded sequential phase directories
+        ├── phase.md
+        ├── steps.md
+        ├── progress.yaml
+        └── review.md
+```
+
+Everything Ushabti needs lives in files. No hidden state. No chat-only context.
+
+## Next Steps
+
+- **New project?** Read [Greenfield Projects](greenfield.md)
+- **Existing codebase?** Read [Brownfield Projects](brownfield.md)
+- **Want advanced patterns?** See [Tips and Tricks](tips-and-tricks.md)
+
+---
+
+Ready to build. Let Ushabti handle the how.

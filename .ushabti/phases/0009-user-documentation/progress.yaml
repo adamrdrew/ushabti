@@ -1,0 +1,76 @@
+phase:
+  id: "0009"
+  slug: user-documentation
+  title: User Documentation
+  status: complete
+
+steps:
+  - id: S001
+    title: Create docs directory structure
+    implemented: true
+    reviewed: true
+    notes: "Created /docs/ directory at repository root"
+    touched:
+      - /Users/adam/Development/ushabti/docs/
+
+  - id: S002
+    title: Write getting-started.md
+    implemented: true
+    reviewed: true
+    notes: "Complete guide covering prerequisites, installation, all seven agents, development loop, and when to use each agent"
+    touched:
+      - /Users/adam/Development/ushabti/docs/getting-started.md
+
+  - id: S003
+    title: Write greenfield.md
+    implemented: true
+    reviewed: true
+    notes: "Step-by-step workflow for new projects, bootstrap sequence, first Phase example, and tips for success"
+    touched:
+      - /Users/adam/Development/ushabti/docs/greenfield.md
+
+  - id: S004
+    title: Write brownfield.md
+    implemented: true
+    reviewed: true
+    notes: "Surveyor-first workflow, integration with existing code, common concerns addressed, example walkthrough"
+    touched:
+      - /Users/adam/Development/ushabti/docs/brownfield.md
+
+  - id: S005
+    title: Write tips-and-tricks.md
+    implemented: true
+    reviewed: true
+    notes: "10+ advanced patterns covering Vizier usage, docs integration, skills, phase sizing, laws/style, commit strategy, and memory management"
+    touched:
+      - /Users/adam/Development/ushabti/docs/tips-and-tricks.md
+
+  - id: S006
+    title: Update README with documentation links
+    implemented: true
+    reviewed: true
+    notes: "Added prominent Documentation section after Installation with links to all four guides and brief descriptions"
+    touched:
+      - /Users/adam/Development/ushabti/README.md
+
+  - id: S007
+    title: Remove redundant content from README
+    implemented: true
+    reviewed: true
+    notes: "Condensed 'How You Use Ushabti', 'Onboarding an Existing Project', and 'Documentation in the Loop' sections with links to detailed docs"
+    touched:
+      - /Users/adam/Development/ushabti/README.md
+
+  - id: S008
+    title: Cross-reference validation
+    implemented: true
+    reviewed: true
+    notes: "Verified all internal links work, agent names and counts consistent, workflow descriptions align, file paths accurate, invocation commands correct. Note: .ushabti/docs/index.md has stale agent count (six vs seven) but that's out of scope for this Phase."
+    touched: []
+
+  - id: S009
+    title: Quality review
+    implemented: true
+    reviewed: true
+    notes: "Verified markdown syntax, ATX headers, style compliance, theme restraint (one appropriate Egyptian reference), technical accuracy (7 agents, 20 skills), no contradictions, clear language throughout"
+    touched: []
