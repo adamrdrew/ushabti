@@ -72,6 +72,41 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 
 **Current state**: README is comprehensive but abstract. No step-by-step examples of a complete Phase cycle from planning through review.
 
+### R004 — Memory Leak from Skill Bash Commands (CRITICAL)
+
+**Status**: ACTIVE - Critical memory leak identified
+
+**Risk**: Skills containing embedded bash commands (using `!` backtick syntax) execute every time a skill is loaded. These commands iterate over all phase directories with multiple grep/awk operations, generating potentially unbounded output.
+
+**Impact**: SEVERE - Claude Code memory balloons to 30GB rapidly, not gradually. User reports "fast and all at once" memory spikes.
+
+**Root cause**: Skills with bash command injection patterns:
+1. **find-current-phase** (line 11): Loops over `.ushabti/phases/*/`, runs `grep` and `awk` on each `progress.yaml`
+2. **find-next-step** (line 11): Multiple `grep` and `awk` operations per phase directory with counting
+3. **get-phase-status** (line 11): Loops over all phases with multiple `grep -c` operations
+4. **find-next-phase-number** (line 11): Lists all phases, pipes through `sed`, `sort`, `tail`
+5. **check-ushabti-prerequisites** (lines 11-14): Four file existence checks
+
+**Why this causes memory leaks**:
+- Skills are loaded at agent startup and during skill invocations
+- Bash commands execute immediately when skill markdown is rendered
+- Output is captured and held in memory
+- With 8+ phases and multiple agents invoking skills, memory accumulates rapidly
+- No cleanup mechanism between skill loads
+
+**Severity**: CRITICAL - Makes the system unusable on projects with multiple phases
+
+**Likelihood**: CERTAIN - Happens on every agent invocation that loads these skills
+
+**Affected agents**: All 7 agents (all have `using-skills` skill loaded, which catalogs the problematic skills)
+
+**Evidence**:
+- `/Users/adam/Development/ushabti/skills/find-current-phase/SKILL.md:11`
+- `/Users/adam/Development/ushabti/skills/find-next-step/SKILL.md:11`
+- `/Users/adam/Development/ushabti/skills/get-phase-status/SKILL.md:11`
+- `/Users/adam/Development/ushabti/skills/find-next-phase-number/SKILL.md:11`
+- `/Users/adam/Development/ushabti/skills/check-ushabti-prerequisites/SKILL.md:11-14`
+
 ---
 
 ## High-Impact Work
@@ -163,6 +198,36 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 **Effort**: Medium - requires schema definition and validation logic
 **Impact**: Medium - catches errors earlier, reduces review friction
 
+### HI006 — Eliminate Skill Bash Command Injection (URGENT)
+
+**Opportunity**: Remove all embedded bash commands from skills to fix critical memory leak.
+
+**Value**:
+- **CRITICAL**: Eliminates 30GB memory leak issue
+- Prevents system from becoming unusable on projects with multiple phases
+- Improves agent startup performance
+- Reduces token usage per invocation
+
+**Implementation approach**:
+1. Remove all `!` backtick bash command patterns from skill files
+2. Convert skills to pure documentation (explain what to check, not execute checks)
+3. Agents should invoke bash commands directly via Bash tool when needed
+4. Update skill documentation to describe procedures rather than execute them
+5. Alternative: Move dynamic queries to agent startup procedures instead of skills
+
+**Affected skills** (all in `/Users/adam/Development/ushabti/skills/`):
+- `find-current-phase/SKILL.md:11`
+- `find-next-step/SKILL.md:11`
+- `get-phase-status/SKILL.md:11`
+- `find-next-phase-number/SKILL.md:11`
+- `check-ushabti-prerequisites/SKILL.md:11-14`
+
+**Risk**: Low - removes problematic pattern, agents can still execute bash via Bash tool
+**Effort**: Low - remove ~5 lines per skill, document procedures instead
+**Impact**: CRITICAL - fixes severe memory leak, makes system usable
+
+**Urgency**: IMMEDIATE - blocks all multi-phase usage
+
 ---
 
 ## Notes
@@ -192,6 +257,17 @@ Counsel offered. This is the working memory of the Vizier agent, tracking observ
 - Assessed permissions - Phase 0008 completed security hardening
 - No automated test suite (not applicable - Ushabti is markup-based, no traditional code)
 - No automated validation in CI/CD (opportunity for improvement)
+
+### Memory Leak Investigation (2026-02-01)
+- User reported severe memory leaks (30GB) happening "fast and all at once"
+- Investigated all skills, agent configs, and scripts for problematic patterns
+- **ROOT CAUSE IDENTIFIED**: Skills with embedded bash commands using `!` backtick syntax
+- These commands execute every time skills are loaded (agent startup, skill invocations)
+- 5 skills iterate over phase directories with grep/awk, generating unbounded output
+- Output accumulates in memory without cleanup between loads
+- Memory leak severity scales with number of phases in project
+- All 7 agents affected (all load `using-skills` which catalogs problematic skills)
+- **RECOMMENDED FIX**: Remove all bash command injection from skills (HI006)
 
 ---
 

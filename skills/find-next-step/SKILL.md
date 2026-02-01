@@ -6,9 +6,30 @@ user-invocable: false
 
 # Next Step
 
-## Active Phases - Step Progress
+## How to Find Next Step
 
-!`if [ -d .ushabti/phases ] && [ "$(ls -A .ushabti/phases 2>/dev/null)" ]; then for dir in .ushabti/phases/*/; do status=$(grep "^  status:" "$dir/progress.yaml" 2>/dev/null | awk '{print $2}'); if [ "$status" = "building" ] || [ "$status" = "planned" ]; then name=$(basename "$dir"); next=$(awk '/- id:/{id=$3} /implemented: false/{print id; exit}' "$dir/progress.yaml" 2>/dev/null); impl=$(grep -c "implemented: true" "$dir/progress.yaml" 2>/dev/null || echo 0); total=$(grep -c "implemented:" "$dir/progress.yaml" 2>/dev/null || echo 0); if [ -n "$next" ]; then echo "$name: next step is $next ($impl/$total done)"; else echo "$name: all steps implemented - ready for review"; fi; fi; done; else echo "No active phases"; fi`
+Run this command to see active phases and their next unimplemented step:
+
+```bash
+if [ -d .ushabti/phases ] && [ "$(ls -A .ushabti/phases 2>/dev/null)" ]; then
+  for dir in .ushabti/phases/*/; do
+    status=$(grep "^  status:" "$dir/progress.yaml" 2>/dev/null | awk '{print $2}')
+    if [ "$status" = "building" ] || [ "$status" = "planned" ]; then
+      name=$(basename "$dir")
+      next=$(awk '/- id:/{id=$3} /implemented: false/{print id; exit}' "$dir/progress.yaml" 2>/dev/null)
+      impl=$(grep -c "implemented: true" "$dir/progress.yaml" 2>/dev/null || echo 0)
+      total=$(grep -c "implemented:" "$dir/progress.yaml" 2>/dev/null || echo 0)
+      if [ -n "$next" ]; then
+        echo "$name: next step is $next ($impl/$total done)"
+      else
+        echo "$name: all steps implemented - ready for review"
+      fi
+    fi
+  done
+else
+  echo "No active phases"
+fi
+```
 
 ## How Steps Are Tracked
 
