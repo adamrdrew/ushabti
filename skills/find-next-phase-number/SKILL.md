@@ -6,9 +6,18 @@ user-invocable: false
 
 # Next Phase Number
 
-## Next Available ID
+## How to Find Next ID
 
-!`current=$(ls -1 .ushabti/phases/ 2>/dev/null | sed 's/-.*//' | sort -n | tail -1); if [ -z "$current" ]; then echo "0001 (first phase)"; else printf "%04d (after %s)\n" $((10#$current + 1)) "$current"; fi`
+Run this command to determine the next available phase number:
+
+```bash
+current=$(ls -1 .ushabti/phases/ 2>/dev/null | sed 's/-.*//' | sort -n | tail -1)
+if [ -z "$current" ]; then
+  echo "0001 (first phase)"
+else
+  printf "%04d (after %s)\n" $((10#$current + 1)) "$current"
+fi
+```
 
 ## Phase Numbering Convention
 
