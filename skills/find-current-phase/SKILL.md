@@ -8,7 +8,7 @@ user-invocable: false
 
 ## All Phases
 
-!`if [ -d .ushabti/phases ] && [ "$(ls -A .ushabti/phases 2>/dev/null)" ]; then for dir in .ushabti/phases/*/; do name=$(basename "$dir"); status=$(grep "^  status:" "$dir/progress.yaml" 2>/dev/null | awk '{print $2}'); echo "$name: $status"; done; else echo "No phases exist yet"; fi`
+!`if [ -d .ushabti/phases ] && [ "$(ls -A .ushabti/phases 2>/dev/null)" ]; then for dir in .ushabti/phases/*/; do name=$(basename "$dir"); phase_status=$(grep "^  status:" "$dir/progress.yaml" 2>/dev/null | awk '{print $2}'); echo "$name: $phase_status"; done; else echo "No phases exist yet"; fi`
 
 ## Status Reference
 
