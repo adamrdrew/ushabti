@@ -1,0 +1,111 @@
+phase:
+  id: 0012
+  slug: ticketing-system
+  title: Ticketing System
+  status: planned
+
+steps:
+  - id: S001
+    title: Create ticket directory structure
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S002
+    title: Create describe-tickets skill
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S003
+    title: Create find-next-ticket-number skill
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S004
+    title: Create create-ticket skill
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S005
+    title: Create archive-ticket skill
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S006
+    title: Create list-tickets skill
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S007
+    title: Register ticket skills in plugin manifest
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S008
+    title: Update Vizier agent for ticket awareness
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S009
+    title: Update Scribe agent for phase-from-ticket workflow
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S010
+    title: Update Overseer agent for ticket archival
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S011
+    title: Update phase.md template format
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S012
+    title: Update documentation with ticket system
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S013
+    title: Update using-skills catalog
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S014
+    title: Validate plugin and increment version
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
+
+  - id: S015
+    title: Verify acceptance criteria
+    implemented: false
+    reviewed: false
+    notes: ""
+    touched: []
