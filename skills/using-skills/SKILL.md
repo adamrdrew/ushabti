@@ -10,7 +10,7 @@ Sub agents can invoke skills to get domain specific knowledge on a number of top
 
 # When to Use Skills
 
-If you have a question or need informaiton on any topic a skill provides information on, invoke the skill. You should also invoke skills at any time that your instructions tell you to.
+If you have a question or need information on any topic a skill provides information on, invoke the skill. You should also invoke skills at any time that your instructions tell you to.
 
 # Available Skills
 
