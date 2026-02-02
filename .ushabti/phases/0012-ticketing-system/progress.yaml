@@ -2,110 +2,125 @@ phase:
   id: 0012
   slug: ticketing-system
   title: Ticketing System
-  status: planned
+  status: complete
 
 steps:
   - id: S001
     title: Create ticket directory structure
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Created .ushabti/tickets/ and .ushabti/tickets/.archived/ directories"
+    touched:
+      - .ushabti/tickets/
+      - .ushabti/tickets/.archived/
 
   - id: S002
     title: Create describe-tickets skill
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Created skill with complete schema, format, workflows, and agent responsibilities documentation"
+    touched:
+      - skills/describe-tickets/SKILL.md
 
   - id: S003
     title: Create find-next-ticket-number skill
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Created skill with bash command for ticket ID discovery, handles empty directory case"
+    touched:
+      - skills/find-next-ticket-number/SKILL.md
 
   - id: S004
     title: Create create-ticket skill
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Created skill with complete creation procedure, validation checklist, and examples"
+    touched:
+      - skills/create-ticket/SKILL.md
 
   - id: S005
     title: Create archive-ticket skill
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Created skill with archive procedure, filesystem operations, and logging guidance"
+    touched:
+      - skills/archive-ticket/SKILL.md
 
   - id: S006
     title: Create list-tickets skill
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Created skill with bash commands for listing, counting, and reading tickets"
+    touched:
+      - skills/list-tickets/SKILL.md
 
   - id: S007
     title: Register ticket skills in plugin manifest
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Added all five ticket skills to plugin.json, maintained alphabetical ordering"
+    touched:
+      - .claude-plugin/plugin.json
 
   - id: S008
     title: Update Vizier agent for ticket awareness
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Added ticket reading capability, ticket creation guidance with sparring recommendation, ignore archived tickets instruction"
+    touched:
+      - agents/vizier.md
 
   - id: S009
     title: Update Scribe agent for phase-from-ticket workflow
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Updated procedure to read tickets, use context/proposed_work, and add ticket metadata to phase.md"
+    touched:
+      - agents/scribe.md
 
   - id: S010
     title: Update Overseer agent for ticket archival
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Added ticket archival procedure to phase completion workflow with skill invocation and logging"
+    touched:
+      - agents/overseer.md
 
   - id: S011
     title: Update phase.md template format
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Added optional ticket metadata field documentation to describe-phase-file skill"
+    touched:
+      - skills/describe-phase-file/SKILL.md
 
   - id: S012
     title: Update documentation with ticket system
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Added ticket system section to architecture.md with design, workflow, agent integration, and schema details"
+    touched:
+      - .ushabti/docs/architecture.md
 
   - id: S013
     title: Update using-skills catalog
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Ran reconcile-skills.sh script, verified all five ticket skills appear with correct descriptions"
+    touched:
+      - skills/using-skills/SKILL.md
 
   - id: S014
     title: Validate plugin and increment version
-    implemented: false
-    reviewed: false
-    notes: ""
-    touched: []
+    implemented: true
+    reviewed: true
+    notes: "Plugin validation passes before and after version increment to 1.6.7"
+    touched:
+      - .claude-plugin/plugin.json
 
   - id: S015
     title: Verify acceptance criteria
-    implemented: false
-    reviewed: false
-    notes: ""
+    implemented: true
+    reviewed: true
+    notes: "All 14 acceptance criteria verified: directories exist, all 5 skills created and registered, schema documented, agents updated, docs updated, skills user-invocable, validation passes, version 1.6.7"
     touched: []

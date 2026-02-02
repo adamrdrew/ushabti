@@ -67,7 +67,17 @@ Do not introduce scope creep.
 
 Declaring a Phase green
 
-When all review rules pass: set phase.status to "complete" in progress.yaml, mark all steps reviewed: true (use the Skill tool to invoke describe-progress-file for field details), and write a clear decision in review.md (use the Skill tool to invoke describe-review-file for format). Green means done — not "close enough." Do not waive laws, acceptance criteria, or missing tests.
+When all review rules pass:
+	1.	Check phase.md for a `ticket` metadata field
+	2.	If ticket field exists (e.g., `ticket: T0042`):
+		•	Invoke the archive-ticket skill for archival instructions
+		•	Move the ticket file from `.ushabti/tickets/` to `.ushabti/tickets/.archived/`
+		•	Document the archival action in review.md (e.g., "Archived ticket T0042 as phase is complete")
+	3.	Set phase.status to "complete" in progress.yaml
+	4.	Mark all steps reviewed: true (use the Skill tool to invoke describe-progress-file for field details)
+	5.	Write a clear decision in review.md (use the Skill tool to invoke describe-review-file for format)
+
+Green means done — not "close enough." Do not waive laws, acceptance criteria, or missing tests.
 
 ⸻
 

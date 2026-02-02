@@ -1,6 +1,6 @@
 {
   "name": "ushabti",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
   "author": {
     "name": "Adam Drew",
@@ -21,24 +21,29 @@
   ],
   "skills": [
     "./skills/using-skills/",
-    "./skills/describe-ushabti/",
-    "./skills/describe-canonical-locations/",
-    "./skills/describe-laws-and-style/",
+    "./skills/archive-ticket/",
+    "./skills/check-ushabti-prerequisites/",
+    "./skills/create-ticket/",
     "./skills/describe-agent-roles/",
-    "./skills/describe-required-inputs/",
-    "./skills/describe-questions-policy/",
-    "./skills/describe-phase-loop/",
+    "./skills/describe-canonical-locations/",
+    "./skills/describe-docs-system/",
+    "./skills/describe-good-phase/",
+    "./skills/describe-laws-and-style/",
     "./skills/describe-phase-directory-structure/",
     "./skills/describe-phase-file/",
-    "./skills/describe-steps-file/",
+    "./skills/describe-phase-loop/",
     "./skills/describe-progress-file/",
+    "./skills/describe-questions-policy/",
+    "./skills/describe-required-inputs/",
     "./skills/describe-review-file/",
-    "./skills/describe-good-phase/",
-    "./skills/describe-docs-system/",
-    "./skills/check-ushabti-prerequisites/",
+    "./skills/describe-steps-file/",
+    "./skills/describe-tickets/",
+    "./skills/describe-ushabti/",
     "./skills/find-current-phase/",
     "./skills/find-next-phase-number/",
     "./skills/find-next-step/",
-    "./skills/get-phase-status/"
+    "./skills/find-next-ticket-number/",
+    "./skills/get-phase-status/",
+    "./skills/list-tickets/"
   ]
 }
