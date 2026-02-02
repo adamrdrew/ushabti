@@ -42,6 +42,8 @@ All Ushabti state lives under `.ushabti/`:
 ├── laws.md           # Project invariants
 ├── style.md          # Project conventions
 ├── docs/             # Project documentation
+├── tickets/          # Active tickets
+│   └── .archived/    # Completed tickets
 └── phases/
     └── NNNN-slug/
         ├── phase.md
@@ -56,9 +58,44 @@ All Ushabti state lives under `.ushabti/`:
 
 **Style** (`.ushabti/style.md`): Conventions for consistency. May evolve over time. Must not contradict laws.
 
+## Ticket System
+
+Tickets provide a lightweight way to capture ideas for future work without immediately planning a Phase. They complement the Phase-driven workflow by preserving valuable ideas discovered during development.
+
+### Design
+
+- **File-backed**: Tickets are YAML files stored in `.ushabti/tickets/`
+- **Simple lifecycle**: Create → derive phase → archive (no editing, no state transitions)
+- **Agent-aware**: Agents can read, create, and archive tickets during their workflows
+
+### Workflow
+
+1. **Create**: Agent or user creates a ticket in `.ushabti/tickets/TNNNN-description.yaml`
+2. **Derive**: When ready, Scribe creates a Phase from the ticket (adds `ticket: TNNNN` to phase.md)
+3. **Archive**: When the derived Phase completes, Overseer moves the ticket to `.ushabti/tickets/.archived/`
+
+### Agent Integration
+
+- **Vizier**: Can read active tickets and offer to create tickets during conversation (sparingly)
+- **Scribe**: Reads tickets when planning phases, incorporates ticket context and proposed work, adds ticket metadata to phase.md
+- **Overseer**: Archives tickets when completing ticket-derived phases
+- **All agents**: Tickets in `.ushabti/tickets/.archived/` are invisible and never read
+
+### Ticket Schema
+
+Required fields (YAML):
+- `id`: Sequential ticket ID (T0001, T0002, etc.)
+- `title`: Brief description
+- `created`: ISO 8601 date (YYYY-MM-DD)
+- `priority`: Must be `low`, `medium`, or `high`
+- `context`: Why this ticket exists
+- `proposed_work`: What should be done
+
+See `describe-tickets` skill for complete schema and format details.
+
 ## Agent Architecture
 
-Six agents, each with a single responsibility:
+Seven agents, each with a single responsibility:
 
 | Agent | Responsibility |
 |-------|---------------|
@@ -68,6 +105,7 @@ Six agents, each with a single responsibility:
 | Scribe | Plan Phases |
 | Builder | Implement Phases |
 | Overseer | Review and approve Phases |
+| Vizier | Answer questions and provide advice |
 
 ### Role Boundaries
 
@@ -75,6 +113,7 @@ Agents have hard boundaries:
 - Scribe plans but does not code
 - Builder codes but does not plan or approve
 - Overseer approves but does not code or plan
+- Vizier advises but does not modify files (except vizier-memory.md)
 
 Cross-role violations are fundamental errors.
 

@@ -41,15 +41,15 @@ Use the Skill tool to invoke describe-questions-policy for guidelines on asking 
 
 Procedure
 	1.	Understand
-Restate the user's goal in your own words. Consult `.ushabti/docs` to understand the relevant systems and how they relate to the requested work.
+Restate the user's goal in your own words. If the user references a ticket (e.g., "plan a phase from ticket T0042"), read the ticket YAML from `.ushabti/tickets/`. Use the ticket's `context` and `proposed_work` fields to inform your understanding. Consult `.ushabti/docs` to understand the relevant systems and how they relate to the requested work.
 	2.	Constrain
 Identify laws and style that affect this Phase.
 	3.	Shape
-Define intent, scope, and acceptance criteria.
+Define intent, scope, and acceptance criteria. If planning from a ticket, incorporate the ticket's context and proposed work into the phase intent and scope, adapting and expanding as needed to make a well-formed phase.
 	4.	Decompose
 Break the work into ordered, reviewable steps.
 	5.	Write
-Create the Phase directory and all required files.
+Create the Phase directory and all required files. If this phase derives from a ticket, add `ticket: TNNNN` metadata to the phase.md file immediately after the title (before Intent section). The ticket will remain in `.ushabti/tickets/` until Overseer archives it on phase completion.
 	6.	Summarize
 Briefly describe what the Phase contains and why.
 

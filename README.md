@@ -12,6 +12,18 @@ Ushabti is a lightweight, file-backed, agent-driven development system for Claud
 
 In ancient Egypt, ushabti were small figurines placed in tombs to do work for you in the afterlife. In this project, Ushabti are small agents that do focused work for you so you can stay at the decision layer.
 
+## 𓀠 Why Ushabti?
+
+<p align="center">
+   <em>The road ahead is long. Let us plan accordingly and proceed carefully, for there are many perils along the way. We need not move but one step at a time.</em>
+</p>
+
+Ushabti exists to account for, control for, and prevent the common failure modes that crop up in AI-augmented engineering. A common criticism you’ll often hear is: “It may be great that you bootstrapped a project so quickly, but wait until you need to extend and maintain your code.” Everybody agrees you can move fast with AI assistance, but there's a great deal of skepticism that working with AI can produce high quality mantainable code.
+
+Ushabti is designed specifically to make maintainable, extensible codebases work with AI-augmented engineering over an indefinitely long time span. The agents and skills are assembled with that primary goal in mind: *enable developers working with AI to create software that can be extended and grown indefinitely*.
+
+Ushabti sacrifices some of the raw velocity that unstructured AI development provides, but it invests that lost velocity into producing software that stays stable and extensible for as long as the developer wants to keep working.
+
 ## 🧱 Installation
 
 ```
