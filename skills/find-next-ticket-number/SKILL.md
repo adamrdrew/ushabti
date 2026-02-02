@@ -16,6 +16,9 @@ Run the provided bash command to find the highest existing ticket number and cal
 ## Bash Command
 
 ```bash
+# Ensure directory exists (defensive, in case bootstrap didn't run)
+mkdir -p .ushabti/tickets
+
 # Find the highest ticket number in .ushabti/tickets/
 HIGHEST=$(find .ushabti/tickets -maxdepth 1 -type f -name 'T[0-9][0-9][0-9][0-9]-*.yaml' | \
   sed -E 's/.*\/T([0-9]{4})-.*/\1/' | \
@@ -35,11 +38,12 @@ printf "T%04d\n" $NEXT
 
 ## How It Works
 
-1. **Find ticket files**: Searches `.ushabti/tickets/` for files matching `T[0-9][0-9][0-9][0-9]-*.yaml`
-2. **Extract IDs**: Uses `sed` to extract the 4-digit numeric portion from each filename
-3. **Sort**: Sorts numerically to find the highest ID
-4. **Calculate next**: Increments the highest ID by 1, or starts at 1 if no tickets exist
-5. **Format**: Outputs the next ID as zero-padded 4-digit format (TNNNN)
+1. **Ensure directory exists**: Creates `.ushabti/tickets/` if it doesn't exist (defensive fallback)
+2. **Find ticket files**: Searches `.ushabti/tickets/` for files matching `T[0-9][0-9][0-9][0-9]-*.yaml`
+3. **Extract IDs**: Uses `sed` to extract the 4-digit numeric portion from each filename
+4. **Sort**: Sorts numerically to find the highest ID
+5. **Calculate next**: Increments the highest ID by 1, or starts at 1 if no tickets exist
+6. **Format**: Outputs the next ID as zero-padded 4-digit format (TNNNN)
 
 ## Example Output
 

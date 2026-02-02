@@ -126,6 +126,89 @@ Ushabti uses seven specialized agents, each with a narrow, enforced role. No age
 
 **Invocation**: `/agent vizier`
 
+## The Ticketing System
+
+Ushabti includes a lightweight ticketing system for capturing ideas, technical debt, and future work that doesn't fit into the current Phase. Tickets provide a structured way to record work without bloating your current Phase or losing track of good ideas.
+
+### What Are Tickets?
+
+Tickets are YAML files stored in `.ushabti/tickets/` that capture ideas for future Phases. Each ticket includes:
+
+- **ID**: Sequential identifier (T0001, T0002, etc.)
+- **Title**: Brief, descriptive name
+- **Created date**: When the ticket was created
+- **Priority**: low, medium, or high
+- **Context**: Why this ticket exists
+- **Proposed work**: What should be done
+
+### When to Create Tickets
+
+Create tickets to capture:
+- **Improvement ideas** discovered during planning or implementation
+- **Technical debt** that's out of scope for the current Phase
+- **Feature requests** to consider later
+- **Refactoring opportunities** noticed during development
+
+Tickets let you acknowledge work without derailing your current Phase.
+
+### Ticket Workflow
+
+1. **Create**: Use the `create-ticket` skill to generate a new ticket
+   ```
+   /skill create-ticket
+   ```
+   The skill guides you through providing the required information and validates the ticket schema.
+
+2. **List**: View all open tickets using the `list-tickets` skill
+   ```
+   /skill list-tickets
+   ```
+   This shows ticket IDs, titles, priority, and creation dates for all active tickets.
+
+3. **Plan Phase**: When ready to work on a ticket, tell Scribe to create a Phase from it
+   ```
+   /agent scribe
+   "Create a Phase based on ticket T0042"
+   ```
+   Scribe reads the ticket and uses its context and proposed work to inform Phase planning.
+
+4. **Archive**: After the Phase completes, Overseer archives the ticket to `.ushabti/tickets/.archived/`
+   The ticket remains on disk but becomes invisible to agents.
+
+### Example: Creating a Ticket
+
+```yaml
+id: T0003
+title: Add validation to ticket creation
+created: 2026-02-01
+priority: medium
+context: |
+  Currently tickets can be created with invalid priority values,
+  which breaks the list-tickets skill's filtering logic.
+proposed_work: |
+  - Add priority validation to create-ticket skill
+  - Verify priority is exactly "low", "medium", or "high"
+  - Fail gracefully with clear error if invalid
+```
+
+This ticket would be saved as `.ushabti/tickets/T0003-add-validation-to-ticket-creation.yaml`
+
+### Example: Planning from a Ticket
+
+When you're ready to work on ticket T0003:
+
+1. Tell Scribe: "Create a Phase based on ticket T0003"
+2. Scribe reads the ticket file and plans a Phase using the context and proposed work
+3. The resulting `phase.md` includes metadata: `ticket: T0003`
+4. After Overseer approves the Phase, Overseer archives T0003
+
+### Tips
+
+- **Keep tickets small**: If a ticket describes more than one Phase of work, create multiple tickets
+- **Don't edit tickets**: Tickets are create-only. If you need to correct a ticket, create a new one and archive the old one
+- **Use tickets during Phases**: Discovered technical debt? Create a ticket for it instead of scope creeping the current Phase
+- **Tickets are optional**: Not everything needs a ticket. Use them when capturing the idea is more valuable than acting on it immediately
+
 ## The Development Loop
 
 All development in Ushabti follows a three-step cycle:
@@ -166,7 +249,9 @@ Overseer verifies the Phase against acceptance criteria and checks compliance wi
 |-----------|-------|-----|
 | Starting a new project | Lawgiver → Artisan → Surveyor | Establish invariants, conventions, and baseline docs |
 | Onboarding an existing project | Surveyor → Lawgiver → Artisan | Document first, then establish rules |
+| Capturing ideas for later | (use tickets) | Create tickets for work that's not in scope right now |
 | Planning the next feature | Scribe | Define the Phase with steps and acceptance criteria |
+| Planning from a ticket | Scribe | Tell Scribe to create a Phase based on a ticket ID |
 | Implementing a planned Phase | Builder | Execute steps as written |
 | Checking if Phase is done | Overseer | Verify acceptance and gate completion |
 | Asking questions | Vizier | Get guidance without modifying anything |
@@ -216,6 +301,8 @@ Ushabti creates this structure in your repository:
 ├── docs/             # Project documentation (created by Surveyor)
 │   ├── index.md
 │   └── *.md
+├── tickets/          # Active tickets
+│   └── .archived/    # Completed tickets
 └── phases/
     └── NNNN-slug/    # Zero-padded sequential phase directories
         ├── phase.md

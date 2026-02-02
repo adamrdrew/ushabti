@@ -42,7 +42,17 @@ Use glob pattern to find the exact filename:
 ls .ushabti/tickets/T0042-*.yaml
 ```
 
-### Step 3: Move to Archive
+### Step 3: Ensure Archive Directory Exists
+
+Ensure the archive directory exists by running:
+
+```bash
+mkdir -p .ushabti/tickets/.archived
+```
+
+This is idempotent and handles cases where the directory was not created during bootstrap.
+
+### Step 4: Move to Archive
 
 Move the ticket file from `.ushabti/tickets/` to `.ushabti/tickets/.archived/`
 
@@ -52,13 +62,13 @@ mv .ushabti/tickets/T0042-improve-error-messages.yaml .ushabti/tickets/.archived
 
 The filename remains unchanged, only the location changes.
 
-### Step 4: Verify
+### Step 5: Verify
 
 Confirm the ticket file:
 - No longer exists in `.ushabti/tickets/`
 - Now exists in `.ushabti/tickets/.archived/`
 
-### Step 5: Log the Action
+### Step 6: Log the Action
 
 In review.md, document the archival:
 
@@ -73,6 +83,9 @@ In review.md, document the archival:
 ### Command Template
 
 ```bash
+# Ensure archive directory exists
+mkdir -p .ushabti/tickets/.archived
+
 # Find the ticket file
 TICKET_FILE=$(ls .ushabti/tickets/TNNNN-*.yaml)
 
@@ -101,6 +114,9 @@ ticket: T0008
 Overseer completes the phase and archives the ticket:
 
 ```bash
+# Ensure archive directory exists
+mkdir -p .ushabti/tickets/.archived
+
 # Find ticket T0008
 TICKET_FILE=$(ls .ushabti/tickets/T0008-*.yaml)
 echo "Found: $TICKET_FILE"
