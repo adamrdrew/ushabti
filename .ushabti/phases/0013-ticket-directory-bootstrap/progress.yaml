@@ -1,0 +1,93 @@
+phase:
+  id: 0013
+  slug: ticket-directory-bootstrap
+  title: Ticket Directory Bootstrap
+  status: complete
+
+steps:
+  - id: S001
+    title: Add ticket directory creation to Lawgiver
+    implemented: true
+    reviewed: true
+    notes: "Added ticket directory creation to bootstrap procedure (steps 3-4) and updated procedure summary"
+    touched:
+      - agents/lawgiver.md
+
+  - id: S002
+    title: Add ticket directory creation to Surveyor
+    implemented: true
+    reviewed: true
+    notes: "Added ticket directory creation to Part A setup step 1"
+    touched:
+      - agents/surveyor.md
+
+  - id: S003
+    title: Add defensive directory creation to create-ticket skill
+    implemented: true
+    reviewed: true
+    notes: "Added Step 6 for mkdir -p before writing ticket file, renumbered subsequent steps"
+    touched:
+      - skills/create-ticket/SKILL.md
+
+  - id: S004
+    title: Add defensive directory check to find-next-ticket-number skill
+    implemented: true
+    reviewed: true
+    notes: "Added mkdir -p at start of bash command, updated How It Works section"
+    touched:
+      - skills/find-next-ticket-number/SKILL.md
+
+  - id: S005
+    title: Add defensive directory creation to archive-ticket skill
+    implemented: true
+    reviewed: true
+    notes: "Added Step 3 for mkdir -p before move, renumbered subsequent steps, updated command template and example"
+    touched:
+      - skills/archive-ticket/SKILL.md
+
+  - id: S006
+    title: Document ticket system in README.md
+    implemented: true
+    reviewed: true
+    notes: "Added Ticketing System section after Agents, updated Repository Structure diagram"
+    touched:
+      - README.md
+
+  - id: S007
+    title: Add ticket workflow to getting-started.md
+    implemented: true
+    reviewed: true
+    notes: "Added comprehensive Ticketing System section with workflow, examples, and tips; updated file structure diagram and agent usage table"
+    touched:
+      - docs/getting-started.md
+
+  - id: S008
+    title: Update greenfield.md to mention tickets
+    implemented: true
+    reviewed: true
+    notes: "Added section 5a about capturing ideas with tickets, added tip about using tickets to defer non-essential work"
+    touched:
+      - docs/greenfield.md
+
+  - id: S009
+    title: Update brownfield.md to mention tickets
+    implemented: true
+    reviewed: true
+    notes: "Added section 4a about capturing technical debt with tickets, added tip about using tickets to track technical debt"
+    touched:
+      - docs/brownfield.md
+
+  - id: S010
+    title: Increment version in plugin.json
+    implemented: true
+    reviewed: true
+    notes: "Incremented version from 1.6.7 to 1.6.8"
+    touched:
+      - .claude-plugin/plugin.json
+
+  - id: S011
+    title: Verify all changes
+    implemented: true
+    reviewed: true
+    notes: "Verified: plugin.json JSON valid, all markdown files syntactically valid, directory creation logic correct and idempotent (mkdir -p), all changes align with acceptance criteria"
+    touched: []

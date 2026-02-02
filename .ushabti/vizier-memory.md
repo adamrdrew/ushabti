@@ -18,14 +18,14 @@ The Phase loop (Plan → Build → Review) is the core workflow. No Phase is com
 
 ## Persistent Risks
 
-None currently identified.
+R001: Ticket directory structure is not automatically created during bootstrap. If users attempt to create tickets before running Lawgiver (which does bootstrap `.ushabti/` and `.ushabti/docs/`), ticket operations will fail because `.ushabti/tickets/` and `.ushabti/tickets/.archived/` don't exist. Ticket skills lack just-in-time directory creation logic.
 
 ## Reference Library
 
 ### Languages
 - [Markdown Guide](https://www.markdownguide.org/) - Markdown syntax and best practices
 - [YAML Specification](https://yaml.org/spec/) - Official YAML specification
-- [JSON](https://www.json.org/) - JSON format specification
+- [JSON](https://json.org/) - JSON format specification
 
 ### Tools
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code) - Official Claude Code documentation

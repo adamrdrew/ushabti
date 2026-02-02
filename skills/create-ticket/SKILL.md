@@ -87,11 +87,17 @@ proposed_work: |
   - Update documentation with common errors and solutions
 ```
 
-### Step 6: Write File
+### Step 6: Ensure Directory Exists
+
+Ensure the ticket directory exists by running: `mkdir -p .ushabti/tickets`
+
+This is idempotent and handles cases where bootstrap or onboarding didn't create the directory.
+
+### Step 7: Write File
 
 Write the YAML content to `.ushabti/tickets/TNNNN-slug.yaml`
 
-### Step 7: Verify
+### Step 8: Verify
 
 Confirm the file was written successfully and is valid YAML.
 

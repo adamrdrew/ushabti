@@ -212,6 +212,23 @@ Purpose: Advisory agent for questions and guidance.
 
 Vizier does not plan, build, or review Phases. It does not modify code, laws, style, or documentation. If asked to make changes, Vizier offers to create a Scribe prompt instead.
 
+## 🎫 Ticketing System
+
+Ushabti includes a lightweight ticketing system for capturing ideas, technical debt, and future work that doesn't fit into the current Phase. Tickets are YAML files stored in `.ushabti/tickets/` that follow a simple schema.
+
+**When to create tickets:**
+- Capture improvement ideas during planning or implementation
+- Document technical debt discovered during development
+- Record feature requests or enhancements for later consideration
+- Track work that's out of scope for the current Phase
+
+**Ticket workflow:**
+1. Create a ticket using the `create-ticket` skill
+2. When ready to work on it, Scribe creates a Phase from the ticket
+3. After the Phase completes, Overseer archives the ticket to `.ushabti/tickets/.archived/`
+
+Tickets provide a lightweight way to track ideas without bloating the current Phase or losing track of future work. See [Getting Started](docs/getting-started.md) for detailed ticket workflow and examples.
+
 ## 🏛️ Repository Structure
 
 ```
@@ -224,6 +241,8 @@ Vizier does not plan, build, or review Phases. It does not modify code, laws, st
 │   ├── laws.md           # Project invariants
 │   ├── style.md          # Project conventions
 │   ├── docs/             # Project documentation (created by Surveyor)
+│   ├── tickets/          # Active tickets
+│   │   └── .archived/    # Completed tickets
 │   └── phases/
 │       └── NNNN-slug/
 │           ├── phase.md

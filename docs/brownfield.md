@@ -143,6 +143,27 @@ Identify the conventions your codebase already follows (or should follow going f
 
 **Output**: `.ushabti/style.md`
 
+### 4a. Capture Technical Debt with Tickets (Optional)
+
+During the survey and bootstrap process, you'll likely identify technical debt, architectural improvements, and refactoring opportunities. Create tickets to capture these:
+
+```
+/skill create-ticket
+```
+
+Tickets are especially valuable in brownfield projects for tracking:
+- **Technical debt** identified during Surveyor's exploration
+- **Architectural improvements** discovered while defining laws
+- **Refactoring opportunities** noticed while establishing style
+- **Missing tests** or documentation gaps
+
+Examples:
+- "Refactor payment service to use connection pooling"
+- "Add missing unit tests for authentication module"
+- "Extract configuration into environment variables"
+
+This lets you acknowledge improvement opportunities without derailing your first Phase. Later, tell Scribe to create a Phase from a ticket when you're ready to address it. See [Getting Started](getting-started.md) for detailed ticket workflow.
+
 ### 5. Begin the Phase Loop
 
 With docs, laws, and style in place, you're ready to start planning Phases.
@@ -304,6 +325,9 @@ Vizier can identify technical debt, integration points, or missing capabilities 
 
 ### Keep Early Phases Small
 Your first few Phases should be tiny. Get comfortable with the loop before tackling complex work.
+
+### Use Tickets to Track Technical Debt
+Brownfield projects often surface lots of improvement ideas. Instead of trying to fix everything at once, create tickets for technical debt and address them incrementally through focused Phases.
 
 ## Next Steps
 
