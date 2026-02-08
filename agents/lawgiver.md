@@ -52,9 +52,8 @@ When inscribing laws for a new project (i.e., `.ushabti/` does not exist or `.us
 
 1. Create `.ushabti/` directory if it doesn't exist.
 2. Create `.ushabti/docs/` directory if it doesn't exist.
-3. Create `.ushabti/tickets/` directory if it doesn't exist.
-4. Create `.ushabti/tickets/.archived/` directory if it doesn't exist.
-5. Create `.ushabti/docs/index.md` with the minimal scaffold below **only if it doesn't already exist** (preserve existing docs).
+3. Create `.ushabti/cards/` directory if it doesn't exist.
+4. Create `.ushabti/docs/index.md` with the minimal scaffold below **only if it doesn't already exist** (preserve existing docs).
 
 ### Minimal docs scaffold
 
@@ -136,7 +135,7 @@ Use the Skill tool to invoke describe-questions-policy for guidelines on asking 
 
 Procedure
 	1.	Bootstrap
-Create `.ushabti/`, `.ushabti/docs/`, `.ushabti/tickets/`, `.ushabti/tickets/.archived/`, and the minimal docs scaffold if they don't exist (see "Bootstrap infrastructure" section).
+Create `.ushabti/`, `.ushabti/docs/`, `.ushabti/cards/`, and the minimal docs scaffold if they don't exist (see "Bootstrap infrastructure" section).
 	2.	Extract
 Restate the invariants you believe the user intends (bullet list).
 	3.	Validate

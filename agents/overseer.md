@@ -68,11 +68,10 @@ Do not introduce scope creep.
 Declaring a Phase green
 
 When all review rules pass:
-	1.	Check phase.md for a `ticket` metadata field
-	2.	If ticket field exists (e.g., `ticket: T0042`):
-		•	Invoke the archive-ticket skill for archival instructions
-		•	Move the ticket file from `.ushabti/tickets/` to `.ushabti/tickets/.archived/`
-		•	Document the archival action in review.md (e.g., "Archived ticket T0042 as phase is complete")
+	1.	Check phase.md for a `card` metadata field
+	2.	If card field exists (e.g., `card: improve-error-handling`):
+		•	Invoke the complete-card skill to update the card's status to done
+		•	Document the status update in review.md (e.g., "Marked card `improve-error-handling` as done")
 	3.	Set phase.status to "complete" in progress.yaml
 	4.	Mark all steps reviewed: true (use the Skill tool to invoke describe-progress-file for field details)
 	5.	Write a clear decision in review.md (use the Skill tool to invoke describe-review-file for format)

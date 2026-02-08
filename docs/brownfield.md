@@ -143,15 +143,15 @@ Identify the conventions your codebase already follows (or should follow going f
 
 **Output**: `.ushabti/style.md`
 
-### 4a. Capture Technical Debt with Tickets (Optional)
+### 4a. Capture Technical Debt with Cards (Optional)
 
-During the survey and bootstrap process, you'll likely identify technical debt, architectural improvements, and refactoring opportunities. Create tickets to capture these:
+During the survey and bootstrap process, you'll likely identify technical debt, architectural improvements, and refactoring opportunities. Create cards to capture these:
 
 ```
-/skill create-ticket
+/skill create-card
 ```
 
-Tickets are especially valuable in brownfield projects for tracking:
+Cards are especially valuable in brownfield projects for tracking:
 - **Technical debt** identified during Surveyor's exploration
 - **Architectural improvements** discovered while defining laws
 - **Refactoring opportunities** noticed while establishing style
@@ -162,7 +162,7 @@ Examples:
 - "Add missing unit tests for authentication module"
 - "Extract configuration into environment variables"
 
-This lets you acknowledge improvement opportunities without derailing your first Phase. Later, tell Scribe to create a Phase from a ticket when you're ready to address it. See [Getting Started](getting-started.md) for detailed ticket workflow.
+This lets you acknowledge improvement opportunities without derailing your first Phase. Later, tell Scribe to create a Phase from a card when you're ready to address it. See [Getting Started](getting-started.md) for detailed card workflow.
 
 ### 5. Begin the Phase Loop
 
@@ -326,8 +326,8 @@ Vizier can identify technical debt, integration points, or missing capabilities 
 ### Keep Early Phases Small
 Your first few Phases should be tiny. Get comfortable with the loop before tackling complex work.
 
-### Use Tickets to Track Technical Debt
-Brownfield projects often surface lots of improvement ideas. Instead of trying to fix everything at once, create tickets for technical debt and address them incrementally through focused Phases.
+### Use Cards to Track Technical Debt
+Brownfield projects often surface lots of improvement ideas. Instead of trying to fix everything at once, create cards for technical debt and address them incrementally through focused Phases.
 
 ## Next Steps
 

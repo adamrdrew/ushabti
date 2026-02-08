@@ -119,20 +119,20 @@ Surveyor will explore your repository (even if mostly empty) and create initial 
 
 **When to skip**: If your repository is truly empty, you can skip Surveyor initially and run it after your first few Phases have added structure.
 
-### 5a. Capture Ideas with Tickets (Optional)
+### 5a. Capture Ideas with Cards (Optional)
 
-During bootstrap, you may identify future work that's not essential for the first Phase. Create tickets to capture these ideas:
+During bootstrap, you may identify future work that's not essential for the first Phase. Create cards to capture these ideas:
 
 ```
-/skill create-ticket
+/skill create-card
 ```
 
-Tickets let you record improvement ideas, technical debt, or nice-to-have features without bloating your first Phase. Examples:
+Cards let you record improvement ideas, technical debt, or nice-to-have features without bloating your first Phase. Examples:
 - "Add request rate limiting"
 - "Implement background job processing"
 - "Create admin dashboard"
 
-Later, when planning Phases, you can tell Scribe to create a Phase based on a ticket ID. See [Getting Started](getting-started.md) for detailed ticket workflow.
+Later, when planning Phases, you can tell Scribe to create a Phase based on a card slug. See [Getting Started](getting-started.md) for detailed card workflow.
 
 ### 6. Plan Your First Phase
 
@@ -265,8 +265,8 @@ The Plan → Build → Review loop feels slow at first, but it compounds. Each P
 ### Document as You Go
 Builder updates docs when code changes affect documented systems. This keeps `.ushabti/docs/` current without extra effort. Trust the process.
 
-### Use Tickets to Defer Non-Essential Work
-When you discover good ideas that aren't critical for the current Phase, create tickets instead of expanding scope. This keeps Phases focused while ensuring ideas aren't lost.
+### Use Cards to Defer Non-Essential Work
+When you discover good ideas that aren't critical for the current Phase, create cards instead of expanding scope. This keeps Phases focused while ensuring ideas aren't lost.
 
 ## Common Pitfalls
 

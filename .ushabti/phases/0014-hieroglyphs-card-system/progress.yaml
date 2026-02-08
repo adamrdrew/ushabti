@@ -1,0 +1,178 @@
+phase:
+  id: 0014
+  slug: hieroglyphs-card-system
+  title: "Hieroglyphs Card System"
+  status: complete
+
+steps:
+  - id: S001
+    title: "Create create-card skill"
+    implemented: true
+    reviewed: true
+    notes: "Created skills/create-card/SKILL.md with complete schema, validation, and examples"
+    touched:
+      - skills/create-card/SKILL.md
+
+  - id: S002
+    title: "Create list-cards skill"
+    implemented: true
+    reviewed: true
+    notes: "Created skills/list-cards/SKILL.md with scanning, parsing, and filtering examples"
+    touched:
+      - skills/list-cards/SKILL.md
+
+  - id: S003
+    title: "Create complete-card skill"
+    implemented: true
+    reviewed: true
+    notes: "Created skills/complete-card/SKILL.md with safe update procedures and frontmatter preservation"
+    touched:
+      - skills/complete-card/SKILL.md
+
+  - id: S004
+    title: "Create describe-cards skill"
+    implemented: true
+    reviewed: true
+    notes: "Created skills/describe-cards/SKILL.md with comprehensive card system documentation"
+    touched:
+      - skills/describe-cards/SKILL.md
+
+  - id: S005
+    title: "Remove ticket skills"
+    implemented: true
+    reviewed: true
+    notes: "Deleted all five ticket skill directories: create-ticket, list-tickets, archive-ticket, describe-tickets, find-next-ticket-number"
+    touched:
+      - skills/create-ticket/
+      - skills/list-tickets/
+      - skills/archive-ticket/
+      - skills/describe-tickets/
+      - skills/find-next-ticket-number/
+
+  - id: S006
+    title: "Update scribe.md agent"
+    implemented: true
+    reviewed: true
+    notes: "Updated Scribe to read cards from .ushabti/cards/{slug}/card.md and use card: {slug} metadata"
+    touched:
+      - agents/scribe.md
+
+  - id: S007
+    title: "Update overseer.md agent"
+    implemented: true
+    reviewed: true
+    notes: "Updated Overseer to invoke complete-card skill and check for card metadata field"
+    touched:
+      - agents/overseer.md
+
+  - id: S008
+    title: "Update vizier.md agent"
+    implemented: true
+    reviewed: true
+    notes: "Updated Vizier to read and create cards instead of tickets, reference create-card skill"
+    touched:
+      - agents/vizier.md
+
+  - id: S009
+    title: "Update lawgiver.md agent"
+    implemented: true
+    reviewed: true
+    notes: "Updated Lawgiver to bootstrap .ushabti/cards/ directory instead of tickets directories"
+    touched:
+      - agents/lawgiver.md
+
+  - id: S010
+    title: "Update surveyor.md agent"
+    implemented: true
+    reviewed: true
+    notes: "Updated Surveyor to bootstrap .ushabti/cards/ directory instead of tickets directories"
+    touched:
+      - agents/surveyor.md
+
+  - id: S011
+    title: "Verify builder.md agent"
+    implemented: true
+    reviewed: true
+    notes: "Verified builder.md has no ticket references; no changes needed"
+    touched: []
+
+  - id: S012
+    title: "Update plugin.json"
+    implemented: true
+    reviewed: true
+    notes: "Removed 5 ticket skills, added 4 card skills, incremented version to 1.6.9"
+    touched:
+      - .claude-plugin/plugin.json
+
+  - id: S013
+    title: "Validate plugin"
+    implemented: true
+    reviewed: true
+    notes: "Plugin validation passed successfully"
+    touched: []
+
+  - id: S014
+    title: "Update README.md"
+    implemented: true
+    reviewed: true
+    notes: "Replaced Ticketing System section with Cards section, updated directory structure diagram"
+    touched:
+      - README.md
+
+  - id: S015
+    title: "Update docs/getting-started.md"
+    implemented: true
+    reviewed: true
+    notes: "Replaced ticket system section with card system, updated examples and file structure"
+    touched:
+      - docs/getting-started.md
+
+  - id: S016
+    title: "Update docs/brownfield.md"
+    implemented: true
+    reviewed: true
+    notes: "Updated technical debt section to reference cards instead of tickets"
+    touched:
+      - docs/brownfield.md
+
+  - id: S017
+    title: "Migrate T0001 to card format"
+    implemented: true
+    reviewed: true
+    notes: "Migrated T0001 to card format with UUID, proper timestamps, and Hieroglyphs-compliant structure"
+    touched:
+      - .ushabti/cards/ushabti-user-guide-agent/card.md
+
+  - id: S018
+    title: "Remove .ushabti/tickets/ directory"
+    implemented: true
+    reviewed: true
+    notes: "Removed .ushabti/tickets/ directory entirely, completing migration"
+    touched:
+      - .ushabti/tickets/
+
+  - id: S019
+    title: "Verify ticket reference cleanup"
+    implemented: true
+    reviewed: true
+    notes: "Updated remaining ticket references in architecture.md, vizier-memory.md, greenfield.md, and describe-phase-file skill. Historical phases 0012 and 0013 preserved as expected."
+    touched:
+      - .ushabti/docs/architecture.md
+      - .ushabti/vizier-memory.md
+      - docs/greenfield.md
+      - skills/describe-phase-file/SKILL.md
+
+  - id: S020
+    title: "Test card creation"
+    implemented: true
+    reviewed: true
+    notes: "Created test card successfully, verified all fields present in alphabetical order, UUID valid, timestamps correct. Deleted test card after verification."
+    touched: []
+
+  - id: S021
+    title: "Update using-skills skill"
+    implemented: true
+    reviewed: true
+    notes: "Removed 5 obsolete ticket skill entries (archive-ticket, create-ticket, describe-tickets, find-next-ticket-number, list-tickets) and added 4 new card skill entries (complete-card, create-card, describe-cards, list-cards) in alphabetical order"
+    touched:
+      - skills/using-skills/SKILL.md

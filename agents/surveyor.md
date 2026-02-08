@@ -43,8 +43,7 @@ Initialize the documentation structure and detect prior surveys.
 1. **Create directories**
    - If `.ushabti/` does not exist, create it.
    - If `.ushabti/docs/` does not exist, create it.
-   - If `.ushabti/tickets/` does not exist, create it.
-   - If `.ushabti/tickets/.archived/` does not exist, create it.
+   - If `.ushabti/cards/` does not exist, create it.
 
 2. **Check for prior survey**
    - Look for existing `.md` files in `.ushabti/docs/`.

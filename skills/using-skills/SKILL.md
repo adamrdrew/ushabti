@@ -14,18 +14,8 @@ If you have a question or need information on any topic a skill provides informa
 
 # Available Skills
 
-name: archive-ticket
-description: Archive completed tickets by moving them to .archived/
-
----
-
 name: check-ushabti-prerequisites
 description: Verify required Ushabti files exist before proceeding. Use when starting agent work to ensure prerequisites are met.
-
----
-
-name: create-ticket
-description: Create a new ticket with schema validation
 
 ---
 
@@ -94,11 +84,6 @@ description: Step format and ordering rules for steps.md. Load when defining imp
 
 ---
 
-name: describe-tickets
-description: Ticket system overview, schema, and workflows
-
----
-
 name: describe-ushabti
 description: Core Ushabti concepts and development lifecycle. Load when starting any Ushabti workflow or orienting to the framework.
 
@@ -119,15 +104,5 @@ description: Find the next unimplemented step in a phase. Use when determining w
 
 ---
 
-name: find-next-ticket-number
-description: Determine the next sequential ticket ID
-
----
-
 name: get-phase-status
 description: Check the current status of a phase. Use when you need to understand where a phase is in the workflow.
-
----
-
-name: list-tickets
-description: List all open (non-archived) tickets

@@ -126,88 +126,110 @@ Ushabti uses seven specialized agents, each with a narrow, enforced role. No age
 
 **Invocation**: `/agent vizier`
 
-## The Ticketing System
+## The Card System
 
-Ushabti includes a lightweight ticketing system for capturing ideas, technical debt, and future work that doesn't fit into the current Phase. Tickets provide a structured way to record work without bloating your current Phase or losing track of good ideas.
+Ushabti uses Hieroglyphs-compatible cards to capture ideas, technical debt, and future work that doesn't fit into the current Phase. Cards provide a structured way to record work without bloating your current Phase or losing track of good ideas.
 
-### What Are Tickets?
+### What Are Cards?
 
-Tickets are YAML files stored in `.ushabti/tickets/` that capture ideas for future Phases. Each ticket includes:
+Cards are directories containing a `card.md` file stored in `.ushabti/cards/{slug}/`. Each card includes:
 
-- **ID**: Sequential identifier (T0001, T0002, etc.)
-- **Title**: Brief, descriptive name
-- **Created date**: When the ticket was created
-- **Priority**: low, medium, or high
-- **Context**: Why this ticket exists
-- **Proposed work**: What should be done
+- **id**: UUID v4 identifier (globally unique)
+- **slug**: Human-readable kebab-case identifier derived from title
+- **title**: Brief, descriptive name
+- **created**: ISO 8601 timestamp when the card was created
+- **updated**: ISO 8601 timestamp of last modification
+- **priority**: low, medium, or high
+- **status**: todo, backlog, in-progress, or done
+- **type**: bug or feature
+- **tags**: Array of categorization tags (may be empty)
 
-### When to Create Tickets
+The card body contains markdown sections:
+- **Overview**: Why this card exists (context and motivation)
+- **Requirements**: What should be done (specific acceptance criteria)
 
-Create tickets to capture:
+### When to Create Cards
+
+Create cards to capture:
 - **Improvement ideas** discovered during planning or implementation
 - **Technical debt** that's out of scope for the current Phase
 - **Feature requests** to consider later
 - **Refactoring opportunities** noticed during development
 
-Tickets let you acknowledge work without derailing your current Phase.
+Cards let you acknowledge work without derailing your current Phase.
 
-### Ticket Workflow
+### Card Workflow
 
-1. **Create**: Use the `create-ticket` skill to generate a new ticket
+1. **Create**: Use the `create-card` skill to generate a new card
    ```
-   /skill create-ticket
+   /skill create-card
    ```
-   The skill guides you through providing the required information and validates the ticket schema.
+   The skill generates a UUID, derives a slug from the title, and creates the card with proper Hieroglyphs frontmatter.
 
-2. **List**: View all open tickets using the `list-tickets` skill
+2. **List**: View cards using the `list-cards` skill
    ```
-   /skill list-tickets
+   /skill list-cards
    ```
-   This shows ticket IDs, titles, priority, and creation dates for all active tickets.
+   This shows card slugs, titles, status, priority, and type. You can filter by status (e.g., only `todo` cards).
 
-3. **Plan Phase**: When ready to work on a ticket, tell Scribe to create a Phase from it
+3. **Plan Phase**: When ready to work on a card, tell Scribe to create a Phase from it
    ```
    /agent scribe
-   "Create a Phase based on ticket T0042"
+   "Create a Phase based on card improve-error-handling"
    ```
-   Scribe reads the ticket and uses its context and proposed work to inform Phase planning.
+   Scribe reads the card's Overview and Requirements sections to inform Phase planning.
 
-4. **Archive**: After the Phase completes, Overseer archives the ticket to `.ushabti/tickets/.archived/`
-   The ticket remains on disk but becomes invisible to agents.
+4. **Complete**: After the Phase completes, Overseer marks the card as done
+   ```
+   /skill complete-card
+   ```
+   This updates the card's status to `done` (cards remain in `.ushabti/cards/` but are considered closed).
 
-### Example: Creating a Ticket
+### Example: Card Format
 
-```yaml
-id: T0003
-title: Add validation to ticket creation
-created: 2026-02-01
+```markdown
+---
+created: 2026-02-08T14:30:00Z
+id: 550e8400-e29b-41d4-a716-446655440000
 priority: medium
-context: |
-  Currently tickets can be created with invalid priority values,
-  which breaks the list-tickets skill's filtering logic.
-proposed_work: |
-  - Add priority validation to create-ticket skill
-  - Verify priority is exactly "low", "medium", or "high"
-  - Fail gracefully with clear error if invalid
+slug: add-validation-to-card-creation
+status: todo
+tags: []
+title: Add validation to card creation
+type: feature
+updated: 2026-02-08T14:30:00Z
+---
+
+# Overview
+
+Currently cards can be created with invalid priority values,
+which breaks the list-cards skill's filtering logic.
+
+# Requirements
+
+- Add priority validation to create-card skill
+- Verify priority is exactly "low", "medium", or "high"
+- Fail gracefully with clear error if invalid
 ```
 
-This ticket would be saved as `.ushabti/tickets/T0003-add-validation-to-ticket-creation.yaml`
+This card would be saved as `.ushabti/cards/add-validation-to-card-creation/card.md`
 
-### Example: Planning from a Ticket
+### Example: Planning from a Card
 
-When you're ready to work on ticket T0003:
+When you're ready to work on card `add-validation-to-card-creation`:
 
-1. Tell Scribe: "Create a Phase based on ticket T0003"
-2. Scribe reads the ticket file and plans a Phase using the context and proposed work
-3. The resulting `phase.md` includes metadata: `ticket: T0003`
-4. After Overseer approves the Phase, Overseer archives T0003
+1. Tell Scribe: "Create a Phase based on card add-validation-to-card-creation"
+2. Scribe reads the card file's Overview and Requirements sections
+3. The resulting `phase.md` includes metadata: `card: add-validation-to-card-creation`
+4. After Overseer approves the Phase, Overseer marks the card as done (status: done)
 
 ### Tips
 
-- **Keep tickets small**: If a ticket describes more than one Phase of work, create multiple tickets
-- **Don't edit tickets**: Tickets are create-only. If you need to correct a ticket, create a new one and archive the old one
-- **Use tickets during Phases**: Discovered technical debt? Create a ticket for it instead of scope creeping the current Phase
-- **Tickets are optional**: Not everything needs a ticket. Use them when capturing the idea is more valuable than acting on it immediately
+- **Keep cards small**: If a card describes more than one Phase of work, create multiple cards
+- **Use status field**: Cards track lifecycle with status (todo → in-progress → done), not archival directories
+- **Use cards during Phases**: Discovered technical debt? Create a card for it instead of scope creeping the current Phase
+- **Cards are optional**: Not everything needs a card. Use them when capturing the idea is more valuable than acting on it immediately
+- **Hieroglyphs compatibility**: Cards use the Hieroglyphs format, enabling future integration with the Hieroglyphs task management tool
 
 ## The Development Loop
 
@@ -249,9 +271,9 @@ Overseer verifies the Phase against acceptance criteria and checks compliance wi
 |-----------|-------|-----|
 | Starting a new project | Lawgiver → Artisan → Surveyor | Establish invariants, conventions, and baseline docs |
 | Onboarding an existing project | Surveyor → Lawgiver → Artisan | Document first, then establish rules |
-| Capturing ideas for later | (use tickets) | Create tickets for work that's not in scope right now |
+| Capturing ideas for later | (use cards) | Create cards for work that's not in scope right now |
 | Planning the next feature | Scribe | Define the Phase with steps and acceptance criteria |
-| Planning from a ticket | Scribe | Tell Scribe to create a Phase based on a ticket ID |
+| Planning from a card | Scribe | Tell Scribe to create a Phase based on a card slug |
 | Implementing a planned Phase | Builder | Execute steps as written |
 | Checking if Phase is done | Overseer | Verify acceptance and gate completion |
 | Asking questions | Vizier | Get guidance without modifying anything |
@@ -301,8 +323,9 @@ Ushabti creates this structure in your repository:
 ├── docs/             # Project documentation (created by Surveyor)
 │   ├── index.md
 │   └── *.md
-├── tickets/          # Active tickets
-│   └── .archived/    # Completed tickets
+├── cards/            # Work items (Hieroglyphs-compatible)
+│   └── {slug}/
+│       └── card.md
 └── phases/
     └── NNNN-slug/    # Zero-padded sequential phase directories
         ├── phase.md

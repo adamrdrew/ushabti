@@ -42,8 +42,7 @@ All Ushabti state lives under `.ushabti/`:
 ├── laws.md           # Project invariants
 ├── style.md          # Project conventions
 ├── docs/             # Project documentation
-├── tickets/          # Active tickets
-│   └── .archived/    # Completed tickets
+├── cards/            # Work items (Hieroglyphs-compatible)
 └── phases/
     └── NNNN-slug/
         ├── phase.md
@@ -58,40 +57,48 @@ All Ushabti state lives under `.ushabti/`:
 
 **Style** (`.ushabti/style.md`): Conventions for consistency. May evolve over time. Must not contradict laws.
 
-## Ticket System
+## Card System
 
-Tickets provide a lightweight way to capture ideas for future work without immediately planning a Phase. They complement the Phase-driven workflow by preserving valuable ideas discovered during development.
+Cards provide a lightweight way to capture ideas for future work without immediately planning a Phase. They complement the Phase-driven workflow by preserving valuable ideas discovered during development.
 
 ### Design
 
-- **File-backed**: Tickets are YAML files stored in `.ushabti/tickets/`
-- **Simple lifecycle**: Create → derive phase → archive (no editing, no state transitions)
-- **Agent-aware**: Agents can read, create, and archive tickets during their workflows
+- **File-backed**: Cards are directories containing `card.md` files stored in `.ushabti/cards/{slug}/`
+- **Hieroglyphs-compatible**: Uses YAML frontmatter + markdown body format
+- **Status-based lifecycle**: Create → plan phase → mark done (status field tracks state)
+- **Agent-aware**: Agents can read, create, and complete cards during their workflows
 
 ### Workflow
 
-1. **Create**: Agent or user creates a ticket in `.ushabti/tickets/TNNNN-description.yaml`
-2. **Derive**: When ready, Scribe creates a Phase from the ticket (adds `ticket: TNNNN` to phase.md)
-3. **Archive**: When the derived Phase completes, Overseer moves the ticket to `.ushabti/tickets/.archived/`
+1. **Create**: Agent or user creates a card in `.ushabti/cards/{slug}/card.md`
+2. **Derive**: When ready, Scribe creates a Phase from the card (adds `card: {slug}` to phase.md)
+3. **Complete**: When the derived Phase completes, Overseer marks the card as done (status: done)
 
 ### Agent Integration
 
-- **Vizier**: Can read active tickets and offer to create tickets during conversation (sparingly)
-- **Scribe**: Reads tickets when planning phases, incorporates ticket context and proposed work, adds ticket metadata to phase.md
-- **Overseer**: Archives tickets when completing ticket-derived phases
-- **All agents**: Tickets in `.ushabti/tickets/.archived/` are invisible and never read
+- **Vizier**: Can read cards (excluding status: done) and offer to create cards during conversation (sparingly)
+- **Scribe**: Reads cards when planning phases, incorporates card Overview and Requirements, adds card metadata to phase.md
+- **Overseer**: Marks cards as done when completing card-derived phases
+- **All agents**: Cards with status: done are closed and generally not read
 
-### Ticket Schema
+### Card Schema
 
-Required fields (YAML):
-- `id`: Sequential ticket ID (T0001, T0002, etc.)
-- `title`: Brief description
-- `created`: ISO 8601 date (YYYY-MM-DD)
+Required frontmatter fields (alphabetically ordered):
+- `created`: ISO 8601 timestamp (YYYY-MM-DDTHH:MM:SSZ)
+- `id`: UUID v4 identifier
 - `priority`: Must be `low`, `medium`, or `high`
-- `context`: Why this ticket exists
-- `proposed_work`: What should be done
+- `slug`: Kebab-case identifier matching directory name
+- `status`: Must be `todo`, `backlog`, `in-progress`, or `done`
+- `tags`: Array of strings (may be empty)
+- `title`: Brief description
+- `type`: Must be `bug` or `feature`
+- `updated`: ISO 8601 timestamp of last modification
 
-See `describe-tickets` skill for complete schema and format details.
+Markdown body sections:
+- **Overview**: Why this card exists (context and motivation)
+- **Requirements**: What should be done (specific acceptance criteria)
+
+See `describe-cards` skill for complete schema and format details.
 
 ## Agent Architecture
 

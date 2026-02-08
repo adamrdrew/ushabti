@@ -212,22 +212,22 @@ Purpose: Advisory agent for questions and guidance.
 
 Vizier does not plan, build, or review Phases. It does not modify code, laws, style, or documentation. If asked to make changes, Vizier offers to create a Scribe prompt instead.
 
-## 🎫 Ticketing System
+## 🗂️ Cards
 
-Ushabti includes a lightweight ticketing system for capturing ideas, technical debt, and future work that doesn't fit into the current Phase. Tickets are YAML files stored in `.ushabti/tickets/` that follow a simple schema.
+Ushabti uses Hieroglyphs-compatible cards to track work items, bugs, and features outside the current Phase. Cards are stored as directories containing a `card.md` file with YAML frontmatter and markdown body in `.ushabti/cards/{slug}/`.
 
-**When to create tickets:**
+**When to create cards:**
 - Capture improvement ideas during planning or implementation
 - Document technical debt discovered during development
 - Record feature requests or enhancements for later consideration
 - Track work that's out of scope for the current Phase
 
-**Ticket workflow:**
-1. Create a ticket using the `create-ticket` skill
-2. When ready to work on it, Scribe creates a Phase from the ticket
-3. After the Phase completes, Overseer archives the ticket to `.ushabti/tickets/.archived/`
+**Card workflow:**
+1. Create a card using the `create-card` skill (generates UUID, derives slug from title)
+2. When ready to work on it, Scribe creates a Phase from the card
+3. After the Phase completes, Overseer marks the card as done (updates `status: done`)
 
-Tickets provide a lightweight way to track ideas without bloating the current Phase or losing track of future work. See [Getting Started](docs/getting-started.md) for detailed ticket workflow and examples.
+Cards use the Hieroglyphs format with UUID identifiers and status fields, providing alignment with the Hieroglyphs task management tool. Unlike the previous ticket system, cards track lifecycle state with a status field (`todo`, `in-progress`, `done`) rather than moving files to archived directories. See [Getting Started](docs/getting-started.md) for detailed card workflow and examples.
 
 ## 🏛️ Repository Structure
 
@@ -241,8 +241,7 @@ Tickets provide a lightweight way to track ideas without bloating the current Ph
 │   ├── laws.md           # Project invariants
 │   ├── style.md          # Project conventions
 │   ├── docs/             # Project documentation (created by Surveyor)
-│   ├── tickets/          # Active tickets
-│   │   └── .archived/    # Completed tickets
+│   ├── cards/            # Work items (Hieroglyphs-compatible)
 │   └── phases/
 │       └── NNNN-slug/
 │           ├── phase.md

@@ -18,7 +18,7 @@ The Phase loop (Plan → Build → Review) is the core workflow. No Phase is com
 
 ## Persistent Risks
 
-R001: Ticket directory structure is not automatically created during bootstrap. If users attempt to create tickets before running Lawgiver (which does bootstrap `.ushabti/` and `.ushabti/docs/`), ticket operations will fail because `.ushabti/tickets/` and `.ushabti/tickets/.archived/` don't exist. Ticket skills lack just-in-time directory creation logic.
+R001: Card directory structure is not automatically created during bootstrap. If users attempt to create cards before running Lawgiver (which does bootstrap `.ushabti/` and `.ushabti/docs/`), card operations will fail because `.ushabti/cards/` doesn't exist. Card skills lack just-in-time directory creation logic.
 
 ## Reference Library
 
