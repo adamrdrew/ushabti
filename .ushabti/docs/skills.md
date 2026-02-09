@@ -49,6 +49,14 @@ These skills provide reference information about Ushabti concepts:
 | describe-good-phase | Phase sizing and anti-patterns |
 | describe-docs-system | Documentation maintenance requirements |
 
+### Orchestration Skills
+
+These skills automate multi-agent workflows:
+
+| Skill | Purpose |
+|-------|---------|
+| ir-kat | Execute a full Scribe → Builder → Overseer phase cycle. User-invocable. Accepts a PHASE_PROMPT via `$ARGUMENTS` (inline text or file path). Includes retry loop (max 3 kickbacks before declaring blocked). |
+
 ### Utility Skills
 
 These skills provide dynamic information about project state:
