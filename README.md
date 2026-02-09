@@ -265,7 +265,7 @@ Cards use the Hieroglyphs format with UUID identifiers and status fields, provid
 │           ├── progress.yaml
 │           └── review.md
 ├── agents/               # Agent definitions
-├── skills/               # Skill definitions (20 skills)
+├── skills/               # Skill definitions (26 skills)
 ├── scripts/
 │   └── reconcile-skills.sh
 ├── CLAUDE.md

@@ -111,3 +111,8 @@ description: Check the current status of a phase. Use when you need to understan
 
 name: ir-kat
 description: Execute a full Scribe → Builder → Overseer phase cycle. Use when you have a PHASE_PROMPT and want to plan, build, and review a phase end-to-end.
+
+---
+
+name: phase-status
+description: Query the status of a phase. Returns structured status information for external consumers.
