@@ -1,6 +1,6 @@
 {
   "name": "ushabti",
-  "version": "1.6.9",
+  "version": "1.7.0",
   "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
   "author": {
     "name": "Adam Drew",
@@ -43,6 +43,7 @@
     "./skills/find-next-phase-number/",
     "./skills/find-next-step/",
     "./skills/get-phase-status/",
+    "./skills/ir-kat/",
     "./skills/list-cards/"
   ]
 }

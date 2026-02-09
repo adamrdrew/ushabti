@@ -106,3 +106,8 @@ description: Find the next unimplemented step in a phase. Use when determining w
 
 name: get-phase-status
 description: Check the current status of a phase. Use when you need to understand where a phase is in the workflow.
+
+---
+
+name: ir-kat
+description: Execute a full Scribe → Builder → Overseer phase cycle. Use when you have a PHASE_PROMPT and want to plan, build, and review a phase end-to-end.
