@@ -312,6 +312,14 @@ Once bootstrap is complete, you cycle through the Plan → Build → Review loop
 4. If Overseer adds follow-ups, Builder implements them and Overseer reviews again
 5. Once Overseer marks the Phase complete, return to step 1
 
+**Or automate it**: Use the `ir-kat` skill to run the entire cycle in one shot:
+
+```
+/ir-kat Build a caching layer for the API with configurable TTL
+```
+
+Ir-kat handles all agent handoffs, including retry loops if the Overseer kicks back. See [Tips and Tricks](tips-and-tricks.md#automated-phase-loops-with-ir-kat) for details.
+
 ## File Structure
 
 Ushabti creates this structure in your repository:

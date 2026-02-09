@@ -275,6 +275,36 @@ The first few Phases will feel slow and ceremonial. Stick with it. By Phase 5, t
 
 **Why this works**: Discipline up front creates speed later. The loop teaches you to think in bounded units of work.
 
+## Automated Phase Loops with Ir-Kat
+
+### Pattern: One-Shot Phase Execution
+
+Use the `ir-kat` skill to run a complete Plan → Build → Review cycle without manual handoffs between agents.
+
+```
+/ir-kat Build a REST API for user management with JWT authentication
+```
+
+Ir-kat creates a task list, invokes Scribe to plan, Builder to implement, and Overseer to review. If the Overseer kicks back, ir-kat feeds the review to Builder and resubmits — up to 3 cycles before declaring the phase blocked.
+
+**Why this works**: Eliminates the manual `/agent scribe` → `/agent builder` → `/agent overseer` handoff. Useful when you trust the process and want to let it run.
+
+### Pattern: File-Based Prompts for Complex Phases
+
+For detailed prompts with acceptance criteria, write a PHASE_PROMPT file and pass it to ir-kat:
+
+```
+/ir-kat /path/to/PHASE_PROMPT.md
+```
+
+**Why this works**: Complex prompts are easier to write, review, and iterate on as files than as inline text.
+
+### Pattern: Watch for Kickback Deflation
+
+When the Overseer kicks back and the Builder fixes, the Builder tends to prioritise "pass the review" over "preserve the original intent." After multiple review cycles, the output may be more conservative than intended. If this happens, review the final result and consider whether a fresh phase with a more specific prompt would produce better results.
+
+**Why this works**: Awareness of this dynamic helps you calibrate when to let ir-kat retry versus when to intervene manually.
+
 ## Commit Strategy
 
 ### Pattern: Commit Per Phase

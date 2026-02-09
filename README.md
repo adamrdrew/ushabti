@@ -100,6 +100,22 @@ Plan → Build → Review
 
 There is no implicit “done.” A Phase is done only when the Reviewer marks it green.
 
+## ☀️ Ir-Kat — Automated Phase Loop
+
+The `ir-kat` skill ("Do the work" in ancient Egyptian) automates the entire Plan → Build → Review cycle. Give it a PHASE_PROMPT and it orchestrates Scribe, Builder, and Overseer end-to-end, including retry loops if the Overseer kicks back (up to 3 attempts before declaring the phase blocked).
+
+```
+/ir-kat Build a REST API for user management with JWT authentication
+```
+
+Or pass a file:
+
+```
+/ir-kat /path/to/PHASE_PROMPT.md
+```
+
+Ir-kat is also the orchestration layer used by [Pharaoh](https://github.com/adamrdrew/pharaoh), the autonomous phase runner.
+
 ## 📜 Project Invariants
 
 Ushabti separates what must never change from what evolves.
