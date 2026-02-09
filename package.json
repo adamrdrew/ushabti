@@ -2,5 +2,15 @@
   "name": "ushabti",
   "version": "1.8.0",
   "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
-  "private": true
+  "private": true,
+  "files": [
+    ".claude-plugin/",
+    "agents/",
+    "skills/",
+    "scripts/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamrdrew/ushabti.git"
+  }
 }
