@@ -6,6 +6,7 @@ color: green
 permissionMode: default
 skills:
     - describe-agent-roles
+    - describe-docs-system
 tools: Read, Edit, Write, Glob, Bash, Skill, Grep
 ---
 
