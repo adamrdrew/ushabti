@@ -1,6 +1,6 @@
 {
   "name": "ushabti",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
   "author": {
     "name": "Adam Drew",

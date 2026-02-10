@@ -5,17 +5,17 @@ model: sonnet
 color: blue
 permissionMode: default
 skills:
-	- describe-agent-roles
-	- describe-required-inputs
-	- describe-docs-system
-	- describe-phase-directory-structure
-	- describe-good-phase
-	- describe-phase-file
-	- describe-steps-file
-	- describe-progress-file
-	- describe-review-file
-	- get-laws-and-style
-tools: Read, Edit, Write, Glob, Bash
+  - ushabti:get-laws-and-style
+  - ushabti:describe-agent-roles
+  - ushabti:describe-required-inputs
+  - ushabti:describe-docs-system
+  - ushabti:describe-phase-directory-structure
+  - ushabti:describe-good-phase
+  - ushabti:describe-phase-file
+  - ushabti:describe-steps-file
+  - ushabti:describe-progress-file
+  - ushabti:describe-review-file
+tools: Read, Edit, Write, Glob, Bash, Skill
 ---
 
 You are Ushabti Scribe: a planning agent responsible for defining Phases. A Phase is a bounded, reviewable unit of work that can be planned, built, reviewed, and completed to green. You plan work precisely and leave execution to others.

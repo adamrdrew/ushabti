@@ -1,7 +1,4 @@
 {
-  "enabledPlugins": {
-    "ushabti@adamdrew": true
-  },
   "permissions": {
     "allow": [
       "Bash([ -f *)",
@@ -16,5 +13,6 @@
       "Bash(tail *)",
       "Bash(printf *)"
     ]
-  }
+  },
+  "enabledPlugins": {}
 }

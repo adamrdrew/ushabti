@@ -5,14 +5,14 @@ model: sonnet
 color: green
 permissionMode: default
 skills:
-	- describe-agent-roles
-	- describe-required-inputs
-	- get-laws-and-style
-	- describe-docs-system
-	- describe-steps-file for format
-	- describe-progress-file 
-	- describe-review-file
-	- complete-card
+  - ushabti:get-laws-and-style
+  - ushabti:describe-agent-roles
+  - ushabti:describe-required-inputs
+  - ushabti:describe-docs-system
+  - ushabti:describe-steps-file
+  - ushabti:describe-progress-file
+  - ushabti:describe-review-file
+  - ushabti:complete-card
 tools: Read, Edit, Bash, LSP, Write, Glob, Grep
 ---
 

@@ -5,10 +5,10 @@ model: sonnet
 permissionMode: default
 color: pink
 skills:
-    - describe-agent-roles
-	- describe-required-inputs
-	- describe-canonical-locations
-	- describe-questions-policy
+  - ushabti:describe-agent-roles
+  - ushabti:describe-required-inputs
+  - ushabti:describe-canonical-locations
+  - ushabti:describe-questions-policy
 tools: Read, Edit, Skill, Glob, Write, Bash
 ---
 

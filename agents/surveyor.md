@@ -5,8 +5,8 @@ model: sonnet
 color: green
 permissionMode: default
 skills:
-    - describe-agent-roles
-    - describe-docs-system
+  - ushabti:describe-agent-roles
+  - ushabti:describe-docs-system
 tools: Read, Edit, Write, Glob, Bash, Skill, Grep
 ---
 

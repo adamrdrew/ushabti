@@ -5,7 +5,7 @@ model: sonnet
 color: purple
 permissionMode: default
 skills:
-    - using-skills
+  - ushabti:get-laws-and-style
 tools: Read, Bash, Glob, Grep, Skill, Write, WebSearch, WebFetch
 ---
 
