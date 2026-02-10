@@ -14,6 +14,7 @@ skills:
 	- describe-steps-file
 	- describe-progress-file
 	- describe-review-file
+	- get-laws-and-style
 tools: Read, Edit, Write, Glob, Bash
 ---
 
