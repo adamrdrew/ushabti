@@ -87,8 +87,6 @@ Each skill is a directory containing a SKILL.md file:
 
 ```
 skills/
-├── using-skills/
-│   └── SKILL.md
 ├── describe-ushabti/
 │   └── SKILL.md
 ├── find-current-phase/
@@ -96,13 +94,3 @@ skills/
 └── ...
 ```
 
-## Skill Maintenance
-
-The `using-skills` catalog is automatically maintained by a pre-commit hook. When skill files change, `scripts/reconcile-skills.sh` updates the catalog to reflect current skill names and descriptions.
-
-## Adding New Skills
-
-1. Create a directory under `skills/` (e.g., `skills/new-skill/`)
-2. Create `SKILL.md` with YAML frontmatter (name, description) and content
-3. Add the skill to `plugin.json`
-4. Commit — the pre-commit hook updates the `using-skills` catalog automatically

@@ -10,8 +10,6 @@ Ushabti is packaged as a Claude Code plugin. This document describes the plugin 
 .
 ├── .claude-plugin/
 │   └── plugin.json       # Plugin manifest
-├── .githooks/
-│   └── pre-commit        # Auto-updates skill catalog
 ├── agents/               # Agent definitions
 │   ├── lawgiver.md
 │   ├── artisan.md
@@ -19,8 +17,6 @@ Ushabti is packaged as a Claude Code plugin. This document describes the plugin 
 │   ├── scribe.md
 │   ├── builder.md
 │   └── overseer.md
-├── scripts/
-│   └── reconcile-skills.sh
 ├── skills/               # Skill definitions (20 skills)
 │   ├── using-skills/
 │   ├── describe-*/       # 14 domain knowledge skills
@@ -81,18 +77,6 @@ user-invocable: false
 [Skill content]
 ```
 
-## Skill Catalog Maintenance
-
-The `using-skills` skill contains a catalog of all available skills. This catalog is automatically maintained:
-
-1. `scripts/reconcile-skills.sh` regenerates the catalog from skill frontmatter
-2. `.githooks/pre-commit` runs the script when skill files change
-3. The updated catalog is auto-staged with the commit
-
-To enable the hook after cloning:
-```bash
-git config core.hooksPath .githooks
-```
 
 ## Validation
 
