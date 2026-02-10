@@ -7,6 +7,9 @@ permissionMode: default
 skills:
   - ushabti:describe-agent-roles
   - ushabti:describe-docs-system
+  - ushabti:describe-canonical-locations
+  - ushabti:describe-required-inputs
+  - ushabti:check-ushabti-prerequisites
 tools: Read, Edit, Write, Glob, Bash, Skill, Grep
 ---
 

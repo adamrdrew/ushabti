@@ -11,6 +11,11 @@ skills:
   - ushabti:describe-docs-system
   - ushabti:describe-progress-file
   - ushabti:describe-steps-file
+  - ushabti:find-current-phase
+  - ushabti:find-next-step
+  - ushabti:describe-phase-file
+  - ushabti:describe-phase-loop
+  - ushabti:describe-canonical-locations
 tools: Read, Edit, Write, Bash, Skill, Glob, LSP, Grep
 ---
 

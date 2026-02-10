@@ -15,6 +15,10 @@ skills:
   - ushabti:describe-steps-file
   - ushabti:describe-progress-file
   - ushabti:describe-review-file
+  - ushabti:find-next-phase-number
+  - ushabti:describe-questions-policy
+  - ushabti:describe-phase-loop
+  - ushabti:list-cards
 tools: Read, Edit, Write, Glob, Bash, Skill
 ---
 

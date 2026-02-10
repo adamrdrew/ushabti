@@ -5,10 +5,13 @@ model: sonnet
 color: orange
 permissionMode: default
 skills:
+  - ushabti:get-laws-and-style
   - ushabti:describe-agent-roles
   - ushabti:describe-required-inputs
   - ushabti:describe-canonical-locations
   - ushabti:describe-questions-policy
+  - ushabti:describe-laws-and-style
+  - ushabti:describe-docs-system
 tools: Read, Edit, Skill, Write, Bash, Glob
 ---
 

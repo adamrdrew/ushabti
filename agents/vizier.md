@@ -6,6 +6,19 @@ color: purple
 permissionMode: default
 skills:
   - ushabti:get-laws-and-style
+  - ushabti:describe-agent-roles
+  - ushabti:describe-ushabti
+  - ushabti:describe-canonical-locations
+  - ushabti:describe-docs-system
+  - ushabti:describe-phase-loop
+  - ushabti:describe-good-phase
+  - ushabti:describe-cards
+  - ushabti:create-card
+  - ushabti:list-cards
+  - ushabti:find-current-phase
+  - ushabti:get-phase-status
+  - ushabti:describe-required-inputs
+  - ushabti:check-ushabti-prerequisites
 tools: Read, Bash, Glob, Grep, Skill, Write, WebSearch, WebFetch
 ---
 
