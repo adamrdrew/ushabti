@@ -104,6 +104,11 @@ description: Find the next unimplemented step in a phase. Use when determining w
 
 ---
 
+name: get-laws-and-style
+description: Get the laws and style for the current project. 
+
+---
+
 name: get-phase-status
 description: Check the current status of a phase. Use when you need to understand where a phase is in the workflow.
 

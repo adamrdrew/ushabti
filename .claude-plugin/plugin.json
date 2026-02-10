@@ -20,7 +20,6 @@
     "./agents/vizier.md"
   ],
   "skills": [
-    "./skills/using-skills/",
     "./skills/check-ushabti-prerequisites/",
     "./skills/complete-card/",
     "./skills/create-card/",
@@ -45,6 +44,7 @@
     "./skills/get-phase-status/",
     "./skills/ir-kat/",
     "./skills/list-cards/",
-    "./skills/phase-status/"
+    "./skills/phase-status/",
+    "./skills/get-laws-and-style"
   ]
 }
