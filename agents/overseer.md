@@ -5,7 +5,6 @@ model: sonnet
 color: green
 permissionMode: default
 skills:
-    - using-skills
 	- describe-agent-roles
 	- describe-required-inputs
 	- get-laws-and-style
