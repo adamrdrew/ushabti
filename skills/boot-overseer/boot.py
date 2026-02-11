@@ -35,9 +35,9 @@ def find_card_slug(phase_md_text):
     return m.group(1) if m else None
 
 
-# Find the phase in review (lowest number first)
+# Find the phase in review (highest number first — most recently moved to review)
 current = None
-for d in sorted(phases_dir.iterdir()):
+for d in sorted(phases_dir.iterdir(), reverse=True):
     if not d.is_dir():
         continue
     progress_path = d / "progress.yaml"

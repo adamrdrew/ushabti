@@ -43,9 +43,9 @@ def count_steps(progress_text):
     return impl, total
 
 
-# Find the active phase (building or planned, lowest number first)
+# Find the active phase (building or planned, highest number first — most recently created)
 current = None
-for d in sorted(phases_dir.iterdir()):
+for d in sorted(phases_dir.iterdir(), reverse=True):
     if not d.is_dir():
         continue
     progress_path = d / "progress.yaml"

@@ -49,7 +49,7 @@ Define intent, scope, and acceptance criteria. If planning from a card, incorpor
 	4.	Decompose
 Break the work into ordered, reviewable steps.
 	5.	Write
-Create the Phase directory and all required files. If this phase derives from a card, add `card: {slug}` metadata to the phase.md file immediately after the title (before Intent section). The card will remain in `.ushabti/cards/{slug}/` until Overseer marks it done on phase completion.
+Create the Phase directory and all required files using the `create-phase-files` skill. This writes all phase files (phase.md, steps.md, progress.yaml, review.md) in a single Bash call via heredoc — do NOT use separate Write calls. If this phase derives from a card, add `card: {slug}` metadata to the phase.md file immediately after the title (before Intent section). The card will remain in `.ushabti/cards/{slug}/` until Overseer marks it done on phase completion.
 	6.	Summarize
 Briefly describe what the Phase contains and why.
 
