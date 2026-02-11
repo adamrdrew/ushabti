@@ -1,6 +1,6 @@
 {
   "name": "ushabti",
-  "version": "1.9.2",
+  "version": "1.9.4",
   "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
   "private": true,
   "files": [

@@ -6,16 +6,17 @@ color: red
 permissionMode: default
 skills:
   - ushabti:get-laws-and-style
+  - ushabti:boot-builder
   - ushabti:describe-agent-roles
   - ushabti:describe-required-inputs
   - ushabti:describe-docs-system
   - ushabti:describe-progress-file
   - ushabti:describe-steps-file
-  - ushabti:find-current-phase
-  - ushabti:find-next-step
   - ushabti:describe-phase-file
   - ushabti:describe-phase-loop
   - ushabti:describe-canonical-locations
+  - ushabti:mark-step-done
+  - ushabti:set-phase-status
 tools: Read, Edit, Write, Bash, Skill, Glob, LSP, Grep
 ---
 

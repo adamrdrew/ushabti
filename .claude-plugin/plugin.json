@@ -1,6 +1,6 @@
 {
   "name": "ushabti",
-  "version": "1.9.2",
+  "version": "1.9.4",
   "description": "File-backed, agent-driven development system with specialized agents for planning, building, and reviewing Phases",
   "author": {
     "name": "Adam Drew",
@@ -20,7 +20,11 @@
     "./agents/vizier.md"
   ],
   "skills": [
+    "./skills/approve-phase/",
+    "./skills/boot-builder/",
+    "./skills/boot-overseer/",
     "./skills/check-ushabti-prerequisites/",
+    "./skills/create-phase-files/",
     "./skills/complete-card/",
     "./skills/create-card/",
     "./skills/describe-agent-roles/",
@@ -43,8 +47,11 @@
     "./skills/find-next-step/",
     "./skills/get-phase-status/",
     "./skills/ir-kat/",
+    "./skills/kick-back-phase/",
     "./skills/list-cards/",
+    "./skills/mark-step-done/",
     "./skills/phase-status/",
+    "./skills/set-phase-status/",
     "./skills/get-laws-and-style"
   ]
 }

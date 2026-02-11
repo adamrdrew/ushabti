@@ -19,6 +19,7 @@ skills:
   - ushabti:describe-questions-policy
   - ushabti:describe-phase-loop
   - ushabti:list-cards
+  - ushabti:create-phase-files
 tools: Read, Edit, Write, Glob, Bash, Skill
 ---
 

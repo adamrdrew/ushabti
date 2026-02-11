@@ -6,6 +6,7 @@ color: green
 permissionMode: default
 skills:
   - ushabti:get-laws-and-style
+  - ushabti:boot-overseer
   - ushabti:describe-agent-roles
   - ushabti:describe-required-inputs
   - ushabti:describe-docs-system
@@ -13,10 +14,11 @@ skills:
   - ushabti:describe-progress-file
   - ushabti:describe-review-file
   - ushabti:complete-card
-  - ushabti:find-current-phase
   - ushabti:describe-phase-file
   - ushabti:describe-phase-loop
   - ushabti:describe-cards
+  - ushabti:approve-phase
+  - ushabti:kick-back-phase
 tools: Read, Edit, Bash, LSP, Write, Skill, Glob, Grep
 ---
 
