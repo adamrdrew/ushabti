@@ -9,6 +9,7 @@
     "skills/",
     "scripts/"
   ],
+  "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adamrdrew/ushabti.git"
