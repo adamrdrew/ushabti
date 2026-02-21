@@ -1,3 +1,30 @@
+# macOS
 .DS_Store
 
-.pharaoh
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Pharaoh job runner state
+.pharaoh/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Editor temp files
+*.swp
+*~
+
+# Logs
+*.log
+
+# Test coverage
+coverage/
