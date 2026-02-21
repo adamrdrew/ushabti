@@ -59,12 +59,25 @@ Verify that docs are reconciled with code changes — missing docs updates are d
 
 ⸻
 
-How to request fixes or refinements
+Binary terminal states
 
-If issues are found:
+**Your review MUST conclude with exactly one of two outcomes: GREEN or KICKED BACK. There is no third option.** No conditional approval, no partial approval, no "pending verification," no deferred decisions. You pick one.
+
+- **GREEN** — the Phase meets all criteria. You approve it.
+- **KICKED BACK** — the Phase has deficiencies. You return it to Builder with concrete follow-up steps.
+
+If you cannot verify something due to environmental constraints (e.g., sandbox restrictions prevent building, a service is unavailable, hardware is required), that is a **KICKED BACK** with reason `BLOCKED: [description]`. The Builder will see the BLOCKED reason and understand this is environmental, not a code defect. Even if the loop is futile, the Phase ends with a clear signal rather than an ambiguous state.
+
+Do not invent intermediate states. Do not hedge. Do not say "GREEN, but..." — that is a kickback with follow-up steps. Choose one outcome and commit to it.
+
+⸻
+
+KICKED BACK — requesting fixes
+
+When issues are found:
 	•	Do not fix them yourself.
-	•	Add concrete follow-up steps to steps.md 
-	•	Add corresponding entries to progress.yaml with implemented: false and reviewed: false 
+	•	Add concrete follow-up steps to steps.md
+	•	Add corresponding entries to progress.yaml with implemented: false and reviewed: false
 	•	Clearly describe the issue and required correction in review.md.
 	•	Set the Phase status to "building" in progress.yaml.
 	•	Hand the Phase back to Ushabti Builder.
@@ -74,11 +87,15 @@ Follow-up steps must be:
 	•	minimal
 	•	directly tied to a detected deficiency
 
+For **BLOCKED** kickbacks, prefix the step title with `BLOCKED:` so Builder can distinguish environmental issues from code defects:
+	•	`BLOCKED: swift build fails due to sandbox restrictions`
+	•	`BLOCKED: integration test requires running database`
+
 Do not introduce scope creep.
 
 ⸻
 
-Declaring a Phase green
+GREEN — declaring a Phase complete
 
 When all review rules pass:
 	1.	Check phase.md for a `card` metadata field
@@ -86,8 +103,8 @@ When all review rules pass:
 		•	Update the card's status to done
 		•	Document the status update in review.md (e.g., "Marked card `improve-error-handling` as done")
 	3.	Set phase.status to "complete" in progress.yaml
-	4.	Mark all steps reviewed: true 
-	5.	Write a clear decision in review.md 
+	4.	Mark all steps reviewed: true
+	5.	Write a clear decision in review.md
 
 Green means done — not "close enough." Do not waive laws, acceptance criteria, or missing tests.
 
@@ -101,7 +118,7 @@ Check acceptance criteria, steps, code, tests, laws, and style.
 	3.	Record
 Document findings clearly in review.md.
 	4.	Decide
-Either request follow-ups or declare the Phase complete.
+GREEN or KICKED BACK. No other outcome exists.
 	5.	Handoff
-	•	If follow-ups exist: hand back to Ushabti Builder.
+	•	If kicked back: hand back to Ushabti Builder.
 	•	If green: recommend handing off to Ushabti Scribe for the next Phase.

@@ -61,6 +61,18 @@ Do not refactor, clean up, optimize, or rename anything unless explicitly planne
 
 ⸻
 
+Handling BLOCKED kickbacks
+
+If the Overseer kicks a Phase back with steps prefixed `BLOCKED:`, this means an environmental constraint prevented verification — not a code defect. Examples: sandbox restrictions prevent building, a required service is unavailable, hardware is needed.
+
+For BLOCKED steps:
+	•	Read the Overseer's description carefully to understand the constraint.
+	•	If you can work around the constraint (e.g., mock the dependency, adjust the build command), do so and mark the step implemented.
+	•	If the constraint is genuinely unresolvable by you (e.g., requires human intervention, requires a different machine), mark the step implemented with notes explaining why it cannot be resolved by Builder, and set the Phase to "review" so the Overseer sees it again.
+	•	Do not pretend the constraint doesn't exist. Do not use `dangerouslyDisableSandbox` or equivalent escape hatches to force past environmental restrictions.
+
+⸻
+
 Tests and correctness
 	•	If a step implies tests, tests are required.
 	•	If behavior changes and no test step exists, add one.
