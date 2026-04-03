@@ -1,68 +1,21 @@
+---
+name: list-cards
+description: "Scan and list Hieroglyphs-compatible cards in `.ushabti/cards/` with optional filtering by status, priority, or type. Use when reviewing available work items or determining which cards to plan next."
+user-invocable: false
+---
+
 # List Cards
 
-Scan and list all Hieroglyphs-compatible cards in `.ushabti/cards/`, with optional filtering by status or other criteria.
+Scan and list all Hieroglyphs-compatible cards in `.ushabti/cards/`, with optional filtering by status, priority, or type.
 
-## When to Use
+## Procedure
 
-Use this skill when:
-- You need to see all available work items
-- Looking for cards in a specific state (e.g., only `todo` cards)
-- Determining which cards to plan next
-- Checking card priorities and types
+1. **Find all cards**: `find .ushabti/cards -name "card.md" -type f`
+2. **Parse frontmatter** for each card (extract slug, title, status, priority, type)
+3. **Apply filters** if requested (status, priority, or type)
+4. **Display** in a clear, scannable format
 
-## Card Location
-
-Cards are stored in:
-```
-.ushabti/cards/{slug}/card.md
-```
-
-Each card is a directory containing a `card.md` file with YAML frontmatter and markdown body.
-
-## Scanning Cards
-
-To find all cards:
-
-```bash
-find .ushabti/cards -name "card.md" -type f
-```
-
-This returns paths like:
-```
-.ushabti/cards/improve-error-handling/card.md
-.ushabti/cards/add-user-guide/card.md
-```
-
-## Parsing Frontmatter
-
-Extract frontmatter fields using tools like `yq`, `awk`, or manual parsing.
-
-Example with `awk` to extract specific fields:
-
-```bash
-# Extract title
-awk '/^---$/{flag=!flag;next}flag && /^title:/{print $0}' card.md
-
-# Extract status
-awk '/^---$/{flag=!flag;next}flag && /^status:/{print $0}' card.md
-```
-
-Example with `sed` and `grep`:
-
-```bash
-# Get frontmatter section (between --- delimiters)
-sed -n '/^---$/,/^---$/p' card.md | grep -v '^---$'
-```
-
-## Listing Format
-
-Display cards in a clear, scannable format. Include at minimum:
-- Slug (identifier)
-- Title (human-readable)
-- Status (lifecycle state)
-- Priority (urgency level)
-
-Example output:
+## Output Format
 
 ```
 Cards in .ushabti/cards/:
@@ -80,16 +33,13 @@ Cards in .ushabti/cards/:
     Type: bug
 ```
 
-## Status Filtering
+## Common Filters
 
-Filter cards by status field to focus on specific work states.
-
-Common filters:
 - **Open work**: status is `todo`, `backlog`, or `in-progress`
 - **Closed work**: status is `done`
 - **Actionable work**: status is `todo` or `in-progress`
 
-Example filtering for `todo` cards only:
+## Example: Filter by Status
 
 ```bash
 for card in .ushabti/cards/*/card.md; do
@@ -102,35 +52,7 @@ for card in .ushabti/cards/*/card.md; do
 done
 ```
 
-## Field Extraction Examples
-
-Extract specific fields from a card:
-
-```bash
-card_path=".ushabti/cards/example-card/card.md"
-
-# Extract all frontmatter as YAML
-sed -n '1,/^---$/p' "$card_path" | sed '1d;$d'
-
-# Extract title
-sed -n '/^---$/,/^---$/p' "$card_path" | grep '^title:' | sed 's/^title: //'
-
-# Extract status
-sed -n '/^---$/,/^---$/p' "$card_path" | grep '^status:' | sed 's/^status: //'
-
-# Extract priority
-sed -n '/^---$/,/^---$/p' "$card_path" | grep '^priority:' | sed 's/^priority: //'
-
-# Extract type
-sed -n '/^---$/,/^---$/p' "$card_path" | grep '^type:' | sed 's/^type: //'
-
-# Extract slug
-sed -n '/^---$/,/^---$/p' "$card_path" | grep '^slug:' | sed 's/^slug: //'
-```
-
-## Filtering by Priority
-
-List only high-priority cards:
+## Example: Filter by Priority
 
 ```bash
 for card in .ushabti/cards/*/card.md; do
@@ -143,24 +65,9 @@ for card in .ushabti/cards/*/card.md; do
 done
 ```
 
-## Filtering by Type
-
-List only bugs:
-
-```bash
-for card in .ushabti/cards/*/card.md; do
-  type=$(sed -n '/^---$/,/^---$/p' "$card" | grep '^type:' | sed 's/^type: //')
-  if [ "$type" = "bug" ]; then
-    slug=$(basename $(dirname "$card"))
-    title=$(sed -n '/^---$/,/^---$/p' "$card" | grep '^title:' | sed 's/^title: //')
-    echo "$slug: $title (type: bug)"
-  fi
-done
-```
-
 ## Empty Results
 
-If no cards exist, `.ushabti/cards/` may be empty or contain no `card.md` files. Handle gracefully:
+Handle gracefully when no cards exist:
 
 ```bash
 cards=(.ushabti/cards/*/card.md)
@@ -171,7 +78,6 @@ fi
 
 ## Notes
 
-- Cards with `status: done` are closed but not removed (unlike the old ticket archival system)
-- The `find` command is more reliable than globbing for complex directory structures
+- Cards with `status: done` are closed but not removed
 - Always verify `.ushabti/cards/` directory exists before scanning
-- Card slugs are unique identifiers—no two cards should have the same slug
+- Card slugs are unique identifiers — no two cards share the same slug
